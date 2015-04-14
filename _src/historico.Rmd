@@ -1,0 +1,88 @@
+---
+title: "Histórico da crise hídrica"
+---
+
+
+```{r setOptions, include=FALSE, message=FALSE}
+library(rmarkdown)
+library(dygraphs)
+knitr::opts_chunk$set(echo=FALSE, warnings=FALSE, message=FALSE)
+##op <- options(gvis.plot.tag='chart')
+```
+
+### O déficit de 2013-2014
+As chuvas de outubro a março em geral garantem a recuperação do sistema Cantareira, mas
+não foi isso que aconteceu em 2013 e 2014.  A entrada de água neste período foi a menor
+da história do sistema,
+que pela primeira vez atravessou mais de um ano inteiro
+com mais água saindo do que entrando.
+
+<br>
+
+```{r vazoes)}
+dygraph(c1[,c("afl.s", "def.s")], group="sit1",
+        main="Vazões de entrada e saída",
+        ylab="Vazão (m3/s)")%>%
+            dySeries("afl.s", label = "Entrada", color="blue") %>%
+                dySeries("def.s", label = "Saída", color="red", fillGraph=TRUE) %>%
+                    dyOptions(drawGrid=FALSE, strokeWidth=2)%>%
+                        dyLegend(width = 400)%>%
+                            ##dyRangeSelector(dateWindow=c(as.Date("2011-01-01"),max(time(c1))))%>%
+                            dyRoller(rollPeriod=30)
+```
+
+<br>
+
+### Uso do volume morto
+
+O volume de água caiu paulatinamente a partir de abril de 2013.
+O volume útil [^2] se esgotou em 11 de julho de 2014.
+Desde então utiliza-se o "volume morto", por bombeamento.
+
+<br>
+
+```{r volume armazenado)}
+dygraph(c1[,c("v.abs.e9", "v.morto")], group="sit1",
+        main="Volume total armazenado",
+        ylab= "Volume (Bilhões m3)")%>%
+            dySeries("v.abs.e9", label = "Armazenado", color="black") %>%
+                dySeries("v.morto", label = "Volume morto", color="black",
+                         strokePattern="dotted", fillGraph=TRUE) %>%
+                            dyOptions(drawGrid=FALSE, strokeWidth=2)%>%
+                                    dyLegend(width = 400)%>%
+                                        dyRoller(rollPeriod=1)
+```
+<br>
+
+### As causas
+
+Os anos de de 2013 e 2014 foram os mais secos da região pelo menos desde 1979 [^3].
+Para uma comparação com o passado recente, veja o gráfico logo abaixo.
+A causa imediata foi um bloqueio atmosférico [^4].
+Mas isso não explica tudo. Uma segunda razão para que o sistema Cantareira
+tenha entrado em crise é que a diminuição da retirada de água deu-se tarde demais.
+
+<br>
+<br>
+
+```{r vchuva)}
+dygraph(window(c3[,c("pluv", "ph.m")],end=max(time(c1))), group="sit1",
+        main="Chuva",
+        ylab= "Pluviosidade diária (mm)")%>%
+            dyOptions(drawGrid=FALSE, strokeWidth=2)%>%
+                dySeries("pluv", label = "Pluviosidade", color="blue")%>%
+                    dySeries("ph.m", label = "Média histórica", color="black",
+                             strokePattern="dotted", fillGraph=TRUE)%>%
+                        dyRangeSelector(dateWindow=c(as.Date("2011-04-10"),
+                                            max(time(cant.dim5))))%>%
+                            dyLegend(width = 600)%>%
+                                dyRoller(rollPeriod=30)
+```
+
+
+[^2]: Água acessível sem necessidade de bombeamento,
+pois flui pela diferença de nível entre os reservatórios do sistema.
+
+[^3]: http://www.climate.gov/news-features/event-tracker/its-supposed-be-rainy-season-brazil-so-where-has-all-water-gone
+
+[^4]: [Comunicado 1 do GTAG - Cantareira](http://arquivos.ana.gov.br/institucional/sof/GTAG-Cantareira/20140218_GTAG-Cantareira_Comunicado_n_1.pdf)

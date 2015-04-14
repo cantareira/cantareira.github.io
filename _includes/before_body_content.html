@@ -1,0 +1,33 @@
+<div class="navbar navbar-default" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Águas <br>&nbsp;&nbsp;Futuras</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="historico.html">Histórico da Crise</a></li>
+
+        <li class="dropdown">
+          <a href="projecoes" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Projeções<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            {% include lista_projecoes.html %}
+          </ul>
+        </li>
+
+        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="dados.html">Fontes</a></li>
+        <li><a href="recursos.html">Recursos</a></li>
+
+<!--         <li class="dropdown-header"></li>
+             <li class="divider"></li>
+-->
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+

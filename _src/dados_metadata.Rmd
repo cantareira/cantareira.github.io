@@ -1,0 +1,14 @@
+---
+title: "Metadados"
+---
+
+```{r setOptions, include=FALSE, message=FALSE}
+source("documenta_e_exporta_dados.R")
+library(knitr)
+knitr::opts_chunk$set(echo=FALSE, warnings=FALSE, message=FALSE)
+##op <- options(gvis.plot.tag='chart')
+```
+
+```{r volume metadata}
+kable(contents(fluxos)$contents)
+```

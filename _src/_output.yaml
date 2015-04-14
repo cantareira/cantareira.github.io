@@ -1,0 +1,9 @@
+html_document:
+    self_contained: false
+    lib_dir: ../libs
+    theme: journal
+    fig_width: 8
+    includes:
+        in_header: in_header.html
+        before_body: before_body.html
+        after_body: after_body.html

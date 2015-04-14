@@ -1,0 +1,158 @@
+---
+title: "Projeções para água armazenada no sistema Cantareira "
+---
+
+```{r setOptions, include=FALSE, message=FALSE}
+library(rmarkdown)
+library(dygraphs)
+library(xtable)
+library(knitr)
+library(googleVis)
+options(OutDec = ',')
+knitr::opts_chunk$set(echo=FALSE, warnings=FALSE, message=FALSE)
+##op <- options(gvis.plot.tag='chart')
+```
+<br>
+<br>
+
+##Usando a chuva prevista de `r format(bol.pred$inicio, "%d/%m")` a `r format(bol.pred$fim, "%d/%m/%Y")`
+<br>
+
+```{r tabela boletins}
+tab1 <-as.data.frame(tab.pred.bol[-1])
+rownames(tab1) <- format(time(tab.pred.bol[-1,]), "%d/%m")
+kable(tab1,
+      col.names=c("Projeção", "Limite inferior", "Limite superior"),
+      digits=1,
+      align=rep("c", ncol(tab1)),
+      caption="Projeção e seus limites de credibilidade em % do volume total")
+## With google vis
+## ```{r tabela boletins, results="asis"}
+## tab1 <-as.data.frame(tab.pred.bol[-1])
+## colnames(tab1) <- c("Projeção", "Limite inferior", "Limite superior")
+## tab1$Data <- format(time(tab.pred.bol[-1,]), "%d/%m")
+## print(gvisTable(tab1[,c(4,1:3)],
+##                 options(sort="disable"),
+##                      formats=list(Data=NULL, "Projeção"="#.#%", "Limite inferior"="#.#%", "Limite superior"="#.#%")),
+##                 tag="chart")
+## With xtables
+## tab1 <-as.data.frame(tab.pred.bol[-1])
+## rownames(tab1) <- format(time(tab.pred.bol[-1,]), "%d/%m")
+## colnames(tab1) <- c("Projeção", "Limite inferior", "Limite superior")
+## print(xtable(tab1, digits=1),
+##              type="html")
+```
+
+<br>
+<br>
+
+## Usando 3 cenários de chuva até `r format(fim, "%d/%m/%Y")`
+
+<br>
+
+```{r projecoes}
+dygraph(c3[,c("v.morto.rel2", "v.rel2",
+              "lower.75.rel2","mean.75.rel2",  "upper.75.rel2",
+              "lower.100.rel2","mean.100.rel2",  "upper.100.rel2",
+              "lower.125.rel2","mean.125.rel2",  "upper.125.rel2")],
+        main=paste("Projeções até ", format(fim, "%d/%m/%Y"), ", com vazão de ", round(def.max,1)," m3/s", sep=""),
+        ylab= "Volume Armazenado (% Vol Total)")%>%
+    dySeries("v.rel2", label="% Armazenado", color="blue")%>%
+        dySeries("v.morto.rel2", label = "Volume morto", color="black", strokePattern="dotted", fillGraph=TRUE) %>%
+            dySeries(c("lower.100.rel2","mean.100.rel2",  "upper.100.rel2"), label = "Chuva na média", color="red") %>%
+                dySeries(c("lower.75.rel2","mean.75.rel2",  "upper.75.rel2"), label = "75% da média", color="orange") %>%
+                    dySeries(c("lower.125.rel2","mean.125.rel2",  "upper.125.rel2"), label = "125% da média", color="green") %>%
+                            dyOptions(drawGrid=FALSE, strokeWidth=2)%>%
+                                dyHighlight(highlightCircleSize = 3,
+                                            highlightSeriesBackgroundAlpha = 0.2,
+                                            hideOnMouseOut = TRUE,
+                                            highlightSeriesOpts = list(strokeWidth=3))%>%
+                                    dyRangeSelector(dateWindow=c(min(time(c2.w)),max(time(ph.next))))%>%
+                                        dyLegend(width = 700)%>%
+                                        dyRoller(rollPeriod=1)
+```
+<br>
+<br>
+
+### Projeções para os 3 cenários em `r format(fim, "%d/%m/%Y")`
+
+```{r}
+knitr::kable(tab.pred.30, 
+      col.names=c("Projeção", "Limite inferior", "Limite superior"),
+      digits=1,
+      align=rep("c", ncol(tab1)),
+      caption="Projeção e seus limites de credibilidade em % do volume total")
+```
+
+## Perguntas frequentes
+
+### Como são feitas as projeções para 5 dias?
+
+Usamos um modelo matemático para projetar quanta água restará no sistema Cantareira
+nos próximos 5 dias a partir de `r format(max(time(c1))+1, "%d/%m/%Y")`.
+Para isso temos que criar cenários: quanto de chuva cairá e quanta água será retirada do
+sistema. Para a retirada usamos a média do mês anterior[^1].
+Para as chuvas usamos as previsões da
+[Sala de Situação da Bacia PCJ](http://www.sspcj.org.br/index.php/boletins-diarios-e-relatorios-telemetria-pcj/boletimdiario).
+
+<br>
+
+### Como são feitas as projeções para 30 dias?
+
+Usamos o mesmo modelo matemático, supondo novamente que a vazão será a média do mês anterior.
+Para as chuvas usamos três cenários:
+
+* Chuva na média histórica,
+* 25% abaixo da média,
+* 25% acima da média.
+
+<br>
+
+### Por que projetar para no máximo 30 dias?
+Por dois motivos. Em primeiro lugar porque toda projeção tem uma margem de erro.
+O erro da projeção de um dia propaga-se para
+o dia seguinte que também tem uma margem de erro e assim por diante.
+Por causa desse "efeito cascata" quanto mais para o futuro tentamos fazer a projeção,
+maiores as incertezas. Assim, depois um certo tempo, a projeção perde tanta precisão que
+não faz mais sentido.
+
+O segundo motivo é que nosso modelo é uma aproximação simples
+para um fenômeno muito complexo. A aproximação é boa para intervalos curtos.
+
+Nós fizemos testes do nosso modelo com dados no
+passado e vimos que as projeções para até 30 dias
+funcionam muito bem e têm uma margem de erro razoável.
+
+<br>
+
+### O que são os limites inferior e superior na projeção para 5 dias?
+É até onde prevemos que o volume pode chegar, com 95% de chance.
+Por causa da incerteza de previsão, quando se projeta um
+cenário para o futuro há, em cada instante do tempo,
+este intervalo de credibilidade.
+
+<br>
+
+### O que é o sombreado ao redor das linhas no gráfico?
+São os mesmos limites de 95% de credibilidade explicados acima.
+
+
+```{rtabela probs}
+#<br>
+### Quais as chances de o volume diminuir em 30 dias?
+#<br>
+#knitr::kable(p.probs, col.names=c("Cenário de chuva", "Probabilidade de redução (%)"), digits=1)
+```
+<br>
+
+### Para saber mais sobre o projeto
+Veja a seção [sobre](sobre.html).
+
+
+[^1]: Ou e os limites fixados pelas agências reguladoras, se forem menores que a média do mês anterior.
+Desde novembro de 2014 a [ANA](http://www2.ana.gov.br) e [DAEE](http://www.daee.sp.gov.br/)
+fixam os limites máximos de retirada de água para o mês seguinte .
+Este é um regime de monitoramento intensivo, por causa da gravidade da situação.
+Os limites são divulgados no
+[site da ANA](http://www2.ana.gov.br/Paginas/servicos/outorgaefiscalizacao/sistemacantareira.aspx),
+ na seção de comunicados conjuntos.

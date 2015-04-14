@@ -1,0 +1,44 @@
+---
+title: "Nossas fontes"
+---
+
+```{r setOptions, include=FALSE, message=FALSE}
+source("documenta_e_exporta_dados.R")
+knitr::opts_chunk$set(echo=FALSE, warnings=FALSE, message=FALSE)
+##op <- options(gvis.plot.tag='chart')
+```
+
+## Transparência
+
+Tudo aqui foi feito com software de código aberto e está disponível para livre uso [^1].
+
+Os dados e os códigos-fonte deste site estão em repositório público
+(https://github.com/cantareira). Quem conhece as ferramentas computacionais que usamos pode
+verificar os resultados ou realizar outras análises.
+
+Para os que não dominam estas ferramentas computacionais, as seções abaixo disponibilizam os dados:
+
+### Volume e pluviosidade nos reservatórios de SP de `r format(min(as.Date(rsp$data)), "%d/%m/%Y")` a `r format(max(as.Date(rsp$data)), "%d/%m/%Y")`
+* Fonte: [Boletins diários da SABESP de situação dos manaciais](http://www2.sabesp.com.br/mananciais/DivulgacaoSiteSabesp.aspx), recuperados automaticamente com a ferramenta [mananciais.tk](http://mananciais.tk/)
+* [Arquivo de dados](/data/dados.csv)
+* [Metadados](dados_metadata.html)
+* Notas:
+	+ Podem conter erros de leitura devido ao processo automatico de recuperação dos dados.
+	+ Nestes dados originais os volumes relativos não estão corrigidos para o acréscimo devido à incorporação do volume morto.
+  Isso foi corrigido nos dados usados nas análises.
+
+### Vazões de entrada e saída no sistema Cantareira de `r format(min(as.Date(fluxos$date)), "%d/%m/%Y")` a `r format(max(as.Date(fluxos$date)), "%d/%m/%Y")`
+* Fonte: [Boletins diários da SABESP de vazão do sistema](http://www2.sabesp.com.br/mananciais/divulgacaopcj.aspx),
+recuperação semi-automatizada com ferramentas de reconhecimento de caracteres (OCR).
+* [Arquivo de dados](/data/data_ocr_cor2.csv)
+* [Metadados](data_ocr_cor2_metadata.html)
+* Podem conter erros de leitura devido ao processo automático de recuperação dos dados.
+
+### Dados processados usados em nossas análises
+* Fonte: dados de volume, pluviosidade e vazões acima.
+* [Arquivo de dados](/data/dados_de_trabalho.csv)
+* [Metadados](planilha_de_trabalho_metadata.html)
+* Nota: valores discrepantes foram retirados, valores faltantes foram interpolados linearmente e quantidades derivadas necessárias para as projeções foram calculadas.
+
+
+[^1]: Desde que para fins não comerciais. Veja o link para a licença completa neste site.
