@@ -2,7 +2,7 @@
 title: Sobre este projeto
 ---
 
-### Nossas motivações
+### Nossas motivações: _sapere aude_
 
 Percebemos que nossa experiência em modelagem matemática em ecologia poderia
 ser útil para a compreensão da dinâmica de reservatórios.  Usamos essa

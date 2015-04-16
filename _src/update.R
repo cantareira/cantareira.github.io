@@ -20,7 +20,7 @@ add.projection <- function(){
     system('echo "`uniq ../_includes/lista_projecoes.html`" > ../_includes/lista_projecoes.html')
 }
 
-all_files <- c('dados.Rmd', 'recursos.md', 'sobre.md', 'historico.Rmd')
+all_files <- c('dados.Rmd', 'recursos.md', 'sobre.md', 'historico.Rmd', 'seca_2013-2014.md')
 to_update <- c('historico.Rmd', 'dados.Rmd')
 
 #add.projection()

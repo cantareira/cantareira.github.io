@@ -1,0 +1,116 @@
+---
+---
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+<title>A seca de 2013-2014</title>
+
+<script src="libs/jquery-1.11.0/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.1/css/journal.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.1/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.1/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.1/shim/respond.min.js"></script>
+
+    {% include in_header_content.html %}
+
+<style type="text/css">code{white-space: pre;}</style>
+<link rel="stylesheet"
+      href="libs/highlight/default.css"
+      type="text/css" />
+<script src="libs/highlight/highlight.js"></script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img { 
+  max-width:100%; 
+  height: auto; 
+}
+</style>
+<div class="container-fluid main-container">
+
+
+    {% include before_body_content.html %}
+
+<div id="header">
+<h1 class="title">A seca de 2013-2014</h1>
+</div>
+
+
+<p>Uma questão candente, discutida publicamente, é o quão seco foi o ano hidrológico<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> 2013-2014. Foi, de fato, muito excepcional? O presidente da Sabesp afirmou publicamente que “a seca que ocorreu em 2014 só acontece a cada 250 anos”<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>. Vejamos.</p>
+<p><img alt="pluviometria anual média de 1940 a 2014" title="pluviometria anual média" src="pluviometria_anual_media.png"></p>
+<p>Vamos olhar para a série de pluviosidade na região da Cantareira desde outubro de 1939<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>. Na Figura acima temos a chuva acumulada em cada ano. O último ponto da série é 2013 (outubro/2013 a setembro/2014) . De fato, foi um ano seco. Mas já houve dois anos mais secos e nove anos com chuva acumulada em valores muito próximos aos do ano 2013-2014. Isso quer dizer que, em termos de chuvas, o ano não foi tão excepcional assim. Mais: se considerarmos anos com chuvas iguais ou menores que este ano, temos 3 anos em 75, ou seja 4%, ou ainda 1 a cada 25 anos, em média.</p>
+<p>Tiramos a mesma conclusão analisando a chuva acumulada por biênios. A figura abaixo revela dez biênios de chuva acumulada menor que a do biênio outubro/12 a setembro/14.</p>
+<p><img alt="pluviometria bienal média de 1940 a 2014" title="pluviometria bienal média" src="pluviometria_bienal_media.png"></p>
+<p>Provavelmente, a afirmação de que o ano de 2013-2014 foi o mais seco da história refere-se à quantidade de água que entrou no sistema, a vazão afluente. De fato, se olharmos a série histórica de vazões afluentes, o ano 13/14 apresenta os menores valores, numa série com início em 1930<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a>. Ou seja, a afluência foi muito excepcional, ao contrário da pluviosidade. Neste ponto, cabe um comentário: o sistema Cantareira entrou em operação parcial em 1973 e foi completado em 1981. Antes disso, as vazões referem-se às dos rios que foram represados. Estes dados são, porém, lacunares, e em parte tiveram que ser reconstruídos. Ou seja, não temos dados seguros de antes de 1981. O que se pode afirmar com certeza é que o ano 2013/2014 foi o mais seco, em termos de vazão e de chuvas, desde que o sistema Cantareira foi completado.</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>O ano hidrológico vai de outubro de um ano até setembro do ano seguinte.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p><a href="http://noticias.uol.com.br/ultimas-noticias/agencia-estado/2015/03/24/nao-estamos-dizendo-que-nao-vai-ter-rodizio-diz-presidente-da-sabesp.htm">Notícia no UOL</a><a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>Dados retirados do <a href="http://hidroweb.ana.gov.br">Sistema de informações hidrológicas Hidroweb</a> da ANA. Tomamos a média de pluviosidade das estações de Americana, Indaiatuba, Itatiba, Martim Francisco, Rio Claro, Vargem e Vinhedo, representativos da bacia PCJ.<a href="#fnref3">↩</a></p></li>
+<li id="fn4"><p><a href="http://arquivos.ana.gov.br/institucional/sof/Renovacao_Outorga/DadosdeReferenciaAcercadaOutorgadoSistemaCantareira.pdf">Estudo para a renovação da outorga do sistema Cantareira</a>. Arquivos da Agência Nacional de Águas<a href="#fnref4">↩</a></p></li>
+</ol>
+</div>
+
+
+    {% include after_body_content.html %}
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
