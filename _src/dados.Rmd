@@ -34,7 +34,7 @@ recuperação semi-automatizada com ferramentas de reconhecimento de caracteres 
 * [Metadados](data_ocr_cor2_metadata.html)
 * Podem conter erros de leitura devido ao processo automático de recuperação dos dados.
 
-### Dados processados usados em nossas análises
+### Dados processados usados em nossas análises (`r format(min(as.Date(rownames(cant.dim5.df))), "%d/%m/%Y")` a `r format(max(as.Date(rownames(cant.dim5.df))), "%d/%m/%Y")`)
 * Fonte: dados de volume, pluviosidade e vazões acima.
 * [Arquivo de dados](/data/dados_de_trabalho.csv)
 * [Metadados](planilha_de_trabalho_metadata.html)
