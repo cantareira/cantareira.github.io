@@ -21,6 +21,7 @@ add.projection <- function(){
 }
 
 all_files <- c('dados_metadata.Rmd', 'dados.Rmd', 'recursos.md', 'sobre.md', 'historico.Rmd')
+to_update <- c('historico.Rmd', 'dados.Rmd')
 
 #for (f in to_update){
 #    generate.page(f)
