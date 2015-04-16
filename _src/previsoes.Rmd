@@ -7,7 +7,7 @@ library(rmarkdown)
 library(dygraphs)
 library(xtable)
 library(knitr)
-library(googleVis)
+## library(googleVis)
 options(OutDec = ',')
 knitr::opts_chunk$set(echo=FALSE, warnings=FALSE, message=FALSE)
 ##op <- options(gvis.plot.tag='chart')
@@ -15,32 +15,17 @@ knitr::opts_chunk$set(echo=FALSE, warnings=FALSE, message=FALSE)
 <br>
 <br>
 
-##Usando a chuva prevista de `r format(bol.pred$inicio, "%d/%m")` a `r format(bol.pred$fim, "%d/%m/%Y")`
+## Usando a chuva prevista até `r format(bol.pred$fim, "%d/%m/%Y")`
 <br>
 
 ```{r tabela boletins}
-tab1 <-as.data.frame(tab.pred.bol[-1])
-rownames(tab1) <- format(time(tab.pred.bol[-1,]), "%d/%m")
+tab1 <-as.data.frame(tab.pred.bol)
+rownames(tab1) <- format(time(tab.pred.bol), "%d/%m")
 kable(tab1,
       col.names=c("Projeção", "Limite inferior", "Limite superior"),
       digits=1,
       align=rep("c", ncol(tab1)),
       caption="Projeção e seus limites de credibilidade em % do volume total")
-## With google vis
-## ```{r tabela boletins, results="asis"}
-## tab1 <-as.data.frame(tab.pred.bol[-1])
-## colnames(tab1) <- c("Projeção", "Limite inferior", "Limite superior")
-## tab1$Data <- format(time(tab.pred.bol[-1,]), "%d/%m")
-## print(gvisTable(tab1[,c(4,1:3)],
-##                 options(sort="disable"),
-##                      formats=list(Data=NULL, "Projeção"="#.#%", "Limite inferior"="#.#%", "Limite superior"="#.#%")),
-##                 tag="chart")
-## With xtables
-## tab1 <-as.data.frame(tab.pred.bol[-1])
-## rownames(tab1) <- format(time(tab.pred.bol[-1,]), "%d/%m")
-## colnames(tab1) <- c("Projeção", "Limite inferior", "Limite superior")
-## print(xtable(tab1, digits=1),
-##              type="html")
 ```
 
 <br>
@@ -75,6 +60,7 @@ dygraph(c3[,c("v.morto.rel2", "v.rel2",
 <br>
 
 ### Projeções para os 3 cenários em `r format(fim, "%d/%m/%Y")`
+<br>
 
 ```{r}
 knitr::kable(tab.pred.30, 
@@ -84,16 +70,29 @@ knitr::kable(tab.pred.30,
       caption="Projeção e seus limites de credibilidade em % do volume total")
 ```
 
+<br>
+
+### Probabilidade do volume em `r format(fim, "%d/%m/%Y")` estar menor que hoje
+
+<br>
+```{rtabela probs}
+knitr::kable(p.probs, col.names=c("Cenário de chuva", "Probabilidade de redução (%)"), digits=1)
+```
+<br>
+<br>
+
 ## Perguntas frequentes
 
-### Como são feitas as projeções para 5 dias?
+### Como são feitas as projeções para os próximos dias?
 
-Usamos um modelo matemático para projetar quanta água restará no sistema Cantareira
-nos próximos 5 dias a partir de `r format(max(time(c1))+1, "%d/%m/%Y")`.
+Usamos um modelo matemático e as previsões meteorológicas
+para projetar quanta água restará no sistema Cantareira
+até `r format(fim, "%d/%m/%Y")`.
 Para isso temos que criar cenários: quanto de chuva cairá e quanta água será retirada do
 sistema. Para a retirada usamos a média do mês anterior[^1].
 Para as chuvas usamos as previsões da
-[Sala de Situação da Bacia PCJ](http://www.sspcj.org.br/index.php/boletins-diarios-e-relatorios-telemetria-pcj/boletimdiario).
+[Sala de Situação da Bacia PCJ](http://www.sspcj.org.br/index.php/boletins-diarios-e-relatorios-telemetria-pcj/boletimdiario),
+divulgadas por volta das 12:00 horas dos dias úteis.
 
 <br>
 
@@ -126,6 +125,7 @@ funcionam muito bem e têm uma margem de erro razoável.
 <br>
 
 ### O que são os limites inferior e superior na projeção para 5 dias?
+
 É até onde prevemos que o volume pode chegar, com 95% de chance.
 Por causa da incerteza de previsão, quando se projeta um
 cenário para o futuro há, em cada instante do tempo,
@@ -136,14 +136,12 @@ este intervalo de credibilidade.
 ### O que é o sombreado ao redor das linhas no gráfico?
 São os mesmos limites de 95% de credibilidade explicados acima.
 
-
-```{rtabela probs}
-#<br>
-### Quais as chances de o volume diminuir em 30 dias?
-#<br>
-#knitr::kable(p.probs, col.names=c("Cenário de chuva", "Probabilidade de redução (%)"), digits=1)
-```
 <br>
+
+
+### Há outros modelos?
+O [Centro Nacional de Monitoramento e Alerta de Desastres Naturais](http://www.cemaden.gov.br/)
+usa um modelo hidrológico para fazer projeções até o final do ano, para vários cenários de chuva.
 
 ### Para saber mais sobre o projeto
 Veja a seção [sobre](sobre.html).

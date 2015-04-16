@@ -52,8 +52,8 @@ fluxos$afluente.m <- runmean(fluxos$afluente, 30, align="right")
 fluxos.zoo <- zoo(fluxos[,-1], fluxos$date)
 ### Converting daily time series to zoo object
 ## v.rel2= stored volume as a percentage of Total volume (and not of operational volume) 
-cant.zoo <- zoo(data.frame(pluv=cant.p, v.rel=cant+29, v.rel2=(cant+29)*9.8155e6/1269.5e4,
-                           v.abs=(cant+29)*9.8155e6,
+cant.zoo <- zoo(data.frame(pluv=cant.p, v.rel=cant+29.2, v.rel2=(cant+29.2)*9.8155e6/1269.5e4,
+                           v.abs=(cant+29.2)*9.8155e6,
                            pluv.m=runmean(cant.p, 30, align="right")), time(cant))
 cant.dim <- merge(cant.zoo, fluxos.zoo[,c("afluente", "defluente", "afluente.m")])
 ## Croping ends that miss data in one or other series
@@ -95,6 +95,6 @@ pluv.hist$pluv.m20 <- runmean(pluv.hist$ph.m, k=20, align="right")
 ## Mean of previous 10 days
 pluv.hist$pluv.m10 <- runmean(pluv.hist$ph.m, k=10, align="right")
 
-## Rain forecast for the next 5 days ##
+## Rain forecast for the next days ##
 ## from http://www.sspcj.org.br/index.php/boletins-diarios-e-relatorios-telemetria-pcj/boletimdiario
 boletins <- read.csv("../data/previsoes_boletins_pcj.csv", colClasses=c("Date","Date","numeric","numeric"))

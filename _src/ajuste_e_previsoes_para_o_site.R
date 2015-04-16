@@ -24,17 +24,16 @@ c2.prior <- function(params,...){
     params["sigma"] <- runif(n=1, min=0.001,max=0.05)
     params
 }
-##Ajuste em duas etapas:
-## 1 . Duas iteracoes com distribuicoes a priori definidas acima
-tmp.bsmc <- bsmc2.fit.3p(c2.pomp, params=guess, rpriors=c2.prior, Np=2000)
-## 2 . Dez mil iterações com a priori lognormais com parametros
+##Ajuste com bayesian filter em duas etapas:
+## 1 . 5 mil iteracoes com distribuicoes a priori definidas acima
+tmp.bsmc <- bsmc2.fit.3p(c2.pomp, params=guess, rpriors=c2.prior, Np=5000)
+## 2 . 30 mil iterações com a priori lognormais com parametros
 ## obtidos das ditribuicoes posteriores do primeiro ajuste
-c2.fit <- bsmc2.fit.3p(c2.pomp, bsmc2.obj=tmp.bsmc, Np=10000)
+c2.fit <- bsmc2.fit.3p(c2.pomp, bsmc2.obj=tmp.bsmc, Np=30000)
 
 ## PROJECAO ##
 ## chuva media para os 30 dias seguintes
 ## Fim do periodo
-## fim <- as.Date(as.yearmon(max(time(c1)))+2/12)-1 ## caso
 fim <- max(time(c1))+30
 ## Adiciona valores de chuva media para o mes seguinte
 tmp <- c(c1$pluv, window(pluv.hist$ph.m, start=max(time(c1))+1, end=fim))
@@ -111,7 +110,7 @@ c3 <- c3%>%
             zoo(time(c3))
 c3 <- na.approx(c3)
 
-## Tabela de projecoes e seus limites aos fim do periodo de 30 dias
+## Tabela de projecoes e seus limites ao fim do periodo de 30 dias
 tmpw <- c3[time(c3)==max(time(ph.next)),
            c("mean.75.rel2","lower.75.rel2", "upper.75.rel2",
              "mean.100.rel2","lower.100.rel2", "upper.100.rel2",
@@ -119,7 +118,7 @@ tmpw <- c3[time(c3)==max(time(ph.next)),
 tab.pred.30 <- data.frame(proj=as.numeric(tmpw[,c("mean.75.rel2","mean.100.rel2","mean.125.rel2")]),
                           lower=as.numeric(tmpw[,c("lower.75.rel2","lower.100.rel2","lower.125.rel2")]),
                           upper=as.numeric(tmpw[,c("upper.75.rel2","upper.100.rel2","upper.125.rel2")]),
-                          row.names=c("75% da média", "na média", "125% da média"))
+                          row.names=c("75% da média", "Na média", "125% da média"))
 
 ## Tabela de probabilidades de redução de volume
 ## Funcao para calculo das probabilidades a partir das projecoes
@@ -128,34 +127,24 @@ c.prob <- function(obj, ref){
     sum(x<as.numeric(ref))/length(x)
 }
 ## A tabela
+## Volume no ultimo dia da serie
+V0 <- c2.w$v.abs[time(c2.w)==max(time(c2.w))]
 p.probs <- data.frame(
     cenario=c("75% da média", "Na média", "125% da média"),
-    probabilidade=c(c.prob(pred.75, c2.w$v.abs[1]),
-        c.prob(pred.100, c2.w$v.abs[1]),
-        c.prob(pred.125, c2.w$v.abs[1]))*100)
-## Plot para verificar
-## v.morto <- 2.875e8
-## cores <- c("yellow", "green", "red")
-## cores2 <- add.alpha(cores, alpha=0.3)
-## plot(window(c2.w$v.abs),
-##      xlim=range(c(time(c2.w),time(ph.next))),
-##      ylim=range(c(range(c2.w$v.abs), range(pred.125$summary[,2:3])), v.morto),
-##      col="blue", lwd=3, ylab="Volume total (m3)")
-## fc.lines(pred.100, col=cores[1], cpoly=cores2[1], lwd=3)
-## fc.lines(pred.125, , col=cores[2], cpoly=cores2[2], lwd=3)
-## fc.lines(pred.75 , col=cores[3], cpoly=cores2[3], lwd=3)
-## abline(h=v.morto, lty=2)
+    probabilidade=c(c.prob(pred.75, V0),
+        c.prob(pred.100, V0),
+        c.prob(pred.125, V0))*100)
 
-### Previsao para os proximos 5 dias ###
-### usando chuva prevista pelo boletim diario da sala de sitauacao da PCJ
+### Projecao para os proximos dias com a previsao metereologica###
+### usando chuva prevista pelo boletim diario da sala de situacao da PCJ
 ### http://www.sspcj.org.br/index.php/boletins-diarios-e-relatorios-telemetria-pcj/boletimdiario
 bol.pred <- boletins[boletins$inicio==max(boletins$inicio),]
 ## N de dias da previsao
 bol.n <- as.numeric(bol.pred$fim-bol.pred$inicio+1)
 ## Series temporal com ponto medio da chuva prevista: (min+max)/2
 bol.pluv <- zoo(rep((bol.pred$maximo+bol.pred$minimo)/2, bol.n), seq(bol.pred$inicio,bol.pred$fim, by=1))
-## Calculo da media de chuva dos 30 anteriores, usado pelo modelo
-tmp <- c(c1$pluv, bol.pluv)
+## Calculo da media de chuva dos 30 dias anteriores, usado pelo modelo
+tmp <- c(c1$pluv, window(bol.pluv, start=max(time(c1)+1)))
 tmp2 <- runmean(tmp, k=30, align="right")
 ## Serie temporal para realizar a projecao pelo modelo
 pluv.bol <- window(zoo(data.frame(pluv.m=tmp2, defluente=NA), time(tmp)), start=max(time(c1)), end=bol.pred$fim)
@@ -173,4 +162,4 @@ pred.bol <- res.fc(p1=c2.pomp, z1=c2.w$v.abs,
 ## Tabela com previsao e intervalos de 95% de credibilidade ##
 tab.pred.bol <- pred.bol$summary[,1:3]
 ## Convertendo para percentual do volume máximo
-tab.pred.bol <- scale(tab.pred.bol, center=FALSE, scale=rep(1.2695e7, 3))
+tab.pred.bol <- window(scale(tab.pred.bol, center=FALSE, scale=rep(1.2695e7, 3)), start=max(time(c1))+1)
