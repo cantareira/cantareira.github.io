@@ -20,9 +20,10 @@ add.projection <- function(){
     system('echo "`uniq ../_includes/lista_projecoes.html`" > ../_includes/lista_projecoes.html')
 }
 
-all_files <- c('dados_metadata.Rmd', 'dados.Rmd', 'recursos.md', 'sobre.md', 'historico.Rmd')
+all_files <- c('dados.Rmd', 'recursos.md', 'sobre.md', 'historico.Rmd')
 to_update <- c('historico.Rmd', 'dados.Rmd')
 
+#add.projection()
 #for (f in to_update){
 #    generate.page(f)
 #}
