@@ -40,5 +40,9 @@ recuperação semi-automatizada com ferramentas de reconhecimento de caracteres 
 * [Metadados](planilha_de_trabalho_metadata.html)
 * Nota: valores discrepantes foram retirados, valores faltantes foram interpolados linearmente e quantidades derivadas necessárias para as projeções foram calculadas.
 
+### Projeções de volume de água armazenada até `r format(max(as.Date(rownames(proj.30))), "%d/%m/%Y")`
+* Fonte: [projeções para os cenários de chuva na média histórica, 25% a menos e 25% a mais que esta média](./index.html)
+* [Arquivo de dados](/data/proj30.csv)
+* [Metadados](projecoes_30_dias_metadata.html)
 
 [^1]: Desde que para fins não comerciais. Veja o link para a licença completa neste site.

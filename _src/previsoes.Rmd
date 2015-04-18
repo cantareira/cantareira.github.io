@@ -1,6 +1,6 @@
 ---
 title: "Projeções para água armazenada no sistema Cantareira "
-date: "`r format(Sys.time(), "%d de %B de %Y")`"
+date: "`r format(Sys.time(), '%d de %B de %Y')`"
 ---
 
 ```{r setOptions, include=FALSE, message=FALSE}
