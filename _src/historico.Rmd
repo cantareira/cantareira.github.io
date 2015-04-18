@@ -56,7 +56,7 @@ dygraph(c1[,c("v.abs.e9", "v.morto")], group="sit1",
 
 ### As causas
 
-Os anos de de 2013 e 2014 foram os menos chuvosos da região pelo menos desde 1979 [^3].
+Os anos de 2013 e 2014 foram os menos chuvosos da região pelo menos desde 1979 [^3].
 Para uma comparação com o passado recente, veja o gráfico logo abaixo.
 A causa imediata da seca foi um bloqueio atmosférico [^4].
 Mas houve anos igualmente secos em que a vazão de água para o sistema Cantareira não
