@@ -72,7 +72,40 @@ cant.dim5.df <- upData(as.data.frame(cant.dim5),
                         afluente.m="m3/dia"
                         )
                        )
+## Projecoes e intervalos de credibilidade para os proximos 30 dias
+proj.30 <- as.data.frame(
+    window(c3[,c("mean.75","lower.75","upper.75", "mean.100","lower.100","upper.100", "mean.125","lower.125","upper.125")],
+           start=min(time(ph.next)+1), end=max(time(ph.next))))
+proj.30 <- upData(proj.30,
+                  labels=c(
+                      mean.75 = "Volume projetado para pluviosidade 25% abaixo da media historica",
+                      lower.75 = "Limite inferior de credibilidade a 95% do volume projetado para pluviosidade 25% abaixo da media historica",
+                      upper.75= "Limite superior de credibilidade a 95% do volume projetado para pluviosidade 25% abaixo da media historica",
+                      mean.100 = "Volume projetado para pluviosidade na media historica",
+                      lower.100 = "Limite inferior de credibilidade a 95% do volume projetado para pluviosidade na  media historica",
+                      upper.100= "Limite superior de credibilidade a 95% do volume projetado para pluviosidade na media historica",
+                      mean.125 = "Volume projetado para pluviosidade 25% acima da media historica",
+                      lower.125 = "Limite inferior de credibilidade a 95% do volume projetado para pluviosidade 25% acima da media historica",
+                      upper.125= "Limite superior de credibilidade a 95% do volume projetado para pluviosidade 25% acima da media historica"
+                      ),
+                  units=c(
+                      mean.75 = "bilhoes de m3",
+                      lower.75 = "bilhoes de m3",
+                      upper.75= "bilhoes de m3",
+                      mean.100 = "bilhoes de m3",
+                      lower.100 = "bilhoes de m3",
+                      upper.100= "bilhoes de m3",
+                      mean.125 = "bilhoes de m3",
+                      lower.125 = "bilhoes de m3",
+                      upper.125= "bilhoes de m3"
+                      )
+    
+    )
+
+## salva os arquivos em formato csv
 write.csv(cant.dim5.df, file="../data/dados_de_trabalho.csv")
+write.csv(proj.30, file="../data/proj30.csv")
 tmp1 <- html(contents(rsp), file="../dados_metadata.html")
 tmp2 <- html(contents(fluxos), file="../data_ocr_cor2_metadata.html")
 tmp3 <- html(contents(cant.dim5.df), file="../planilha_de_trabalho_metadata.html")
+tmp3 <- html(contents(proj.30), file="../projecoes_30_dias_metadata.html")
