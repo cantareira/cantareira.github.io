@@ -115,10 +115,10 @@ tmpw <- c3[time(c3)==max(time(ph.next)),
            c("mean.75.rel2","lower.75.rel2", "upper.75.rel2",
              "mean.100.rel2","lower.100.rel2", "upper.100.rel2",
              "mean.125.rel2","lower.125.rel2", "upper.125.rel2")]
-tab.pred.30 <- data.frame(proj=as.numeric(tmpw[,c("mean.75.rel2","mean.100.rel2","mean.125.rel2")]),
+tab.pred.30 <- data.frame(cenario=c("75% da média", "Na média", "125% da média"),
+                          proj=as.numeric(tmpw[,c("mean.75.rel2","mean.100.rel2","mean.125.rel2")]),
                           lower=as.numeric(tmpw[,c("lower.75.rel2","lower.100.rel2","lower.125.rel2")]),
-                          upper=as.numeric(tmpw[,c("upper.75.rel2","upper.100.rel2","upper.125.rel2")]),
-                          row.names=c("75% da média", "Na média", "125% da média"))
+                          upper=as.numeric(tmpw[,c("upper.75.rel2","upper.100.rel2","upper.125.rel2")]))
 
 ## Tabela de probabilidades de redução de volume
 ## Funcao para calculo das probabilidades a partir das projecoes
@@ -141,8 +141,8 @@ p.probs <- data.frame(
 bol.pred <- boletins[boletins$inicio==max(boletins$inicio),]
 ## N de dias da previsao
 bol.n <- as.numeric(bol.pred$fim-bol.pred$inicio+1)
-## Series temporal com ponto medio da chuva prevista: (min+max)/2
-bol.pluv <- zoo(rep((bol.pred$maximo+bol.pred$minimo)/2, bol.n), seq(bol.pred$inicio,bol.pred$fim, by=1))
+## Series temporal com ponto medio da chuva prevista: acumulado no período =(min+max)/2; chuva diária 
+bol.pluv <- zoo(rep((bol.pred$maximo+bol.pred$minimo)/(2*bol.n), bol.n), seq(bol.pred$inicio,bol.pred$fim, by=1))
 ## Calculo da media de chuva dos 30 dias anteriores, usado pelo modelo
 tmp <- c(c1$pluv, window(bol.pluv, start=max(time(c1)+1)))
 tmp2 <- runmean(tmp, k=30, align="right")

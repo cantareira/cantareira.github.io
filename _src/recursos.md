@@ -3,7 +3,7 @@ title: Recursos
 ---
 ### Links úteis
 
-* [Cemaden](http://www.cemaden.gov.br)
+* [Cemaden](http://www.cemaden.gov.br): projeções para vários meses com modelo hidrológico mais complexo. Atualizadas semanalmente.
 
 * [Sabesp: precipitação e volume](http://www2.sabesp.com.br/mananciais/DivulgacaoSiteSabesp.aspx)
 
@@ -23,4 +23,6 @@ title: Recursos
 
 * [The Cantareira System Blog](http://blogs.umass.edu/cantareira/)
 
-* Boletim da SABESP com dados completos de todos os mananciais que abastecem a Região Metropolitana de São Paulo: http://site.sabesp.com.br/uploads/file/boletim/boletim_mananciais_15jan15.pdf. Para obter o boletim do dia, troque a data no endereço acima. Por vezes é necessário substituir o “15”por “2015”. Disponível apenas a partir de 15/01/2015.
+* Boletim da SABESP com dados completos de todos os mananciais que abastecem a Região Metropolitana de São Paulo: http://site.sabesp.com.br/uploads/file/boletim/boletim_mananciais.pdf. Para obter boletins anteriores,
+tente algo como http://site.sabesp.com.br/uploads/file/boletim/boletim_mananciais_15jan15.pdf.
+Por vezes é necessário substituir o “15”por “2015”. Disponível apenas a partir de 15/01/2015.

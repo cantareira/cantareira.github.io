@@ -1,5 +1,5 @@
 ---
-title: "Projeções para água armazenada no sistema Cantareira "
+title: "Projeções para água armazenada no sistema Cantareira"
 date: "`r format(Sys.time(), '%d de %B de %Y')`"
 ---
 
@@ -26,8 +26,24 @@ kable(tab1,
       col.names=c("Projeção", "Limite inferior", "Limite superior"),
       digits=1,
       align=rep("c", ncol(tab1)),
-      caption="Projeção e seus limites de credibilidade em % do volume total")
+      caption=paste("Projeção e seus limites de credibilidade em % do volume total. Chuva prevista de ",
+          bol.pluv[1], " mm/dia e vazão de retirada de ", round(def.max,1), " m3/s.", sep=""  ))
 ```
+
+<br>
+
+
+* De acordo com a [SABESP](http://www2.sabesp.com.br/mananciais/DivulgacaoSiteSabesp.aspx),
+**o volume armazenado em `r format(max(time(c1)), '%d/%m/%Y')` é
+`r as.numeric(round(c1$v.rel2[time(c1)==max(time(c1))],1))` % do volume total**.
+* As projeções são os valores esperados por um modelo matemático e os limites
+são a margem de erro da projeção. 
+* Por exemplo, para o dia `r format(max(time(tab.pred.bol)), '%d de %B de %Y')` a projeção
+é que o volume esteja entre `r as.numeric(round(tab.pred.bol$lower[time(tab.pred.bol)==max(time(tab.pred.bol))], 1))`%
+e `r as.numeric(round(tab.pred.bol$upper[time(tab.pred.bol)==max(time(tab.pred.bol))], 1))`% do volume total.
+O valor médio projetado para este dia é 
+`r as.numeric(round(tab.pred.bol$mean[time(tab.pred.bol)==max(time(tab.pred.bol))], 1))`% do volume total,
+e está dentro deste intervalo.
 
 <br>
 <br>
@@ -41,7 +57,7 @@ dygraph(c3[,c("v.morto.rel2", "v.rel2",
               "lower.75.rel2","mean.75.rel2",  "upper.75.rel2",
               "lower.100.rel2","mean.100.rel2",  "upper.100.rel2",
               "lower.125.rel2","mean.125.rel2",  "upper.125.rel2")],
-        main=paste("Projeções até ", format(fim, "%d/%m/%Y"), ", com vazão de ", round(def.max,1)," m3/s", sep=""),
+        main="",
         ylab= "Volume Armazenado (% Vol Total)")%>%
     dySeries("v.rel2", label="% Armazenado", color="blue")%>%
         dySeries("v.morto.rel2", label = "Volume morto", color="black", strokePattern="dotted", fillGraph=TRUE) %>%
@@ -58,6 +74,18 @@ dygraph(c3[,c("v.morto.rel2", "v.rel2",
                                         dyRoller(rollPeriod=1)
 ```
 <br>
+
+
+* Linha azul: água armazenada em % do volume total até  `r format(min(time(ph.next)), "%d/%m/%Y")`.
+* Em vermelho, laranja e verde as projeções (linhas) e seus limites de credibilidade (sombreados)
+para cenário de chuva na média histórica do mês, e 25% abaixo e acima da média.
+* Todos os cenários consideram vazão de retirada de `r round(def.max,1)` m3/s.
+* Médias históricas: `r as.numeric(medias$ph.cum[as.yearmon(min(time(ph.next)))])`
+mm de chuva acumulada em  `r format(min(time(ph.next)), "%B")` e
+`r as.numeric(medias$ph.cum[as.yearmon(max(time(ph.next)))])` mm em
+`r format(max(time(ph.next)), "%B")`.
+
+<br>
 <br>
 
 ### Projeções para os 3 cenários em `r format(fim, "%d/%m/%Y")`
@@ -65,10 +93,15 @@ dygraph(c3[,c("v.morto.rel2", "v.rel2",
 
 ```{r}
 knitr::kable(tab.pred.30, 
-      col.names=c("Projeção", "Limite inferior", "Limite superior"),
+      col.names=c("Cenário de Chuva", "Projeção", "Limite inferior", "Limite superior"),
       digits=1,
       align=rep("c", ncol(tab1)),
-      caption="Projeção e seus limites de credibilidade em % do volume total")
+             caption=paste("Projeção e seus limites de credibilidade em % do volume total para os três cenários. ",
+                 "Vazão de retirada de ", round(def.max,1), " m3/s. Médias históricas: ",
+                 as.numeric(medias$ph.cum[as.yearmon(min(time(ph.next)))]),
+                 " mm de chuva acumulada em ", format(min(time(ph.next)), "%B"),
+                 " e ", as.numeric(medias$ph.cum[as.yearmon(max(time(ph.next)))]),
+                 " mm em ", format(max(time(ph.next)), "%B"), "." , sep=""))
 ```
 
 <br>
@@ -76,8 +109,16 @@ knitr::kable(tab.pred.30,
 ### Probabilidade do volume em `r format(fim, "%d/%m/%Y")` estar menor que hoje
 
 <br>
-```{rtabela probs}
-knitr::kable(p.probs, col.names=c("Cenário de chuva", "Probabilidade de redução (%)"), digits=1)
+
+```{r tabela probs}
+knitr::kable(p.probs, col.names=c("Cenário de chuva", "Probabilidade de redução (%)"), digits=1,
+             align=rep("c", ncol(p.probs)),
+             caption=paste("Para os 3 cenários de chuva e vazão de retirada de ", round(def.max,1),
+                 " m3/s. Médias históricas: ",
+                 as.numeric(medias$ph.cum[as.yearmon(min(time(ph.next)))]),
+                 " mm de chuva acumulada em ", format(min(time(ph.next)), "%B"),
+                 " e ", as.numeric(medias$ph.cum[as.yearmon(max(time(ph.next)))]),
+                 " mm em ", format(max(time(ph.next)), "%B"), "." , sep=""))
 ```
 <br>
 <br>
@@ -125,7 +166,7 @@ funcionam muito bem e têm uma margem de erro razoável.
 
 <br>
 
-### O que são os limites inferior e superior na projeção para 5 dias?
+### O que são os limites inferior e superior das projeções?
 
 É até onde prevemos que o volume pode chegar, com 95% de chance.
 Por causa da incerteza de previsão, quando se projeta um
