@@ -23,16 +23,15 @@ Para os que não dominam estas ferramentas computacionais, as seções abaixo di
 * [Arquivo de dados](/data/dados.csv)
 * [Metadados](dados_metadata.html)
 * Notas:
-	+ Podem conter erros de leitura devido ao processo automatico de recuperação dos dados.
+	+ Podem conter erros de leitura devido ao processo automático de recuperação dos dados.
 	+ Nestes dados originais os volumes relativos não estão corrigidos para o acréscimo devido à incorporação do volume morto.
   Isso foi corrigido nos dados usados nas análises.
 
 ### Vazões de entrada e saída no sistema Cantareira de `r format(min(as.Date(fluxos$date)), "%d/%m/%Y")` a `r format(max(as.Date(fluxos$date)), "%d/%m/%Y")`
-* Fonte: [Boletins diários da SABESP de vazão do sistema](http://www2.sabesp.com.br/mananciais/divulgacaopcj.aspx),
-recuperação semi-automatizada com ferramentas de reconhecimento de caracteres (OCR).
+* Fonte: [Boletins diários da SABESP de vazão do sistema](http://www2.sabesp.com.br/mananciais/divulgacaopcj.aspx), recuperação semi-automatizada.
 * [Arquivo de dados](/data/data_ocr_cor2.csv)
 * [Metadados](data_ocr_cor2_metadata.html)
-* Podem conter erros de leitura devido ao processo automático de recuperação dos dados.
+* Podem conter erros de leitura devido ao processo semi-automático de recuperação dos dados.
 
 ### Dados processados usados em nossas análises (`r format(min(as.Date(rownames(cant.dim5.df))), "%d/%m/%Y")` a `r format(max(as.Date(rownames(cant.dim5.df))), "%d/%m/%Y")`)
 * Fonte: dados de volume, pluviosidade e vazões acima.

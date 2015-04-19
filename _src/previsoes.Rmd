@@ -35,7 +35,10 @@ kable(tab1,
 
 * De acordo com a [SABESP](http://www2.sabesp.com.br/mananciais/DivulgacaoSiteSabesp.aspx),
 **o volume armazenado em `r format(max(time(c1)), '%d/%m/%Y')` é
-`r as.numeric(round(c1$v.rel2[time(c1)==max(time(c1))],1))` % do volume total**.
+`r as.numeric(round(c1$v.rel2[time(c1)==max(time(c1))],1))` % do volume total**,
+que corresponde a `r as.numeric(round(c1$v.rel[time(c1)==max(time(c1))],1))` % do volume útil.
+* **Todas as projeções estão em percentual do volume total**.
+Para converter para percentual do volume útil multiplique por 1,292.
 * As projeções são os valores esperados por um modelo matemático e os limites
 são a margem de erro da projeção. 
 * Por exemplo, para o dia `r format(max(time(tab.pred.bol)), '%d de %B de %Y')` a projeção
