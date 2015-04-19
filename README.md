@@ -12,7 +12,7 @@ Pacotes;
 * devtools
 * pomp versão de desenvolvimento, via:
 
-`P devtools::install_github('rforge/pomp', subdir='pkg/pomp')`
+`devtools::install_github('rforge/pomp', subdir='pkg/pomp')`
 
 ### Jekyll ###
 * ruby
@@ -41,8 +41,9 @@ Jekyll, que é realizada pelo próprio github.
 * atualizações periódicas são feitas rodando o script `update.R`, que atualiza o histórico, os arquivos de dados para upçoad (seção recursos) e cria uma nova página de projeções.
 
 * novas páginas são feitas adicionando os arquivos Rmd
-e gerando os htmls com a função `generate.page('arquivo.Rmd')` no shell do `R`.
-Esta é uma função criada com no script `update.R` que entre outras coisas adiciona um cabeçalho do YAML:
+e gerando os htmls com o comando `generate.page('arquivo.Rmd')` no shell do R.
+Esta é uma função criada com no script `update.R`,
+que entre outras coisas adiciona um cabeçalho do YAML:
 
 `sed -i '1i---\n---' arquivo.html arquivo2.html`
 
