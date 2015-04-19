@@ -1,5 +1,4 @@
 source('ajuste_e_previsoes_para_o_site.R')
-source('documenta_e_exporta_dados.R')
 library(rmarkdown)
 
 generate.page <- function(f, fname){
