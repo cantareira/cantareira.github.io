@@ -12,7 +12,7 @@ pesquisadores.
 
 Nossas projeções são atualizadas a cada dia, e podem ser reproduzidas
 em um computador pessoal. Esperamos que possam somar-se a outros instrumentos
-de gestão, como modelos mais complexos de médio prazo (por exemplo, o do
+de apoio à gestão, como modelos mais complexos de médio prazo (por exemplo, o do
 [CEMADEN](http://www.cemaden.gov.br/)).
 
 Dessa forma mostramos que é possível contribuir para o debate público de forma
@@ -39,7 +39,8 @@ Para fazermos projeções, calibramos o modelo com dados de seis meses
 anteriores. Feito isso, validamos o modelo fazendo previsões no
 passado e comparando com o que de fato ocorreu. Uma vez concluído este
 processo, fazemos duas projeções:
-* para cinco dias, apoiada na previsão meteorológica para a
+
+* para os próximos, apoiada na previsão meteorológica para a
   Cantareira;
 * para trinta dias, embasada em médias históricas de precipitação.
   A validação do modelo mostrou que 
