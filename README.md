@@ -7,13 +7,12 @@ Arquivos-fonte do site `cantareira.github.io`.
 ### R ###
 Pacotes;
 * rmarkdown
+* zoo
 * dygraphs
-* deSolve
 * devtools
 * pomp versão de desenvolvimento, via:
 
     devtools::install_github('rforge/pomp', subdir='pkg/pomp')
-* outros...
 
 ### Jekyll ###
 * ruby
@@ -39,12 +38,12 @@ para nossos requisitos, que nsão mínimos.
 As fontes contêm os htmls já processados pelo rmarkdown, mas não a saída do
 Jekyll, que é realizada pelo próprio github.
 
-* atualizações periódicas são feitas rodando o script `update.R`, que atualiza o histórico e cria uma nova página de projeções.
+* atualizações periódicas são feitas rodando o script `update.R`, que atualiza o histórico, os arquivos de dados para upçoad (seção recursos) e cria uma nova página de projeções.
 
-* novas páginas são feitas adicionando os arquivos Rmd, gerando os htmls via `render('arquivo.Rmd')` no shell do `R`, e adicionando um cabeçalho do YAML:
-    sed -i '1i---\n---' arquivo.html arquivo2.html
+* novas páginas são feitas adicionando os arquivos Rmd
+e gerando os htmls com a função `generate.page('arquivo.Rmd')` no shell do `R`[^1]
 
-* o conteúdo adicionado pode ser visualizado rodando
+* o conteúdo adicionado pode ser visualizado localmente rodando
 
     jekyll build
     jekyll serve
@@ -53,3 +52,5 @@ O default é o site ser servido em `http://localhost:4000`.
 
 * Finalmente, o conteúdo novo é publicado quando fazemos o commit e enviamos pro repositório `cantareira` no github.
 
+[^1]: Esta é uma função criada com no script `update.R` que entre outras coisas adiciona um cabeçalho do YAML:
+    sed -i '1i---\n---' arquivo.html arquivo2.html
