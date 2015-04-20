@@ -1,5 +1,6 @@
 ---
 title: "Projeções para água armazenada no sistema Cantareira"
+subtitle: "Atualizadas diariamente, por volta das 13:00 horas"
 date: "`r format(Sys.time(), '%d de %B de %Y')`"
 ---
 
