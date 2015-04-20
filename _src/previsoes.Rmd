@@ -15,7 +15,9 @@ knitr::opts_chunk$set(echo=FALSE, warnings=FALSE, message=FALSE)
 ```
 <br>
 <br>
+
 > Atualizadas diariamente, por volta das 13:00 horas
+
 <br>
 ## Usando a chuva prevista até `r format(bol.pred$fim, "%d/%m/%Y")`
 <br>
