@@ -18,6 +18,7 @@ add.projection <- function(){
     write(new_entry, file="../_includes/lista_projecoes.html", append=TRUE)
     # prevent repeated entries
     system('echo "`uniq ../_includes/lista_projecoes.html`" > ../_includes/lista_projecoes.html')
+    system(paste('cp ../', proj_file, ' ../index.html', sep=''))
 }
 
 all_files <- c('dados.Rmd', 'recursos.md', 'sobre.md', 'historico.Rmd', 'seca_2013-2014.md')
@@ -28,3 +29,5 @@ add.projection()
 for (f in to_update){
     generate.page(f)
 }
+
+system('bash generate_sitemap.sh')
