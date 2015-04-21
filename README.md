@@ -50,9 +50,9 @@ que entre outras coisas adiciona um cabeçalho do YAML:
 
 * o conteúdo adicionado pode ser visualizado localmente rodando
 
-    jekyll build
+`jekyll build`
 
-	jekyll serve
+`jekyll serve`
 
 O default é o site ser servido em `http://localhost:4000`.
 

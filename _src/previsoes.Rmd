@@ -30,7 +30,7 @@ kable(tab1,
       digits=1,
       align=rep("c", ncol(tab1)),
       caption=paste("Projeção e seus limites de credibilidade em % do volume total. Chuva prevista de ",
-          bol.pluv[1], " mm/dia e vazão de retirada de ", round(def.max,1), " m3/s.", sep=""  ))
+          round(bol.pluv[1],1), " mm/dia e vazão de retirada de ", round(def.max,1), " m3/s.", sep=""  ))
 ```
 
 <br>
