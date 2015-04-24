@@ -67,6 +67,7 @@ cant.dim5.df <- upData(as.data.frame(cant.dim5),
                     units=c(
                         pluv="mm",
                         v.abs="m3",
+                        pluv.m="mm",
                         afluente="m3/dia",
                         defluente="m3/dia",
                         afluente.m="m3/dia"
