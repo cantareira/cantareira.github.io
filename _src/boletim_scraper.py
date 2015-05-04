@@ -57,14 +57,14 @@ class Boletim_Processor(PDF_Processor):
  
         return r
 
-def vline(p):
+def vline(p, vol_paivacastro):
     return '%s,%s,%s,%s,%.2f,%s,%s,%.2f,%s,%s,%.2f,%s,%s,%.1f\n' % (p['data'].strftime('%Y-%m-%d'),
             p['Jaguari'][4], p['Jaguari'][5], p['Jaguari'][2],
             float(p['Cachoeira'][4]) - float(p['Cachoeira'][6]), p['Cachoeira'][5], p['Cachoeira'][2],
             float(p['Atibainha'][4]) - float(p['Atibainha'][6]), p['Atibainha'][5], p['Atibainha'][2],
             float(p['PaivaCastro'][4]) - float(p['PaivaCastro'][6]), p['PaivaCastro'][5], p['PaivaCastro'][2],
-            -float(p['Cantareira'][2])*float(p['Cantareira'][3])*1e6/(100*24*3600) \
-                    + float(p['Cantareira'][4])-float(p['Cantareira'][5]))
+            -((float(p['PaivaCastro'][1])-float(vol_paivacastro))*1e6/(24*3600) -
+                    float(p['PaivaCastro'][4]) + float(p['PaivaCastro'][5])))
 
 def plines(p):
     r = ''
@@ -81,12 +81,13 @@ def plines(p):
 b = Boletim_Processor()
 if __name__ == '__main__':
     p = b.scrape_pdf(sys.argv[1])
-    if len(sys.argv) > 3:
-        with open(sys.argv[2], "a") as outfile:
-            outfile.write(plines(p))
+    pontem = b.scrape_pdf(sys.argv[2])
+    if len(sys.argv) > 4:
         with open(sys.argv[3], "a") as outfile:
-            outfile.write(vline(p))
+            outfile.write(plines(p))
+        with open(sys.argv[4], "a") as outfile:
+            outfile.write(vline(p), pontem['PaivaCastro'][1])
     else:
-        print(vline(p))
+        print(vline(p, pontem['PaivaCastro'][1]))
         print(plines(p))
 

@@ -12,7 +12,7 @@ wget "http://site.sabesp.com.br/site/uploads/file/boletim/boletim_mananciais.pdf
 diff -q "boletim_mananciais.pdf" "boletins/boletim_mananciais_${ontem}.pdf"
 if [ $? != 0 ]; then
     echo "** boletim dos mananciais parece atualizado **"
-    python _src/boletim_scraper.py boletim_mananciais.pdf data/dados.csv data/data_ocr_cor2.csv
+    python _src/boletim_scraper.py boletim_mananciais.pdf "boletins/boletim_mananciais_${ontem}.pdf" data/dados.csv data/data_ocr_cor2.csv
     if [ $? = 0 ]; then
         mv boletim_mananciais.pdf "boletins/boletim_mananciais_${hoje}.pdf"
         git add "boletins/boletim_mananciais_${hoje}.pdf" data/dados.csv data/data_ocr_cor2.csv
