@@ -5,24 +5,31 @@ hoje=`date +"%Y-%m-%d"`
 hoje2=`date +"%Y%m%d"`
 ontem=`date -d "yesterday" +"%Y-%m-%d"`
 commit=1
+error=0
 
 pushd $ROOT
 
-wget "http://site.sabesp.com.br/site/uploads/file/boletim/boletim_mananciais.pdf"
-diff -q "boletim_mananciais.pdf" "boletins/boletim_mananciais_${ontem}.pdf"
-if [ $? != 0 ]; then
-    echo "** boletim dos mananciais parece atualizado **"
-    python _src/boletim_scraper.py boletim_mananciais.pdf "boletins/boletim_mananciais_${ontem}.pdf" data/dados.csv data/data_ocr_cor2.csv
-    if [ $? = 0 ]; then
-        mv boletim_mananciais.pdf "boletins/boletim_mananciais_${hoje}.pdf"
-        git add "boletins/boletim_mananciais_${hoje}.pdf" data/dados.csv data/data_ocr_cor2.csv
-        commit=0
+if [ ! -e  "boletins/boletim_mananciais_${hoje}.pdf" ]; then
+    wget "http://site.sabesp.com.br/site/uploads/file/boletim/boletim_mananciais.pdf"
+    diff -q "boletim_mananciais.pdf" "boletins/boletim_mananciais_${ontem}.pdf"
+    if [ $? != 0 ]; then
+        echo "** boletim dos mananciais parece atualizado **"
+        python _src/boletim_scraper.py boletim_mananciais.pdf "boletins/boletim_mananciais_${ontem}.pdf" data/dados.csv data/data_ocr_cor2.csv
+        if [ $? = 0 ]; then
+            mv boletim_mananciais.pdf "boletins/boletim_mananciais_${hoje}.pdf"
+            git add "boletins/boletim_mananciais_${hoje}.pdf" data/dados.csv data/data_ocr_cor2.csv
+            commit=0
+        else
+            error=1
+            echo "** erro no processamento do boletim dos mananciais **"
+            rm boletim_mananciais.pdf
+        fi
     else
-        rm boletim_mananciais.pdf
+        rm "boletim_mananciais.pdf"
+        echo "** boletim dos mananciais ainda não foi atualizado **"
     fi
 else
-    rm "boletim_mananciais.pdf"
-    echo "** boletim dos mananciais ainda não foi atualizado **"
+    echo "** boletim dos mananciais de hoje já foi atualizado **"
 fi
 
 wget "http://www.sspcj.org.br/images/downloads/SSPCJ_boletimDiario_${hoje2}.pdf"
@@ -34,6 +41,9 @@ if [ $? = 0 ]; then
         rm "SSPCJ_boletimDiario_${hoje2}.pdf"
         git add data/previsoes_boletins_pcj.csv
         commit=0
+    else
+        error=1
+        echo "** erro no processamento do boletim SSPCJ **"
     fi
 else
     echo "** boletim SSPCJ ainda não foi atualizado **"
@@ -54,6 +64,8 @@ if [ "$commit" = 0 ]; then
             # TODO: not yet!
             #git push
         else
+            error=1
+            echo "** erro no script update.R **"
             cd ..
         fi
     fi
@@ -62,3 +74,5 @@ else
 fi
 
 popd
+
+exit $error
