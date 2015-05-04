@@ -49,7 +49,7 @@ if [ "$commit" = 0 ]; then
         if [ $? = 0 ]; then
             cd ..
             # "commit -a" é perigoso, lista arquivos individualmente
-            git add projecoes-${hoje}.html _includes/lista_projecoes.html dados.html dados_metadata.html data/dados_de_trabalho.csv data_ocr_cor2_metadata.html historico.html index.html planilha_de_trabalho_metadata.html sitemap.xml 
+            git add projecoes-${hoje}.html _includes/lista_projecoes.html dados.html dados_metadata.html data/dados_de_trabalho.csv data/proj30.csv data_ocr_cor2_metadata.html historico.html index.html planilha_de_trabalho_metadata.html sitemap.xml 
             git commit -m "[auto] Novos dados e projeção."
             # TODO: not yet!
             #git push
