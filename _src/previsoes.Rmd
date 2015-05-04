@@ -90,6 +90,7 @@ para cenário de chuva na média histórica do mês, e 25% abaixo e acima da mé
 mm de chuva acumulada em  `r format(min(time(ph.next)), "%B")` e
 `r as.numeric(medias$ph.cum[as.yearmon(max(time(ph.next)))])` mm em
 `r format(max(time(ph.next)), "%B")`.
+* Nos últimos 30 dias a chuva acumulada foi `r round(sum(window(c2.w$pluv,start=max(time(c2.w))-30)),0)` mm.
 
 <br>
 <br>
