@@ -86,7 +86,7 @@ if __name__ == '__main__':
         with open(sys.argv[3], "a") as outfile:
             outfile.write(plines(p))
         with open(sys.argv[4], "a") as outfile:
-            outfile.write(vline(p), pontem['PaivaCastro'][1])
+            outfile.write(vline(p, pontem['PaivaCastro'][1]))
     else:
         print(vline(p, pontem['PaivaCastro'][1]))
         print(plines(p))

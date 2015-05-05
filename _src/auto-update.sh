@@ -45,6 +45,7 @@ if [ $? = 0 ]; then
         error=1
         echo "** erro no processamento do boletim SSPCJ **"
     fi
+    rm "SSPCJ_boletimDiario_${hoje2}.pdf"
 else
     echo "** boletim SSPCJ ainda não foi atualizado **"
 fi

@@ -94,17 +94,25 @@ def transform(v):
     v[2] = int(v[2])
     v[3] = int(v[3])
     return v
+def transform_semchuva(v):
+    d1 = parser.parse(translate_month(v[0]), fuzzy=True)
+    d2 = parser.parse(translate_month(v[1]), fuzzy=True)
+    return [d1, d2, 0, 0]
+    
 targets = [('prev', ('A +previsão +de +chuvas +entre +os +dias +(.+) +a +(.+)'
            ' +é +de +acumulados +de +(\d+) +a +(\d+) +mm +nas +Bacias +PCJ.'),
-           transform)]
+           transform),
+           ('noprev', ('Não +há +previsão +de +chuvas +entre +os +dias +(.+) a +(.+)'
+               ' +nas +Bacias +PCJ.'), transform_semchuva)]
 previsao_chuva_SABESP = PDF_Processor(url, tuple(targets))
 
 def pline(p):
     return '"%s","%s",%d,%d\n' % (p[0].strftime('%Y-%m-%d'),
-            p[1].strftime('%Y-%m-%d'), p[2], p[3])
+           p[1].strftime('%Y-%m-%d'), p[2], p[3])
 
 if __name__ == '__main__':
-    p = previsao_chuva_SABESP.scrape_pdf(sys.argv[1])[0]
+    p = previsao_chuva_SABESP.scrape_pdf(sys.argv[1])
+    p = [ i for i in p if i != '' ][0]
     if len(sys.argv) > 2:
         with open(sys.argv[2], "a") as outfile:
             outfile.write(pline(p))
