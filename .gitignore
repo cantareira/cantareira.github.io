@@ -1,0 +1,67 @@
+# History files
+.Rhistory
+
+# Example code in package build process
+*-Ex.R
+
+# R data files from past sessions
+.Rdata
+
+# RStudio files
+.Rproj.user/
+
+# Python Notebook temp folder
+.ipynb_checkpoints/
+
+# Python cache folder
+__pycache__/
+
+#Local files and directories
+old/
+dropbox
+artigos/
+lixo/
+outros/
+_site/
+
+# Temporary files
+*~
+
+# latex files
+*.aux
+*.log
+*.bbl
+*.blg
+
+# other
+/suppl2/.RData
+/.RData
+/fitting/parallel
+/fitting/figs
+
+# vim temp files
+.*.sw[opq]
+
+#added by git ignore
+# /fitting/.RData
+# /fitting/auto/fitting.el
+# /fitting/biestability.R
+# /fitting/dynlm.r
+# /fitting/fits_por_pedacos.pdf
+# /fitting/forecast1.pdf
+# /fitting/forecasts_para o periodo_seguinte.pdf
+# /fitting/model_based_ews.Rnw
+# /fitting/old.RData
+# /fitting/prado_mif_results1.pdf
+# /fitting/sem_outliers.r
+# /fitting/seminarioUFABC.zip
+# /fitting/separatrix.dat
+# /fitting/separatriz1.png
+# /fitting/separatriz2.png
+# /fitting/skeletons.R
+# /fitting/stocast.sim.pdf
+# /fitting/stocast2.pdf
+# /fitting/volumediff365.pdf
+# /site/.RData
+/fitting/.RData
+/htmls_and_Rmds/.RData

@@ -7,6 +7,7 @@ ontem=`date -d "yesterday" +"%Y-%m-%d"`
 commit=1
 error=0
 
+date
 pushd "$ROOT/.."
 
 if [ ! -e  "boletins/boletim_mananciais_${hoje}.pdf" ]; then
