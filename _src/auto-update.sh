@@ -1,13 +1,13 @@
 #!/usr/bin/bash
 
-ROOT=..
+ROOT="$( dirname "${BASH_SOURCE[0]}" )"
 hoje=`date +"%Y-%m-%d"`
 hoje2=`date +"%Y%m%d"`
 ontem=`date -d "yesterday" +"%Y-%m-%d"`
 commit=1
 error=0
 
-pushd $ROOT
+pushd "$ROOT/.."
 
 if [ ! -e  "boletins/boletim_mananciais_${hoje}.pdf" ]; then
     wget "http://site.sabesp.com.br/site/uploads/file/boletim/boletim_mananciais.pdf"
@@ -52,9 +52,17 @@ else
     echo "** boletim SSPCJ de hoje já foi atualizado **"
 fi
 
+
+if [ ! "$error" = 0 ]; then
+    echo "** algum erro aconteceu. Saindo sem gerar atualizações... **"
+    popd
+    exit $error
+fi
+
 if [ "$commit" = 0 ]; then
-    echo "Cheque os dados antes de prosseguir. Continuar? (s/n)?"
-    read check
+    #echo "Cheque os dados antes de prosseguir. Continuar? (s/n)?"
+    #read check
+    check="s"
     if [ ${check:0:1} = "s" ]; then
         # update.R assume que estamos em _src
         cd _src
@@ -77,5 +85,3 @@ else
 fi
 
 popd
-
-exit $error
