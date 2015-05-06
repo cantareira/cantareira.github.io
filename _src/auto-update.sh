@@ -32,22 +32,24 @@ else
     echo "** boletim dos mananciais de hoje já foi atualizado **"
 fi
 
-wget "http://www.sspcj.org.br/images/downloads/SSPCJ_boletimDiario_${hoje2}.pdf"
-if [ $? = 0 ]; then
-    echo "** boletim SSPCJ parece atualizado **"
-    # TODO: pdf_scraper não lida bem com boletins sem chuva
-    python _src/pdf_scraper.py "SSPCJ_boletimDiario_${hoje2}.pdf" data/previsoes_boletins_pcj.csv
+if [ ! -e  "SSPCJ_boletimDiario_${hoje2}.pdf" ]; then
+    wget "http://www.sspcj.org.br/images/downloads/SSPCJ_boletimDiario_${hoje2}.pdf"
     if [ $? = 0 ]; then
-        rm "SSPCJ_boletimDiario_${hoje2}.pdf"
-        git add data/previsoes_boletins_pcj.csv
-        commit=0
+        echo "** boletim SSPCJ parece atualizado **"
+        # TODO: pdf_scraper não lida bem com boletins sem chuva
+        python _src/pdf_scraper.py "SSPCJ_boletimDiario_${hoje2}.pdf" data/previsoes_boletins_pcj.csv
+        if [ $? = 0 ]; then
+            git add data/previsoes_boletins_pcj.csv
+            commit=0
+        else
+            error=1
+            echo "** erro no processamento do boletim SSPCJ **"
+        fi
     else
-        error=1
-        echo "** erro no processamento do boletim SSPCJ **"
+        echo "** boletim SSPCJ ainda não foi atualizado **"
     fi
-    rm "SSPCJ_boletimDiario_${hoje2}.pdf"
 else
-    echo "** boletim SSPCJ ainda não foi atualizado **"
+    echo "** boletim SSPCJ de hoje já foi atualizado **"
 fi
 
 if [ "$commit" = 0 ]; then
