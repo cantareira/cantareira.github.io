@@ -37,7 +37,6 @@ if [ ! -e  "SSPCJ_boletimDiario_${hoje2}.pdf" ]; then
     wget "http://www.sspcj.org.br/images/downloads/SSPCJ_boletimDiario_${hoje2}.pdf"
     if [ $? = 0 ]; then
         echo "** boletim SSPCJ parece atualizado **"
-        # TODO: pdf_scraper não lida bem com boletins sem chuva
         python _src/pdf_scraper.py "SSPCJ_boletimDiario_${hoje2}.pdf" data/previsoes_boletins_pcj.csv
         if [ $? = 0 ]; then
             git add data/previsoes_boletins_pcj.csv
@@ -73,7 +72,6 @@ if [ "$commit" = 0 ]; then
             # "commit -a" é perigoso, lista arquivos individualmente
             git add projecoes-${hoje}.html _includes/lista_projecoes.html dados.html dados_metadata.html data/dados_de_trabalho.csv data/proj30.csv data_ocr_cor2_metadata.html historico.html index.html planilha_de_trabalho_metadata.html sitemap.xml 
             git commit -m "[auto] Novos dados e projeção."
-            # TODO: not yet!
             git push
         else
             error=1
