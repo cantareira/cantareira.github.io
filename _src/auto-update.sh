@@ -52,6 +52,24 @@ else
     echo "** boletim SSPCJ de hoje já foi atualizado **"
 fi
 
+python _src/somar_scraper.py "data/prev_somar_novo.csv"
+if [ $? = 0 ]; then
+    diff -q "data/prev_somar_novo.csv" "data/prev_somar.csv"
+    if [ $? != 0 ]; then
+        echo "** previsão pluviométrica somar atualizada **"
+        mv -f "data/prev_somar_novo.csv" "data/prev_somar.csv"
+        git add "data/prev_somar.csv"
+        # TODO: alterar $commit para gerar nova projeção
+        #commit=0
+        commit=1
+    else
+        echo "** previsão pluviométrica somar não foi atualizada **"
+        rm "data/prev_somar_novo.csv"
+    fi
+else
+    echo "** erro ao recuperar previsão pluviométrica somar **"
+    error=1
+fi
 
 if [ ! "$error" = 0 ]; then
     echo "** algum erro aconteceu. Saindo sem gerar atualizações... **"
