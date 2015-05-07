@@ -3,9 +3,9 @@ import re
 import datetime
 import numpy
 
-def scrape_data():
+def scrape_data(sistema='Cantareira'):
     url = "http://iframe.somarmeteorologia.com.br/mananciais/"
-    text = requests.get(url).text
+    text = requests.post(url, data={'sistema': sistema}).text
     
     g1 = re.search("categories: \[([^\]]+)\]", text, re.DOTALL)
     dates = [ datetime.datetime.strptime(i, "'%d/%m/%Y'").date()  for i in g1.groups()[0].split(',') if i != '' ]
@@ -24,10 +24,11 @@ def scrape_data():
 
 if __name__ == '__main__':
     import sys
-    r = scrape_data()
+    r = scrape_data(sys.argv[1])
     if len(r) == 0:
         sys.exit(1)
-    if len(sys.argv) > 1:
-        numpy.savetxt(sys.argv[1], r, fmt=['"%s"', '%d'], delimiter=",", header='"data","pluviometria"')
+    if len(sys.argv) > 2:
+        numpy.savetxt(sys.argv[2], r, fmt=['"%s"', '%d'], delimiter=",", header='"data","pluviometria"')
     else:
+        print("previsão para o sistema %s" % sys.argv[1])
         print(r)

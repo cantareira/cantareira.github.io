@@ -52,7 +52,7 @@ else
     echo "** boletim SSPCJ de hoje já foi atualizado **"
 fi
 
-python _src/somar_scraper.py "data/prev_somar_novo.csv"
+python _src/somar_scraper.py "Cantareira" "data/prev_somar_novo.csv"
 if [ $? = 0 ]; then
     diff -q "data/prev_somar_novo.csv" "data/prev_somar.csv"
     if [ $? != 0 ]; then
@@ -63,7 +63,7 @@ if [ $? = 0 ]; then
         #commit=0
         commit=1
     else
-        echo "** previsão pluviométrica somar não foi atualizada **"
+        echo "** previsão pluviométrica somar ainda não foi atualizada **"
         rm "data/prev_somar_novo.csv"
     fi
 else
