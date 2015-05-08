@@ -5,6 +5,7 @@ hoje=`date +"%Y-%m-%d"`
 hoje2=`date +"%Y%m%d"`
 ontem=`date -d "yesterday" +"%Y-%m-%d"`
 commit=1
+novo_boletim=1
 error=0
 
 date
@@ -20,6 +21,7 @@ if [ ! -e  "boletins/boletim_mananciais_${hoje}.pdf" ]; then
             mv boletim_mananciais.pdf "boletins/boletim_mananciais_${hoje}.pdf"
             git add "boletins/boletim_mananciais_${hoje}.pdf" data/dados.csv data/data_ocr_cor2.csv
             commit=0
+            novo_boletim=0
         else
             error=1
             echo "** erro no processamento do boletim dos mananciais **"
@@ -30,27 +32,29 @@ if [ ! -e  "boletins/boletim_mananciais_${hoje}.pdf" ]; then
         echo "** boletim dos mananciais ainda não foi atualizado **"
     fi
 else
+    novo_boletim=0
     echo "** boletim dos mananciais de hoje já foi atualizado **"
 fi
 
-if [ ! -e  "SSPCJ_boletimDiario_${hoje2}.pdf" ]; then
-    wget "http://www.sspcj.org.br/images/downloads/SSPCJ_boletimDiario_${hoje2}.pdf"
-    if [ $? = 0 ]; then
-        echo "** boletim SSPCJ parece atualizado **"
-        python _src/pdf_scraper.py "SSPCJ_boletimDiario_${hoje2}.pdf" data/previsoes_boletins_pcj.csv
-        if [ $? = 0 ]; then
-            git add data/previsoes_boletins_pcj.csv
-            commit=0
-        else
-            error=1
-            echo "** erro no processamento do boletim SSPCJ **"
-        fi
-    else
-        echo "** boletim SSPCJ ainda não foi atualizado **"
-    fi
-else
-    echo "** boletim SSPCJ de hoje já foi atualizado **"
-fi
+# Não usamos mais previsão de chuva do boletim SSPCJ
+#if [ ! -e  "SSPCJ_boletimDiario_${hoje2}.pdf" ]; then
+#    wget "http://www.sspcj.org.br/images/downloads/SSPCJ_boletimDiario_${hoje2}.pdf"
+#    if [ $? = 0 ]; then
+#        echo "** boletim SSPCJ parece atualizado **"
+#        python _src/pdf_scraper.py "SSPCJ_boletimDiario_${hoje2}.pdf" data/previsoes_boletins_pcj.csv
+#        if [ $? = 0 ]; then
+#            git add data/previsoes_boletins_pcj.csv
+#            commit=0
+#        else
+#            error=1
+#            echo "** erro no processamento do boletim SSPCJ **"
+#        fi
+#    else
+#        echo "** boletim SSPCJ ainda não foi atualizado **"
+#    fi
+#else
+#    echo "** boletim SSPCJ de hoje já foi atualizado **"
+#fi
 
 python _src/somar_scraper.py "Cantareira" "data/prev_somar_novo.csv"
 if [ $? = 0 ]; then
@@ -59,9 +63,7 @@ if [ $? = 0 ]; then
         echo "** previsão pluviométrica somar atualizada **"
         mv -f "data/prev_somar_novo.csv" "data/prev_somar.csv"
         git add "data/prev_somar.csv"
-        # TODO: alterar $commit para gerar nova projeção
-        #commit=0
-        commit=1
+        commit=0
     else
         echo "** previsão pluviométrica somar ainda não foi atualizada **"
         rm "data/prev_somar_novo.csv"
@@ -77,7 +79,7 @@ if [ ! "$error" = 0 ]; then
     exit $error
 fi
 
-if [ "$commit" = 0 ]; then
+if [[ $novo_boletim = 0 && $commit = 0 ]]; then
     #echo "Cheque os dados antes de prosseguir. Continuar? (s/n)?"
     #read check
     check="s"
@@ -88,7 +90,7 @@ if [ "$commit" = 0 ]; then
         if [ $? = 0 ]; then
             cd ..
             # "commit -a" é perigoso, lista arquivos individualmente
-            git add projecoes-${hoje}.html _includes/lista_projecoes.html dados.html dados_metadata.html data/dados_de_trabalho.csv data/proj30.csv data_ocr_cor2_metadata.html historico.html index.html planilha_de_trabalho_metadata.html sitemap.xml 
+            git add projecoes-${hoje}.html _includes/lista_projecoes.html dados.html dados_metadata.html data/dados_de_trabalho.csv data/proj30.csv data_ocr_cor2_metadata.html historico.html index.html planilha_de_trabalho_metadata.html sitemap.xml
             git commit -m "[auto] Novos dados e projeção."
             git push
         else
