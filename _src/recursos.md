@@ -23,7 +23,4 @@ title: Recursos
 
 * [The Cantareira System Blog](http://blogs.umass.edu/cantareira/)
 
-* A partir de 15/01/2015 a SABESP disponibiliza boletins diários com dados completos de todos os mananciais que abastecem a Região Metropolitana de São Paulo em: http://site.sabesp.com.br/uploads/file/boletim/boletim_mananciais.pdf.
-
-    * **Nota**: desde 18/04/15 a Sabesp disponibiliza apenas o boletim do dia. Os endereços até o dia 17/04/15 continuam ativos até agora, mas a partir desta data há acesso apenas para o boletim diário. Para obter boletins anteriores,
-    tente algo como http://site.sabesp.com.br/uploads/file/boletim/boletim_mananciais_15jan15.pdf. Por vezes é necessário substituir o “15”por “2015”. 
+* A partir de 15/01/2015 a SABESP disponibiliza boletins diários com dados completos de todos os mananciais que abastecem a Região Metropolitana de São Paulo em: http://site.sabesp.com.br/site/interna/Default.aspx?secaoId=553.

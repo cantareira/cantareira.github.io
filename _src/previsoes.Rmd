@@ -13,7 +13,7 @@ options(OutDec = ',')
 knitr::opts_chunk$set(echo=FALSE, warnings=FALSE, message=FALSE)
 ##op <- options(gvis.plot.tag='chart')
 ```
-Atualizadas diariamente por volta das 08:30 horas
+Atualizadas diariamente por volta das 09:00 horas
 
 <br>
 <br>
