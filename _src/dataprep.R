@@ -98,6 +98,6 @@ pluv.hist$pluv.m10 <- runmean(pluv.hist$ph.m, k=10, align="right")
 ## Rain forecast for the next days ##
 ## from http://www.sspcj.org.br/index.php/boletins-diarios-e-relatorios-telemetria-pcj/boletimdiario
 ## boletins <- read.csv("../data/previsoes_boletins_pcj.csv", colClasses=c("Date","Date","numeric"))
-boletins <- read.csv("../data/previsoes_boletins_pcj.csv", as.is=TRUE)
-boletins$inicio <- as.Date(boletins$inicio, format="%Y-%m-%d")
-boletins$fim <- as.Date(boletins$fim, format="%Y-%m-%d")
+boletins <- read.csv("../data/prev_somar.csv", as.is=TRUE)
+boletins <- zoo(boletins[,2], as.Date(boletins[,1], "%Y-%m-%d"))
+

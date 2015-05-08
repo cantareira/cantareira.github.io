@@ -136,20 +136,15 @@ p.probs <- data.frame(
         c.prob(pred.125, V0))*100)
 
 ### Projecao para os proximos dias com a previsao metereologica###
-### usando chuva prevista pelo boletim diario da sala de situacao da PCJ
-## ou a chuva prevista pelo relatório de situação da Cantareira do Cemaden (http://www.cemaden.gov.br/)
-### http://www.sspcj.org.br/index.php/boletins-diarios-e-relatorios-telemetria-pcj/boletimdiario
-bol.pred <- boletins[boletins$inicio==max(boletins$inicio),]
-bol.pred <- bol.pred[bol.pred$fim==max(bol.pred$fim),]
-## N de dias da previsao
-bol.n <- as.numeric(bol.pred$fim-bol.pred$inicio+1)
-## Series temporal com ponto medio da chuva prevista: acumulado no período =(min+max)/2; chuva diária 
-bol.pluv <- zoo(rep((bol.pred$maximo+bol.pred$minimo)/(2*bol.n), bol.n), seq(bol.pred$inicio,bol.pred$fim, by=1))
+### usando chuva prevista sobre o sistema pelo site SOMAR metereologia
+### http://www.tempoagora.com.br/sustentabilidade/acompanhe-o-nivel-dos-reservatorios-em-sao-paulo/
 ## Calculo da media de chuva dos 30 dias anteriores, usado pelo modelo
-tmp <- c(c1$pluv, window(bol.pluv, start=max(time(c1)+1)))
+ini <- max(time(c1)+1)
+finis <- max(time(c1)+5)
+tmp <- c(c1$pluv, window(boletins, start=ini, end=finis))
 tmp2 <- runmean(tmp, k=30, align="right")
 ## Serie temporal para realizar a projecao pelo modelo
-pluv.bol <- window(zoo(data.frame(pluv.m=tmp2, defluente=NA), time(tmp)), start=max(time(c1)), end=bol.pred$fim)
+pluv.bol <- window(zoo(data.frame(pluv.m=tmp2, defluente=NA), time(tmp)), start=max(time(c1)))
 ## Calculo da projecao
 pred.bol <- res.fc(p1=c2.pomp, z1=c2.w$v.abs,
                    z2=pluv.bol,

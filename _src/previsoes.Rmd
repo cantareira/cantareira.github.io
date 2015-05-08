@@ -13,12 +13,12 @@ options(OutDec = ',')
 knitr::opts_chunk$set(echo=FALSE, warnings=FALSE, message=FALSE)
 ##op <- options(gvis.plot.tag='chart')
 ```
-Atualizadas diariamente por volta das 13:00 horas
+Atualizadas diariamente por volta das 08:30 horas
 
 <br>
 <br>
 
-## Usando a chuva prevista até `r format(bol.pred$fim, "%d/%m/%Y")`
+## Usando a chuva prevista até `r format(max(time(pluv.bol)), "%d/%m/%Y")`
 
 <br>
 
@@ -29,17 +29,19 @@ kable(tab1,
       col.names=c("Projeção", "Limite inferior", "Limite superior"),
       digits=1,
       align=rep("c", ncol(tab1)),
-      caption=paste("Projeção e seus limites de credibilidade em % do volume total. Chuva prevista de ",
-          round(bol.pluv[1],1), " mm/dia e vazão de retirada de ", round(def.max,1), " m3/s.", sep=""  ))
+      caption=paste("Projeção e seus limites de credibilidade em % do volume total. Chuva média prevista de ",
+          round(mean(window(boletins, start=ini, end=finis)),1), " mm/dia e vazão de retirada de ", round(def.max,1), " m3/s.",
+          sep=""  ))
 ```
 
 <br>
 
 
-* De acordo com a [SABESP](http://www2.sabesp.com.br/mananciais/DivulgacaoSiteSabesp.aspx),
-**o volume armazenado em `r format(max(time(c1)), '%d/%m/%Y')` é
-`r as.numeric(round(c1$v.rel2[time(c1)==max(time(c1))],1))` % do volume total**,
-que corresponde a `r as.numeric(round(c1$v.rel[time(c1)==max(time(c1))],1))` % do volume útil.
+* **Volume armazenado em `r format(max(time(c1)), '%d/%m/%Y')`** ([SABESP](http://www2.sabesp.com.br/mananciais/DivulgacaoSiteSabesp.aspx)):
+    * `r as.numeric(round(c1$v.rel2[time(c1)==max(time(c1))],1))` % do volume total
+    * o mesmo que `r as.numeric(round(c1$v.rel[time(c1)==max(time(c1))],1))` % do volume útil.
+* **Chuva nos últimos 30 dias**: `r round(sum(window(c2.w$pluv,start=max(time(c2.w))-30)),0)` mm.
+<br>	
 * **Todas as projeções estão em percentual do volume total**.
 Para converter para percentual do volume útil multiplique por 1,292.
 * As projeções são os valores esperados por um modelo matemático e os limites
@@ -139,9 +141,7 @@ para projetar quanta água restará no sistema Cantareira
 até `r format(fim, "%d/%m/%Y")`.
 Para isso temos que criar cenários: quanto de chuva cairá e quanta água será retirada do
 sistema. Para a retirada usamos a média do mês anterior[^1].
-Para as chuvas usamos as previsões da
-[Sala de Situação da Bacia PCJ](http://www.sspcj.org.br/index.php/boletins-diarios-e-relatorios-telemetria-pcj/boletimdiario),
-divulgadas por volta das 12:00 horas dos dias úteis.
+Para as chuvas usamos as previsões diárias do portal [Tempo Agora](http://www.tempoagora.com.br/sustentabilidade/acompanhe-o-nivel-dos-reservatorios-em-sao-paulo/).
 
 <br>
 
