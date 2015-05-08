@@ -10,6 +10,9 @@
 # RStudio files
 .Rproj.user/
 
+# R CMD out
+*.Rout
+
 # Python Notebook temp folder
 .ipynb_checkpoints/
 
@@ -32,6 +35,7 @@ _site/
 *.log
 *.bbl
 *.blg
+*.out
 
 # other
 /suppl2/.RData
