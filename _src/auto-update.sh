@@ -3,6 +3,7 @@
 ROOT="$( dirname "${BASH_SOURCE[0]}" )"
 hoje=`date +"%Y-%m-%d"`
 hoje2=`date +"%Y%m%d"`
+hoje3=`date +"%d%b%y"`
 ontem=`date -d "yesterday" +"%Y-%m-%d"`
 commit=1
 novo_boletim=1
@@ -12,20 +13,19 @@ date
 pushd "$ROOT/.."
 
 if [ ! -e  "boletins/boletim_mananciais_${hoje}.pdf" ]; then
-    wget "http://site.sabesp.com.br/site/uploads/file/boletim/boletim_mananciais.pdf"
-    diff -q "boletim_mananciais.pdf" "boletins/boletim_mananciais_${ontem}.pdf"
+    wget "http://site.sabesp.com.br/site/uploads/file/boletim/boletim_mananciais_${hoje3}.pdf"
     if [ $? != 0 ]; then
         echo "** boletim dos mananciais parece atualizado **"
-        python _src/boletim_scraper.py boletim_mananciais.pdf "boletins/boletim_mananciais_${ontem}.pdf" data/dados.csv data/data_ocr_cor2.csv
+        mv "boletim_mananciais_${hoje3}.pdf" "boletins/boletim_mananciais_${hoje}.pdf"
+        git add "boletins/boletim_mananciais_${hoje}.pdf"
+        commit=0
+        python _src/boletim_scraper.py "boletins/boletim_mananciais_${hoje}.pdf" "boletins/boletim_mananciais_${ontem}.pdf" data/dados.csv data/data_ocr_cor2.csv
         if [ $? = 0 ]; then
-            mv boletim_mananciais.pdf "boletins/boletim_mananciais_${hoje}.pdf"
-            git add "boletins/boletim_mananciais_${hoje}.pdf" data/dados.csv data/data_ocr_cor2.csv
-            commit=0
+            git add data/dados.csv data/data_ocr_cor2.csv
             novo_boletim=0
         else
             error=1
             echo "** erro no processamento do boletim dos mananciais **"
-            rm boletim_mananciais.pdf
         fi
     else
         rm "boletim_mananciais.pdf"
