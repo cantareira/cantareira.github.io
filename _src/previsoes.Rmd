@@ -13,10 +13,13 @@ options(OutDec = ',')
 knitr::opts_chunk$set(echo=FALSE, warnings=FALSE, message=FALSE)
 ##op <- options(gvis.plot.tag='chart')
 ```
+Atualizadas diariamente por volta das 13:00 horas
+
 <br>
 <br>
 
 ## Usando a chuva prevista até `r format(bol.pred$fim, "%d/%m/%Y")`
+
 <br>
 
 ```{r tabela boletins}
@@ -27,7 +30,7 @@ kable(tab1,
       digits=1,
       align=rep("c", ncol(tab1)),
       caption=paste("Projeção e seus limites de credibilidade em % do volume total. Chuva prevista de ",
-          bol.pluv[1], " mm/dia e vazão de retirada de ", round(def.max,1), " m3/s.", sep=""  ))
+          round(bol.pluv[1],1), " mm/dia e vazão de retirada de ", round(def.max,1), " m3/s.", sep=""  ))
 ```
 
 <br>
@@ -35,7 +38,10 @@ kable(tab1,
 
 * De acordo com a [SABESP](http://www2.sabesp.com.br/mananciais/DivulgacaoSiteSabesp.aspx),
 **o volume armazenado em `r format(max(time(c1)), '%d/%m/%Y')` é
-`r as.numeric(round(c1$v.rel2[time(c1)==max(time(c1))],1))` % do volume total**.
+`r as.numeric(round(c1$v.rel2[time(c1)==max(time(c1))],1))` % do volume total**,
+que corresponde a `r as.numeric(round(c1$v.rel[time(c1)==max(time(c1))],1))` % do volume útil.
+* **Todas as projeções estão em percentual do volume total**.
+Para converter para percentual do volume útil multiplique por 1,292.
 * As projeções são os valores esperados por um modelo matemático e os limites
 são a margem de erro da projeção. 
 * Por exemplo, para o dia `r format(max(time(tab.pred.bol)), '%d de %B de %Y')` a projeção
@@ -84,6 +90,7 @@ para cenário de chuva na média histórica do mês, e 25% abaixo e acima da mé
 mm de chuva acumulada em  `r format(min(time(ph.next)), "%B")` e
 `r as.numeric(medias$ph.cum[as.yearmon(max(time(ph.next)))])` mm em
 `r format(max(time(ph.next)), "%B")`.
+* Nos últimos 30 dias a chuva acumulada foi `r round(sum(window(c2.w$pluv,start=max(time(c2.w))-30)),0)` mm.
 
 <br>
 <br>
@@ -189,10 +196,8 @@ usa um modelo hidrológico para fazer projeções até o final do ano, para vár
 Veja a seção [sobre](sobre.html).
 
 
-[^1]: Ou e os limites fixados pelas agências reguladoras, se forem menores que a média do mês anterior.
+[^1]: Ou os limites fixados pelas agências reguladoras, se forem menores que a média do mês anterior.
 Desde novembro de 2014 a [ANA](http://www2.ana.gov.br) e [DAEE](http://www.daee.sp.gov.br/)
-fixam os limites máximos de retirada de água para o mês seguinte .
-Este é um regime de monitoramento intensivo, por causa da gravidade da situação.
-Os limites são divulgados no
+fixam os limites máximos de retirada de água para o mês seguinte, divulgados no
 [site da ANA](http://www2.ana.gov.br/Paginas/servicos/outorgaefiscalizacao/sistemacantareira.aspx),
  na seção de comunicados conjuntos.

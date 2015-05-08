@@ -67,6 +67,7 @@ cant.dim5.df <- upData(as.data.frame(cant.dim5),
                     units=c(
                         pluv="mm",
                         v.abs="m3",
+                        pluv.m="mm",
                         afluente="m3/dia",
                         defluente="m3/dia",
                         afluente.m="m3/dia"
@@ -103,8 +104,8 @@ proj.30 <- upData(proj.30,
     )
 
 ## salva os arquivos em formato csv
-write.csv(cant.dim5.df, file="../data/dados_de_trabalho.csv")
-write.csv(proj.30, file="../data/proj30.csv")
+write.csv2(cant.dim5.df, file="../data/dados_de_trabalho.csv")
+write.csv2(proj.30, file="../data/proj30.csv")
 tmp1 <- html(contents(rsp), file="../dados_metadata.html")
 tmp2 <- html(contents(fluxos), file="../data_ocr_cor2_metadata.html")
 tmp3 <- html(contents(cant.dim5.df), file="../planilha_de_trabalho_metadata.html")

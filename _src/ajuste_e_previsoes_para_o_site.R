@@ -137,8 +137,10 @@ p.probs <- data.frame(
 
 ### Projecao para os proximos dias com a previsao metereologica###
 ### usando chuva prevista pelo boletim diario da sala de situacao da PCJ
+## ou a chuva prevista pelo relatório de situação da Cantareira do Cemaden (http://www.cemaden.gov.br/)
 ### http://www.sspcj.org.br/index.php/boletins-diarios-e-relatorios-telemetria-pcj/boletimdiario
 bol.pred <- boletins[boletins$inicio==max(boletins$inicio),]
+bol.pred <- bol.pred[bol.pred$fim==max(bol.pred$fim),]
 ## N de dias da previsao
 bol.n <- as.numeric(bol.pred$fim-bol.pred$inicio+1)
 ## Series temporal com ponto medio da chuva prevista: acumulado no período =(min+max)/2; chuva diária 

@@ -46,6 +46,8 @@ processo, fazemos duas projeções:
   A validação do modelo mostrou que 
   projeções para até trinta dias são acuradas.
 
+Para mais detalhes técnicos veja nosso [documento de metodologia](detalhes-tecnicos.pdf).
+
 
 ### Agradecimentos
 
