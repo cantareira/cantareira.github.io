@@ -14,7 +14,7 @@ pushd "$ROOT/.."
 
 if [ ! -e  "boletins/boletim_mananciais_${hoje}.pdf" ]; then
     wget "http://site.sabesp.com.br/site/uploads/file/boletim/boletim_mananciais_${hoje3}.pdf"
-    if [ $? != 0 ]; then
+    if [ $? = 0 ]; then
         echo "** boletim dos mananciais parece atualizado **"
         mv "boletim_mananciais_${hoje3}.pdf" "boletins/boletim_mananciais_${hoje}.pdf"
         git add "boletins/boletim_mananciais_${hoje}.pdf"
@@ -28,7 +28,6 @@ if [ ! -e  "boletins/boletim_mananciais_${hoje}.pdf" ]; then
             echo "** erro no processamento do boletim dos mananciais **"
         fi
     else
-        rm "boletim_mananciais.pdf"
         echo "** boletim dos mananciais ainda não foi atualizado **"
     fi
 else
