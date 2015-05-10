@@ -22,11 +22,18 @@ create.win.fl <- function(zoo.obj, len=180){
 }
 
 ## Creates a list of zoo windows defined by date in 'times'
-create.win <- function(zoo.obj, times){
+create.win <- function(zoo.obj, times, len){
     periods <- length(times)-1
     results <- vector(mode="list", length=periods)
-    for(i in 1:periods){
-        results[[i]] <- window(zoo.obj, start=times[i], end=times[i+1]-1)
+    if(missing(len)){
+        for(i in 1:periods){
+            results[[i]] <- window(zoo.obj, start=times[i], end=times[i+1]-1)
+        }
+    }
+    else{
+        for(i in 1:periods){
+            results[[i]] <- window(zoo.obj, start=times[i], end=times[i]+len-1)
+        }
     }
     ##results <- results[length(results):1]
     names(results) <- sapply(results, function(x) paste(range(time(x)), collapse="-to-"))
