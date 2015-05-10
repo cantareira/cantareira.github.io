@@ -16,7 +16,11 @@ c2.w <- window(cant.dim5, start=max(time(cant.dim5)-180))
 c2.pomp <- create.pomp.3p(c2.w)
 ## Ajuste em duas etapas:
 ## Valores iniciais
-guess <- c(a0=11, a1=0.51, a3=0.59, V.0=c2.w$v.abs[1], dp=3.2e7, sigma=3.7e-3)
+##guess <- data.frame(a0=11, a1=0.51, a3=0.59, V.0=as.numeric(cant.dim5$v.abs[time(cant.dim5)=="2015-04-15"]),
+##                    dp=3.2e7, sigma=3.7e-3, row.names="2015-04-15 00:00:00")
+guesses <- read.csv2("../data/coefs_estimados.csv", row.names=1)
+guess <- c(guesses[nrow(guesses),], recursive=TRUE)
+guess["V.0"] <- as.numeric(c2.w$v.abs[1])
 ## Distribuicoes a priori dos parametros a estimar
 c2.prior <- function(params,...){
     params["a0"] <- runif(n=1, min=0.1, max=1000)
@@ -30,6 +34,9 @@ tmp.bsmc <- bsmc2.fit.3p(c2.pomp, params=guess, rpriors=c2.prior, Np=5000)
 ## 2 . 30 mil iterações com a priori lognormais com parametros
 ## obtidos das ditribuicoes posteriores do primeiro ajuste
 c2.fit <- bsmc2.fit.3p(c2.pomp, bsmc2.obj=tmp.bsmc, Np=30000)
+## Gravando os coeficientes estimados
+guesses <- rbind(guesses,data.frame(t(coef(c2.fit)), row.names=Sys.time()))
+write.csv2(guesses, file="../data/coefs_estimados.csv")
 
 ## PROJECAO ##
 ## chuva media para os 30 dias seguintes
