@@ -14,8 +14,9 @@ def scrape_data(sistema='Cantareira'):
     g2 = re.search(pattern, text, re.DOTALL)
     pluv = [ int(i.strip("'")) for i in g2.groups()[0].split(',') if i != '' ]
     
-    # estranhamente, os dados costumam ter um ponto a mais
+    # estranhamente, os dados nem sempre têm o mesmo comprimento
     pluv = pluv[:len(dates)]
+    dates = dates[:len(pluv)]
     
     r = numpy.array([dates, pluv]).T
     # filtrando datas passadas
