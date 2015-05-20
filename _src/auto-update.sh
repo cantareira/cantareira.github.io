@@ -21,7 +21,7 @@ if [ ! -e  "boletins/boletim_mananciais_${hoje}.pdf" ]; then
         commit=0
         python _src/boletim_scraper.py "boletins/boletim_mananciais_${hoje}.pdf" "boletins/boletim_mananciais_${ontem}.pdf" data/dados.csv data/data_ocr_cor2.csv data/dados_boletins.csv
         if [ $? = 0 ]; then
-            git add data/dados.csv data/data_ocr_cor2.csv
+            git add data/dados.csv data/data_ocr_cor2.csv data/dados_boletins.csv
             novo_boletim=0
         else
             error=1
