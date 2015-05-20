@@ -9,8 +9,20 @@ library(zoo)
 library(pomp)
 library(caTools)
 ##source("../suppl2/functions.r")
+
+################################################################################
+## Reading and converting data from the SABESP daily bulletins
+## http://site.sabesp.com.br/site/interna/Default.aspx?secaoId=553,
+## available since 2015-01-15
+################################################################################
+dados.bol <- read.csv("../data/dados_boletins.csv")
+cant.bol <- dados.bol[dados.bol$sistema=="Cantareira",-2]
+cant.bol <- zoo(cant.bol[,-1], as.Date(cant.bol[,1],"%Y-%m-%d"))
+
 ###########################################################
 ### Reading and transforming data on water volume and rain
+## Available at http://www2.sabesp.com.br/mananciais/DivulgacaoSiteSabesp.aspx
+## before the bulletins (2015-01-14 to 2004-01-01)
 ## Note: stored water expressed as % of maximum capacity
 ###########################################################
 raw <- read.csv("../data/dados.csv", as.is=TRUE)
@@ -34,7 +46,7 @@ rsp$volume[z&rsp$data>"2014-12-13"] <- rsp$volume[z&rsp$data>"2014-12-13"] - 6.6
 cant <- rsp[rsp$manancial=="sistemaCantareira",-2]
 cant.p <- zoo(x=cant$pluviometria, order.by=cant$data) 
 cant <- zoo(x=cant$volume, order.by=cant$data)
-
+    
 ###########################################################################
 ### Reading and preprocessing data on inflow and outflow
 ###########################################################################
@@ -52,10 +64,15 @@ fluxos$afluente.m <- runmean(fluxos$afluente, 30, align="right")
 fluxos.zoo <- zoo(fluxos[,-1], fluxos$date)
 ### Converting daily time series to zoo object
 ## v.rel2= stored volume as a percentage of Total volume (and not of operational volume) 
-cant.zoo <- zoo(data.frame(pluv=cant.p, v.rel=cant+29.2, v.rel2=(cant+29.2)*9.8155e6/1269.5e4,
+cant.zoo <- zoo(data.frame(pluv=cant.p, v.rel=cant+29.2, v.rel2=(cant+29.2)*9.8155e6/1.2695e7,
                            v.abs=(cant+29.2)*9.8155e6,
                            pluv.m=runmean(cant.p, 30, align="right")), time(cant))
 cant.dim <- merge(cant.zoo, fluxos.zoo[,c("afluente", "defluente", "afluente.m")])
+## Replaces absolute volumes for the more exact figures available since 2015-01-15
+cant.dim$v.abs[time(cant.bol)] <- cant.bol$vabs*1000000
+cant.dim$v.rel2[time(cant.bol)] <- cant.dim$v.abs[time(cant.bol)]/1.2695e7
+cant.dim$v.rel[time(cant.bol)] <- cant.dim$v.abs[time(cant.bol)]/9.8155e6
+
 ## Croping ends that miss data in one or other series
 cant.dim2 <- window(cant.dim, start=min(time(fluxos.zoo)), end=max(time(cant.p)))
 ## Approximating NA values (few)
