@@ -13,6 +13,7 @@ date
 pushd "$ROOT/.."
 
 if [ ! -e  "boletins/boletim_mananciais_${hoje}.pdf" ]; then
+    # fonte: http://site.sabesp.com.br/site/interna/Default.aspx?secaoId=553
     wget "http://site.sabesp.com.br/site/uploads/file/boletim/boletim_mananciais_${hoje3}.pdf"
     if [ $? = 0 ]; then
         echo "** boletim dos mananciais parece atualizado **"
