@@ -13,15 +13,16 @@ date
 pushd "$ROOT/.."
 
 if [ ! -e  "boletins/boletim_mananciais_${hoje}.pdf" ]; then
+    # fonte: http://site.sabesp.com.br/site/interna/Default.aspx?secaoId=553
     wget "http://site.sabesp.com.br/site/uploads/file/boletim/boletim_mananciais_${hoje3}.pdf"
     if [ $? = 0 ]; then
         echo "** boletim dos mananciais parece atualizado **"
         mv "boletim_mananciais_${hoje3}.pdf" "boletins/boletim_mananciais_${hoje}.pdf"
         git add "boletins/boletim_mananciais_${hoje}.pdf"
         commit=0
-        python _src/boletim_scraper.py "boletins/boletim_mananciais_${hoje}.pdf" "boletins/boletim_mananciais_${ontem}.pdf" data/dados.csv data/data_ocr_cor2.csv
+        python _src/boletim_scraper.py "boletins/boletim_mananciais_${hoje}.pdf" "boletins/boletim_mananciais_${ontem}.pdf" data/dados.csv data/data_ocr_cor2.csv data/dados_boletins.csv
         if [ $? = 0 ]; then
-            git add data/dados.csv data/data_ocr_cor2.csv
+            git add data/dados.csv data/data_ocr_cor2.csv data/dados_boletins.csv
             novo_boletim=0
         else
             error=1

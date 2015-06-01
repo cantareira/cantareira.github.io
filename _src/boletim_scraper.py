@@ -8,7 +8,8 @@ from dateutil import parser
 from pdf_scraper import PDF_Processor
 
 def is_number(s, decimals=('.', ',')):
-    return len(s) and all([ x.isdigit() or x in decimals for x in list(s) ])
+    return (len(s) and all([ x.isdigit() or x in decimals for x in list(s) ]) 
+            and (s.find(',') >=0 or s.find('.') >= 0))
 
 class Boletim_Processor(PDF_Processor):
     def __init__(self):
@@ -17,8 +18,11 @@ class Boletim_Processor(PDF_Processor):
     def scrape_pdf(self, arquivo):
         text = subprocess.Popen(['pdftotext', '-q', '-layout', arquivo, '-'], stdout=subprocess.PIPE).communicate()[0]
         text = text.decode('utf-8') # system-dependent?
+        text = re.sub('\(\d+\)\n', '', text)
         r = {}
         for l in text.split("\n"):
+            # mais uma...
+            l = l.replace('(9)', '').replace('(', '').replace(')', '')
             if re.search('Gerado às [0-9:]+ hs de ([0-9/]+)', l):
                 g = re.search('Gerado às [0-9:]+ hs de ([0-9/]+)', l)
                 r['data'] = datetime.datetime.strptime(g.groups()[0], '%d/%m/%Y').date()
@@ -40,7 +44,7 @@ class Boletim_Processor(PDF_Processor):
                 r['RioClaro'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
             elif re.search('Alto Tietê +[▲▼−]( +[0-9,]+)+', l):
                 r['AltoTiete'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
-            elif re.search('Alto Cotia\(2\) +[▲▼−-]( +[0-9,]+)+', l):
+            elif re.search('Alto Cotia2 +[▲▼−-]( +[0-9,]+)+', l):
                 r['Cotia'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
             elif re.search('Cantareira( +[0-9,]+)+$', l):
                 r['p Cantareira'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
@@ -77,6 +81,15 @@ def plines(p):
             'sistema'+s, p[s][i], p['p '+s][0], p['p '+s][1], p['p '+s][3])
     return r
 
+def blines(p):
+    r = ''
+    for s in ['Cantareira', 'AltoTiete', 'Guarapiranga', 'Cotia', 'RioGrande', 'RioClaro']:
+        if s in ['Cantareira', 'AltoTiete', 'Cotia']:
+            i = 0
+        else:
+            i = 1
+        r += '"%s","%s",' % (p['data'].strftime('%Y-%m-%d'), s) + ','.join(p[s][i:i+2]+p[s][i+3:]) + '\n'
+    return r
 
 b = Boletim_Processor()
 if __name__ == '__main__':
@@ -87,7 +100,10 @@ if __name__ == '__main__':
             outfile.write(plines(p))
         with open(sys.argv[4], "a") as outfile:
             outfile.write(vline(p, pontem['PaivaCastro'][1]))
+        with open(sys.argv[5], "a") as outfile:
+            outfile.write(blines(p))
     else:
         print(vline(p, pontem['PaivaCastro'][1]))
         print(plines(p))
+        print(blines(p))
 
