@@ -164,6 +164,7 @@ res.fc <- function(p1, z1, z2, start=min(time(z1)), end=max(time(z1)), deflu,
     sim$V2 <- sim$V
     if(bounded.vols){
         sim$V2[is.na(sim$V2)] <- 0
+        sim$V2[sim$V2<0] <- 0
         sim$V2[sim$V2>V.max] <- V.max
     }
     sim.s <-
