@@ -8,7 +8,7 @@ from dateutil import parser
 from pdf_scraper import PDF_Processor
 
 def is_number(s, decimals=('.', ',')):
-    return (len(s) and all([ x.isdigit() or x in decimals for x in list(s) ]) 
+    return (len(s) and all([ x.isdigit() or x in decimals or x == '-' for x in list(s) ])
             and (s.find(',') >=0 or s.find('.') >= 0))
 
 class Boletim_Processor(PDF_Processor):
@@ -63,9 +63,9 @@ class Boletim_Processor(PDF_Processor):
 
 def vline(p, vol_paivacastro):
     return '%s,%s,%s,%s,%.2f,%s,%s,%.2f,%s,%s,%.2f,%s,%s,%.1f\n' % (p['data'].strftime('%Y-%m-%d'),
-            p['Jaguari'][4], p['Jaguari'][5], p['Jaguari'][2],
+            p['Jaguari'][6], p['Jaguari'][7], p['Jaguari'][2],
             float(p['Cachoeira'][4]) - float(p['Cachoeira'][6]), p['Cachoeira'][5], p['Cachoeira'][2],
-            float(p['Atibainha'][4]) - float(p['Atibainha'][6]), p['Atibainha'][5], p['Atibainha'][2],
+            float(p['Atibainha'][6]) - float(p['Atibainha'][8]), p['Atibainha'][7], p['Atibainha'][2],
             float(p['PaivaCastro'][4]) - float(p['PaivaCastro'][6]), p['PaivaCastro'][5], p['PaivaCastro'][2],
             -((float(p['PaivaCastro'][1])-float(vol_paivacastro))*1e6/(24*3600) -
                     float(p['PaivaCastro'][4]) + float(p['PaivaCastro'][5])))
@@ -88,7 +88,10 @@ def blines(p):
             i = 0
         else:
             i = 1
-        r += '"%s","%s",' % (p['data'].strftime('%Y-%m-%d'), s) + ','.join(p[s][i:i+2]+p[s][i+3:]) + '\n'
+        j = 3
+        if s == 'Cantareira':
+            j = 5
+        r += '"%s","%s",' % (p['data'].strftime('%Y-%m-%d'), s) + ','.join(p[s][i:i+2]+p[s][i+j:]) + '\n'
     return r
 
 b = Boletim_Processor()
