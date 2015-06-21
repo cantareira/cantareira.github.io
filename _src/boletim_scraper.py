@@ -44,7 +44,7 @@ class Boletim_Processor(PDF_Processor):
                 r['RioClaro'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
             elif re.search('Alto Tietê +[▲▼−]( +[0-9,]+)+', l):
                 r['AltoTiete'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
-            elif re.search('Alto Cotia2 +[▲▼−-]( +[0-9,]+)+', l):
+            elif re.search('Alto Cotia2? +[▲▼−-]( +[0-9,]+)+', l):
                 r['Cotia'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
             elif re.search('Cantareira( +[0-9,]+)+$', l):
                 r['p Cantareira'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
