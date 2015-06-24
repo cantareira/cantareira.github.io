@@ -18,6 +18,10 @@ library(caTools)
 dados.bol <- read.csv("../data/dados_boletins.csv")
 cant.bol <- dados.bol[dados.bol$sistema=="Cantareira",-2]
 cant.bol <- zoo(cant.bol[,-1], as.Date(cant.bol[,1],"%Y-%m-%d"))
+# fixing some bizarre behavior of zoo conversion
+if (mode(cant.bol) == "character"){
+    mode(cant.bol) <- "numeric"
+}
 
 ###########################################################
 ### Reading and transforming data on water volume and rain
