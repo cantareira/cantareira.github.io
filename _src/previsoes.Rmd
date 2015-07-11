@@ -40,7 +40,7 @@ kable(tab1,
 * **Volume armazenado em `r format(max(time(c1)), '%d/%m/%Y')`** ([SABESP](http://www2.sabesp.com.br/mananciais/DivulgacaoSiteSabesp.aspx)):
     * `r as.numeric(round(c1$v.rel2[time(c1)==max(time(c1))],1))` % do volume total
     * o mesmo que `r as.numeric(round(c1$v.rel[time(c1)==max(time(c1))],1))` % do volume útil.
-* **Chuva nos últimos 30 dias**: `r round(sum(window(c2.w$pluv,start=max(time(c2.w))-30)),0)` mm.
+* **Chuva nos últimos 30 dias**: `r round(sum(window(c2.w$pluv,start=max(time(c2.w))-29)),0)` mm.
 <br>	
 * **Todas as projeções estão em percentual do volume total**.
 Para converter para percentual do volume útil multiplique por 1,292.
@@ -92,7 +92,7 @@ para cenário de chuva na média histórica do mês, e 25% abaixo e acima da mé
 mm de chuva acumulada em  `r format(min(time(ph.next)), "%B")` e
 `r as.numeric(medias$ph.cum[as.yearmon(max(time(ph.next)))])` mm em
 `r format(max(time(ph.next)), "%B")`.
-* Nos últimos 30 dias a chuva acumulada foi `r round(sum(window(c2.w$pluv,start=max(time(c2.w))-30)),0)` mm.
+* Nos últimos 30 dias a chuva acumulada foi `r round(sum(window(c2.w$pluv,start=max(time(c2.w))-29)),0)` mm.
 
 <br>
 <br>
