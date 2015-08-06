@@ -4,6 +4,7 @@ ROOT="$( dirname "${BASH_SOURCE[0]}" )"
 hoje=`date +"%Y-%m-%d"`
 hoje2=`date +"%Y%m%d"`
 hoje3=`date +"%d%b%y"`
+hoje4=`date +'%y%m%d'`
 ontem=`date -d "yesterday" +"%Y-%m-%d"`
 commit=1
 novo_boletim=1
@@ -56,21 +57,34 @@ fi
 #    echo "** boletim SSPCJ de hoje já foi atualizado **"
 #fi
 
-python _src/somar_scraper.py "Cantareira" "data/prev_somar_novo.csv"
-if [ $? = 0 ]; then
-    diff -q "data/prev_somar_novo.csv" "data/prev_somar.csv"
-    if [ $? != 0 ]; then
-        echo "** previsão pluviométrica somar atualizada **"
-        mv -f "data/prev_somar_novo.csv" "data/prev_somar.csv"
+#python _src/somar_scraper.py "Cantareira" "data/prev_somar_novo.csv"
+#if [ $? = 0 ]; then
+#    diff -q "data/prev_somar_novo.csv" "data/prev_somar.csv"
+#    if [ $? != 0 ]; then
+#        echo "** previsão pluviométrica somar atualizada **"
+#        mv -f "data/prev_somar_novo.csv" "data/prev_somar.csv"
+#        git add "data/prev_somar.csv"
+#        commit=0
+#    else
+#        echo "** previsão pluviométrica somar ainda não foi atualizada **"
+#        rm "data/prev_somar_novo.csv"
+#    fi
+#else
+#    echo "** erro ao recuperar previsão pluviométrica somar **"
+#    error=1
+#fi
+
+if [ ! -e  "somar_prev/prev_${hoje4}.csv" ]; then
+    wget "http://somarmeteorologia.com.br/security/Unesp_Cantareira/prev_${hoje4}.csv"
+    if [ $? = 0 ]; then
+        echo "** previsao SOMAR atualizada **"
+        cp -f "prev_${hoje4}.csv" "data/prev_somar.csv"
         git add "data/prev_somar.csv"
         commit=0
+        mv "prev_${hoje4}.csv" somar_prev/
     else
-        echo "** previsão pluviométrica somar ainda não foi atualizada **"
-        rm "data/prev_somar_novo.csv"
+        echo "** previsão SOMAR ainda não foi atualizada hoje **"
     fi
-else
-    echo "** erro ao recuperar previsão pluviométrica somar **"
-    error=1
 fi
 
 if [ ! "$error" = 0 ]; then
