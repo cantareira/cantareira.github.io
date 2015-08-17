@@ -192,4 +192,4 @@ pred.bol30 <- res.fc(p1=c2.pomp, z1=c2.w$v.abs,
 tab.pred.bol30 <- pred.bol30$summary[,1:3]
 ## Convertendo para percentual do volume máximo
 tab.pred.bol30 <- window(scale(tab.pred.bol30, center=FALSE, scale=rep(1.2695e7, 3)), start=max(time(c1))+1)
-write.csv2(tab.pred.bol30, file=paste('../somar_prev/projecao30_', max(time(c1)), '.csv', sep=''))
+write.csv(tab.pred.bol30, file=paste('../somar_prev/projecao30_', max(time(c1)), '.csv', sep=''), row.names=index(tab.pred.bol30))
