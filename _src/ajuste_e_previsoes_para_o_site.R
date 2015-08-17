@@ -167,3 +167,29 @@ pred.bol <- res.fc(p1=c2.pomp, z1=c2.w$v.abs,
 tab.pred.bol <- pred.bol$summary[,1:3]
 ## Convertendo para percentual do volume máximo
 tab.pred.bol <- window(scale(tab.pred.bol, center=FALSE, scale=rep(1.2695e7, 3)), start=max(time(c1))+1)
+
+### Projecao para os proximos 30 dias com a previsao metereologica###
+### usando chuva prevista sobre o sistema pelo site SOMAR metereologia
+## Calculo da media de chuva dos 30 dias anteriores, usado pelo modelo
+ini <- max(time(c1)+1)
+finis <- max(time(boletins), time(c1)+30)
+tmp <- c(c1$pluv, window(boletins, start=ini, end=finis))
+tmp2 <- runmean(tmp, k=30, align="right")
+## Serie temporal para realizar a projecao pelo modelo
+pluv.bol30 <- window(zoo(data.frame(pluv.m=tmp2, defluente=NA), time(tmp)), start=max(time(c1)))
+## Calculo da projecao
+pred.bol30 <- res.fc(p1=c2.pomp, z1=c2.w$v.abs,
+                   z2=pluv.bol30,
+                   deflu=def.max,
+                   start=min(time(pluv.bol30)),
+                   end=max(time(pluv.bol30)),
+                   coefs=exp(c2.fit@post),
+                   V.max=1.2695e9,
+                   nsamp.coef=5000,
+                   nsim=2
+                   )
+## Tabela com previsao e intervalos de 95% de credibilidade ##
+tab.pred.bol30 <- pred.bol30$summary[,1:3]
+## Convertendo para percentual do volume máximo
+tab.pred.bol30 <- window(scale(tab.pred.bol30, center=FALSE, scale=rep(1.2695e7, 3)), start=max(time(c1))+1)
+write.csv2(tab.pred.bol30, file=paste('../somar_prev/projecao30_', max(time(c1)), '.csv', sep=''))

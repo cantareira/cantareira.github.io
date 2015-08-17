@@ -104,7 +104,7 @@ if [[ $novo_boletim = 0 && $commit = 0 ]]; then
         if [ $? = 0 ]; then
             cd ..
             # "commit -a" é perigoso, lista arquivos individualmente
-            git add projecoes-${hoje}.html _includes/lista_projecoes.html dados.html dados_metadata.html data/dados_de_trabalho.csv data/proj30.csv data/coefs_estimados.csv data_ocr_cor2_metadata.html historico.html index.html planilha_de_trabalho_metadata.html sitemap.xml
+            git add projecoes-${hoje}.html _includes/lista_projecoes.html dados.html dados_metadata.html data/dados_de_trabalho.csv data/proj30.csv data/coefs_estimados.csv data_ocr_cor2_metadata.html historico.html index.html planilha_de_trabalho_metadata.html sitemap.xml somar_prev/projecao30_*.csv
             git commit -m "[auto] Novos dados e projeção."
             git push
         else
