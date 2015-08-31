@@ -21,7 +21,7 @@ Nem toda chuva que cai na bacia de uma reservatório vira água armazenada.
 Quando o reservatório está vazio a bacia está mais seca, mais chuva é absorvida pelo solo ou evapora, e sobra menos
 para alimentar o reservatório.
 
-![](_src/sequencia_funil_vazio.png)
+![](sequencia_funil_vazio.png)
 
 
 ### Quanto mais cheio mais fácil de encher
@@ -29,7 +29,7 @@ para alimentar o reservatório.
 Quanto há muita água na bacia o reservatório está cheio. O solo estará mais saturado e mais água da chuva escorre
 para o reservatório.
 
-![](_src/sequencia_funil_cheio.png)
+![](sequencia_funil_cheio.png)
 
 
 ### Há dois estados estados em reservatórios: cheio e vazio
