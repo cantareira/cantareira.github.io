@@ -1,0 +1,44 @@
+---
+title: "Estados alternativos em reservatórios"
+---
+
+
+```{r setOptions, include=FALSE, message=FALSE}
+library(rmarkdown)
+##library(dygraphs)
+knitr::opts_chunk$set(echo=FALSE, warnings=FALSE, message=FALSE, fig.width=9, fig.height=6.5)
+##op <- options(gvis.plot.tag='chart')
+```
+
+### A quantidade de água no reservatório não depende só da chuva
+* Comparar vazões de entrada no fim de agosto deste ano x chuva acumulada no mês com os mesmos números de 2012
+* Fazer o mesmo para o mês mais chuvoso
+* Grafico de barras com razão vazão/chuva médias para volumes altos e baixos
+
+### Quanto mais vazio mais difícil de encher
+
+Nem toda chuva que cai na bacia de uma reservatório vira água armazenada.
+Quando o reservatório está vazio a bacia está mais seca, mais chuva é absorvida pelo solo ou evapora, e sobra menos
+para alimentar o reservatório.
+
+![](_src/sequencia_funil_vazio.png)
+
+
+### Quanto mais cheio mais fácil de encher
+
+Quanto há muita água na bacia o reservatório está cheio. O solo estará mais saturado e mais água da chuva escorre
+para o reservatório.
+
+![](_src/sequencia_funil_cheio.png)
+
+
+### Há dois estados estados em reservatórios: cheio e vazio
+
+* Ligar o feedback descrito acima com estados alternativos.
+* Usar a analogia do barco
+* Nossas evidência de que o Cantareira tenha estados alternativos (razão chuva/vazão, bom ajuste do modelo)
+
+
+### A gestão da água deve considerar estados alternativos dos reservatórios
+* graficos ou números das simulações de reduçãod a vazão em jan 2014 e no momento que ocorreu
+* Cálculo da água economizada em cada cenários, indicando o que seria água poupada por vazão e por melhro eficência do sistema
