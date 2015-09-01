@@ -13,7 +13,7 @@ options(OutDec = ',')
 knitr::opts_chunk$set(echo=FALSE, warnings=FALSE, message=FALSE)
 ##op <- options(gvis.plot.tag='chart')
 ```
-Atualizadas diariamente por volta das 09:00 horas
+Atualizadas diariamente por volta das 09:00 horas[^2]
 
 <br>
 <br>
@@ -41,9 +41,11 @@ kable(tab1,
     * `r as.numeric(round(c1$v.rel2[time(c1)==max(time(c1))],1))` % do volume total
     * o mesmo que `r as.numeric(round(c1$v.rel[time(c1)==max(time(c1))],1))` % do volume útil.
 * **Chuva nos últimos 30 dias**: `r round(sum(window(c2.w$pluv,start=max(time(c2.w))-29)),0)` mm.
+* **Média histórica dos últimos 30 dias**: `r as.numeric(round(pluv.hist$ph.m[time(pluv.hist)==max(time(c2.w))-29]*30,0))`	
 <br>	
 * **Todas as projeções estão em percentual do volume total**.
-Para converter para percentual do volume útil multiplique por 1,292.
+  * Para converter para percentual do volume útil multiplique por 1,292.
+  * Para converter para saldo percentual do volume morto multiplique por 1,292 e subtraia 29,2.
 * As projeções são os valores esperados por um modelo matemático e os limites
 são a margem de erro da projeção. 
 * Por exemplo, para o dia `r format(max(time(tab.pred.bol)), '%d de %B de %Y')` a projeção
@@ -201,3 +203,5 @@ Desde novembro de 2014 a [ANA](http://www2.ana.gov.br) e [DAEE](http://www.daee.
 fixam os limites máximos de retirada de água para o mês seguinte, divulgados no
 [site da ANA](http://www2.ana.gov.br/Paginas/servicos/outorgaefiscalizacao/sistemacantareira.aspx),
  na seção de comunicados conjuntos.
+
+[^2]: Sujeito a atrasos e lacunas nos fins de semanas e feriados da divulgação de dados da SABESP.
