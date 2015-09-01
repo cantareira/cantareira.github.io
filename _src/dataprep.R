@@ -56,7 +56,7 @@ cant <- zoo(x=cant$volume, order.by=cant$data)
 ###########################################################################
 fluxos <- read.csv("../data/data_ocr_cor2.csv", as.is=TRUE)
 fluxos$date <- as.Date(fluxos$date, "%Y-%m-%d")
-seg.scaling <- 24*3600 # convertion factor from months to seconds
+seg.scaling <- 24*3600 # convertion factor from seconds to days
 ## Inflow
 fluxos$afluente <- seg.scaling*apply(
     fluxos[,c("Jaguari_QNat","Cachoeira_QNat","Atibainha_QNat","PaivaC_QNat")], 1, sum)
