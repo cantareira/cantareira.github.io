@@ -23,7 +23,7 @@ title: Águas Futuras na mídia
 
 * [Site Águas Futuras mostra projeção de água no Cantareira](https://catracalivre.com.br/geral/sustentavel/indicacao/site-aguas-futuras-mostra-projecao-de-agua-no-cantareira/), Catraca Livre
 
-* [Entrevista: Roberto Kraenkel](http://www.ictp-saifr.org/?p=8945),Portal ICTP-SAIRF
+* [Entrevista: Roberto Kraenkel](http://www.ictp-saifr.org/?p=8945), Portal ICTP-SAIRF
 
 * [Modelagem matemática torna mais eficientes previsões para o Cantareira](http://www5.usp.br/92757/modelagem-matematica-torna-mais-confiaveis-previsoes-para-o-cantareira/), Portal USP
 

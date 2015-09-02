@@ -41,7 +41,7 @@ kable(tab1,
     * `r as.numeric(round(c1$v.rel2[time(c1)==max(time(c1))],1))` % do volume total
     * o mesmo que `r as.numeric(round(c1$v.rel[time(c1)==max(time(c1))],1))` % do volume útil.
 * **Chuva nos últimos 30 dias**: `r round(sum(window(c2.w$pluv,start=max(time(c2.w))-29)),0)` mm.
-* **Média histórica dos últimos 30 dias**: `r as.numeric(round(pluv.hist$ph.m[time(pluv.hist)==max(time(c2.w))-29]*30,0))`	
+* **Média histórica dos últimos 30 dias**: `r as.numeric(round(pluv.hist$ph.m[time(pluv.hist)==max(time(c2.w))-29]*30,0))` mm.	
 <br>	
 * **Todas as projeções estão em percentual do volume total**.
   * Para converter para percentual do volume útil multiplique por 1,292.
@@ -91,9 +91,10 @@ dygraph(c3[,c("v.morto.rel2", "v.rel2",
 para cenário de chuva na média histórica do mês, e 25% abaixo e acima da média.
 * Todos os cenários consideram vazão de retirada de `r round(def.max,1)` m3/s.
 * Médias históricas: `r as.numeric(medias$ph.cum[as.yearmon(min(time(ph.next)))])`
-mm de chuva acumulada em  `r format(min(time(ph.next)), "%B")` e
+mm de chuva acumulada em  `r format(min(time(ph.next)), "%B")`, 
 `r as.numeric(medias$ph.cum[as.yearmon(max(time(ph.next)))])` mm em
-`r format(max(time(ph.next)), "%B")`.
+`r format(max(time(ph.next)), "%B")` e `r as.numeric(round(pluv.hist$ph.m[time(pluv.hist)==max(time(c2.w))-29]*30,0))` mm
+de `r format(min(time(ph.next)), "%d/%B")` a `r format(max(time(ph.next)), "%d/%B")`.
 * Nos últimos 30 dias a chuva acumulada foi `r round(sum(window(c2.w$pluv,start=max(time(c2.w))-29)),0)` mm.
 
 <br>
@@ -204,4 +205,4 @@ fixam os limites máximos de retirada de água para o mês seguinte, divulgados 
 [site da ANA](http://www2.ana.gov.br/Paginas/servicos/outorgaefiscalizacao/sistemacantareira.aspx),
  na seção de comunicados conjuntos.
 
-[^2]: Sujeito a atrasos e lacunas nos fins de semanas e feriados da divulgação de dados da SABESP.
+[^2]: Sujeito a atrasos e lacunas (fins de semanas e feriados), pois depende da divulgação dos dados pela SABESP.
