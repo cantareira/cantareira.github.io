@@ -58,6 +58,16 @@ class Boletim_Processor(PDF_Processor):
                 r['p AltoTiete'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
             elif re.search('Cotia( +[0-9,]+)+', l):
                 r['p Cotia'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
+            elif re.search('Ponte Nova( +[0-9,]+)+', l):
+                r['AT PN'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
+            elif re.search('Paraitinga( +[0-9,]+)+', l):
+                r['AT P'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
+            elif re.search('Biritiba( +[0-9,]+)+', l):
+                r['AT B'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
+            elif re.search('Jundiaí( +[0-9,]+)+', l):
+                r['AT J'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
+            elif re.search('Taiaçupeba( +[0-9,]+)+', l):
+                r['AT T'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
  
         return r
 
@@ -94,19 +104,32 @@ def blines(p):
         r += '"%s","%s",' % (p['data'].strftime('%Y-%m-%d'), s) + ','.join(p[s][i:i+2]+p[s][i+j:]) + '\n'
     return r
 
+def altotiete(p):
+    r = ''
+    for s in ['AT PN', 'AT P', 'AT B', 'AT J', 'AT T']:
+        r += '"%s","%s",' % (p['data'].strftime('%Y-%m-%d'), s[3:])
+        r += ','.join(p[s])
+        if s in ['AT PN', 'AT T']:
+            r += ',-1'
+        r += "\n"
+    return r
+
 b = Boletim_Processor()
 if __name__ == '__main__':
     p = b.scrape_pdf(sys.argv[1])
     pontem = b.scrape_pdf(sys.argv[2])
-    if len(sys.argv) > 4:
+    if len(sys.argv) > 5:
         with open(sys.argv[3], "a") as outfile:
             outfile.write(plines(p))
         with open(sys.argv[4], "a") as outfile:
             outfile.write(vline(p, pontem['PaivaCastro'][1]))
         with open(sys.argv[5], "a") as outfile:
             outfile.write(blines(p))
+        with open(sys.argv[6], "a") as outfile:
+            outfile.write(altotiete(p))
     else:
         print(vline(p, pontem['PaivaCastro'][1]))
         print(plines(p))
         print(blines(p))
+        print(altotiete(p))
 
