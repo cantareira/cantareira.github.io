@@ -1,0 +1,86 @@
+---
+title: "Interpolação da chuva histórica diária"
+date: "`r format(Sys.time(), '%d de %B de %Y')`"
+output:
+  html_document:
+    theme: united
+  pdf_document:
+    highlight: zenburn
+---
+
+O dado de chuva histórica disponível no site da SABESP é da pluviosidade
+acumulada a cada mês. Para nossas projeções necessitamos de valores históricos diários.
+Para isso usamos uma interpolação linear entre os valores mensais
+
+
+### Como calculamos a média diária histórica
+
+```{r setOptions, include=FALSE, message=FALSE}
+library(rmarkdown)
+library(knitr)
+library(zoo)
+options(OutDec = ',')
+knitr::opts_chunk$set(echo=TRUE)
+```
+
+O script *dataprep.R* cria o objeto `pluv.hist`, com as seguintes variáveis da média histórica de chuvas:
+
+* `ph.cum` : pluviosidade acumulada dos últimos 30 dias
+* `ph.m` : média histórica do dia
+* `pluv.m30` : média histórica da média dos últimos 30 dias
+* `pluv.m20` : média histórica da média dos últimos 20 dias
+* `pluv.m10` : média histórica da média dos últimos 10 dias
+
+Primeiras e últimas linhas dessa tabela de dados no R
+
+```{r tabela pluv historicas, echo=TRUE}
+head(pluv.hist)
+tail(pluv.hist)
+```
+
+Todas as médias são calculadas por interpolação, da seguinte maneira:
+
+1. Os valores de pluviosidade acumulada histórica obtidas em 2014 do site SABESP são colocadas no dia 15 de cada mês;
+2. Esses valores são convertidos para média por dia dividindo-os pelo número de dias de cada mês;
+3. Os valores diários de pluviosidade são calculados por interpolação linear entre estes pontos.
+4. Os valores de médias acumuladas por 10, 20, 30 dias anteriores são calculados a partir das médias obtidas no passo anterior.
+
+```{r plot da interpolação }
+plot(window(m2$ph.m, start="2014-01-01", end="2014-12-31"),
+     type="p", col="blue", pch=19, ylab="Pluviosidade média diária", xlab="", ylim=c(0, max(m2$ph.m)))
+lines(window(pluv.hist$ph.m, start="2014-01-15", end="2014-12-15"), lty=2)
+```
+
+#### Validity checking
+
+As acumuladas históricas da SABESP devem bater com os valores da variável `ph.m`
+no dia 15 de cada mês, multiplicadas pelo número de dias de cada mês.
+Para conferir usasmo o objeto temporário `m2` que tem as médias nestes dias, e o número de dias
+de cada mês é obtido do objeto `data`.
+
+```{r confere medias no dia 15, echo=TRUE}
+## valores de chuva média no dia 15
+(a <- window(m2$ph.m, start="2014-01-15", end="2014-12-16"))
+## N de dias
+(b <- as.numeric(format(datas, "%d")))
+## Multiplicando um pelo outro
+a*b
+## Valores da SABESP
+pmm
+## Verificando se bate com os valores da SABESP
+all.equal(as.numeric(a*b), as.numeric(pmm))
+```
+
+#### Chuva histórica acumulada em 30 dias
+
+Somamos as médias diárias interpoladas do intervalo de 30 dias.
+Nos dias 30 dos meses que têm 30 dias há uma pequena discrepância
+com os acumulados mensais da SABESP
+
+```{r acumulada historica 30 dias, echo TRUE}
+sum(window(pluv.hist$ph.m, start="2014-04-01", end="2014-04-30"))
+sum(window(pluv.hist$ph.m, start="2014-06-01", end="2014-06-30"))
+sum(window(pluv.hist$ph.m, start="2014-09-01", end="2014-09-30"))
+sum(window(pluv.hist$ph.m, start="2014-11-01", end="2014-11-30"))
+pmm[c(4,6,9,11)]
+```
