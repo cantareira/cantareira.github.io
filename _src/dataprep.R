@@ -83,16 +83,18 @@ cant.dim2 <- window(cant.dim, start=min(time(fluxos.zoo)), end=max(time(cant.p))
 cant.dim2 <- na.approx(cant.dim2)
 ## Eliminating records with extreme outflow outliers
 cant.dim5 <- cant.dim2[cant.dim2$defluente<4e6,]
-## Selecting data from 2012-2105
+## Selecting data from 2012-2015
 cant.12 <- window(cant.dim5, start="2012-01-01")
-## Historic mean rainfall for a year (from SABESP site, Feb 2015)
-tmp1 <- c(271.1, 199.1, 178, 89.3, 83.2, 56.0, 49.9, 36.9, 91.9, 130.8, 161.2, 220.9)
+## Historic mean rainfall for a year (from SABESP site, 2014)
+# pmm <- c(271.1, 199.1, 178, 89.3, 83.2, 56.0, 49.9, 36.9, 91.9, 130.8, 161.2, 220.9) ## values for jan-mar 2015 and abr-dec 2014
+## All values from SABESP site in 2014
+pmm <- c(259.9, 202.6, 184.1, 89.3, 83.2, 56.0, 49.9, 36.9, 91.9, 130.8, 161.2, 220.9)
 ## Set the starting data of the periodic series: Jan 2012
 datas <- as.Date(paste(1,c(2:12,1),rep(c(2013,2014),c(11,1)),sep="-"), format="%d-%m-%Y")-1
-## Repeat the data ny years starting in refy and ending in refy2
+## Repeat the data ny years starting in refy to current year
 refy <- as.Date("2004-01-01")
-ny <- 12
-medias  <- zooreg(data.frame(ph.cum=rep(tmp1,ny), ph.m =rep(tmp1/as.numeric(format(datas, "%d")),ny)),
+ny <- as.numeric(format(max(time(cant.12)), "%Y")) - as.numeric(format(refy, "%Y")) + 1
+medias  <- zooreg(data.frame(ph.cum=rep(pmm,ny), ph.m =rep(pmm/as.numeric(format(datas, "%d")),ny)),
                   start=as.yearmon(refy), freq=12)
 ## Average rainfall uniform along each month (montlhy mean repeated over each month) ##
 m1 <- zoo(medias, as.Date(time(medias)))

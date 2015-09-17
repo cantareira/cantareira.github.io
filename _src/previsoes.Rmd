@@ -13,6 +13,13 @@ options(OutDec = ',')
 knitr::opts_chunk$set(echo=FALSE, warnings=FALSE, message=FALSE)
 ##op <- options(gvis.plot.tag='chart')
 ```
+
+```{r quantidades ques erao usadas, include=FALSE, message=FALSE}
+## Acumulada historica de 30 dias
+pluv.hist.30 <- sum(window(pluv.hist$ph.m, start=max(time(c2.w))-29, end=max(time(c2.w))))
+## Acumulada em 30 dias
+pluv.ac.30 <- sum(window(c2.w$pluv,start=max(time(c2.w))-29))
+```
 Atualizadas diariamente por volta das 09:00 horas[^2]
 
 <br>
@@ -40,8 +47,8 @@ kable(tab1,
 * **Volume armazenado em `r format(max(time(c1)), '%d/%m/%Y')`** ([SABESP](http://www2.sabesp.com.br/mananciais/DivulgacaoSiteSabesp.aspx)):
     * `r as.numeric(round(c1$v.rel2[time(c1)==max(time(c1))],1))` % do volume total
     * o mesmo que `r as.numeric(round(c1$v.rel[time(c1)==max(time(c1))],1))` % do volume útil.
-* **Chuva nos últimos 30 dias**: `r round(sum(window(c2.w$pluv,start=max(time(c2.w))-29)),0)` mm.
-* **Média histórica dos últimos 30 dias**: `r as.numeric(round(pluv.hist$ph.m[time(pluv.hist)==max(time(c2.w))-29]*30,0))` mm.	
+* **Chuva nos últimos 30 dias**: `r round(pluv.ac.30,0)` mm.
+* **Média histórica dos últimos 30 dias**: `r round(pluv.hist.30,0)` mm.	
 <br>	
 * **Todas as projeções estão em percentual do volume total**.
   * Para converter para percentual do volume útil multiplique por 1,292.
@@ -93,9 +100,9 @@ para cenário de chuva na média histórica do mês, e 25% abaixo e acima da mé
 * Médias históricas: `r as.numeric(medias$ph.cum[as.yearmon(min(time(ph.next)))])`
 mm de chuva acumulada em  `r format(min(time(ph.next)), "%B")`, 
 `r as.numeric(medias$ph.cum[as.yearmon(max(time(ph.next)))])` mm em
-`r format(max(time(ph.next)), "%B")` e `r as.numeric(round(pluv.hist$ph.m[time(pluv.hist)==max(time(c2.w))-29]*30,0))` mm
+`r format(max(time(ph.next)), "%B")` e `r round(pluv.hist.30,1)` mm
 de `r format(min(time(ph.next)), "%d/%B")` a `r format(max(time(ph.next)), "%d/%B")`.
-* Nos últimos 30 dias a chuva acumulada foi `r round(sum(window(c2.w$pluv,start=max(time(c2.w))-29)),0)` mm.
+* Nos últimos 30 dias a chuva acumulada foi `r round(pluv.ac.30,1)` mm.
 
 <br>
 <br>
