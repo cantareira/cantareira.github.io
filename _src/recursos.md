@@ -2,11 +2,16 @@
 title: Recursos
 ---
 
-### Redes sociais
+### Da equipe Águas Futuras
 
 * [Boletins semanais Águas Futuras](https://aguasfuturas.wordpress.com/): blog com os resumos de cada semana.
 
 * [Águas Futuras FaceBook](https://www.facebook.com/aguasfuturas)
+
+* Coutinho RM, Kraenkel RA, Prado PI (2015) Catastrophic Regime Shift in
+Water Reservoirs and São Paulo Water Supply Crisis. [PLoS ONE 10(9):
+e0138278.](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0138278)
+   * [Resumo do artigo](http://cantareira.github.io/artigo_plos.html), em português.
 
 
 ### Órgãos públicos
@@ -17,7 +22,8 @@ title: Recursos
 
 * [Sabesp: vazões do sistema Cantareira](http://www2.sabesp.com.br/mananciais/Divulgacaopcj.aspx) desde 2004.
 
-* A partir de 15/01/2015 a SABESP disponibiliza boletins diários com dados completos de todos os mananciais que abastecem a Região Metropolitana de São Paulo em: http://site.sabesp.com.br/site/interna/Default.aspx?secaoId=553.
+* A partir de 15/01/2015 a SABESP disponibiliza boletins diários com dados completos de todos
+os mananciais que abastecem a Região Metropolitana de São Paulo em: http://site.sabesp.com.br/site/interna/Default.aspx?secaoId=553.
 
 * [Sabesp: Crise Hídrica, estratégias e soluções](http://site.sabesp.com.br/site/uploads/file/crisehidrica/chess_crise_hidrica.pdf)
 

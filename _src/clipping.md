@@ -19,6 +19,12 @@ title: Águas Futuras na mídia
 
 ### Matérias
 
+* [Cantareira tem 'transição catastrófica', diz estudo publicado em revista internacional](http://sao-paulo.estadao.com.br/noticias/geral,cantareira-tem-transicao-catastrofica--diz-estudo,1765125), Estado de São Paulo.
+
+* [Cantareira sofreu transição catastrófica, diz revista científica](https://queminova.catracalivre.com.br/incomoda/cantareira-sofreu-transicao-catastrofica-diz-revista-cientifica/), Catraca Livre.
+
+* [Sistema Cantareira sofreu "transição catastrófica", aponta estudo](http://vejasp.abril.com.br/materia/sistema-cantareira-estudo-transicao-catastrofica/), Veja São Paulo.
+
 * [Cientistas criam site com previsões para os níveis do sistema Cantareira](http://noticias.uol.com.br/meio-ambiente/ultimas-noticias/redacao/2015/05/27/modelo-matematico-faz-previsoes-semanais-e-mensais-do-niveis-do-cantareira.htm#comentarios), UOL
 
 * [Site Águas Futuras mostra projeção de água no Cantareira](https://catracalivre.com.br/geral/sustentavel/indicacao/site-aguas-futuras-mostra-projecao-de-agua-no-cantareira/), Catraca Livre

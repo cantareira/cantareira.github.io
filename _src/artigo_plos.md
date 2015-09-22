@@ -70,3 +70,11 @@ Water Reservoirs and São Paulo Water Supply Crisis. PLoS ONE 10(9):
 e0138278. doi:10.1371/journal.pone.0138278.
 
 <http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0138278>
+
+### Cobertura na mídia
+
+* [Cantareira tem 'transição catastrófica', diz estudo publicado em revista internacional](http://sao-paulo.estadao.com.br/noticias/geral,cantareira-tem-transicao-catastrofica--diz-estudo,1765125), Estado de São Paulo.
+
+* [Cantareira sofreu transição catastrófica, diz revista científica](https://queminova.catracalivre.com.br/incomoda/cantareira-sofreu-transicao-catastrofica-diz-revista-cientifica/), Catraca Livre.
+
+* [Sistema Cantareira sofreu "transição catastrófica", aponta estudo](http://vejasp.abril.com.br/materia/sistema-cantareira-estudo-transicao-catastrofica/), Veja São Paulo.
