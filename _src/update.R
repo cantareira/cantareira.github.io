@@ -21,7 +21,7 @@ add.projection <- function(){
     system(paste('cp ../', proj_file, ' ../index.html', sep=''))
 }
 
-all_files <- c('dados.Rmd', 'recursos.md', 'sobre.md', 'historico.Rmd', 'seca_2013-2014.md', 'clipping.md', 'artigo_plos.md')
+all_files <- c('dados.Rmd', 'recursos.md', 'sobre.md', 'historico.Rmd', 'seca_2013-2014.md', 'clipping.md', 'artigo_plos.md', 'resposta_kelman.md')
 to_update <- c('historico.Rmd', 'dados.Rmd')
 
 add.projection()
