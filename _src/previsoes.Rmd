@@ -36,7 +36,7 @@ kable(tab1,
       col.names=c("Projeção", "Limite inferior", "Limite superior"),
       digits=1,
       align=rep("c", ncol(tab1)),
-      caption=paste("Projeção e seus limites de credibilidade em % do volume total. Chuva média prevista de ",
+      caption=paste("Projeção e seus limites de credibilidade em % do volume disponível. Chuva média prevista de ",
           round(mean(window(boletins, start=ini, end=finis)),1), " mm/dia e vazão de retirada de ", round(def.max,1), " m3/s.",
           sep=""  ))
 ```
@@ -45,21 +45,22 @@ kable(tab1,
 
 
 * **Volume armazenado em `r format(max(time(c1)), '%d/%m/%Y')`** ([SABESP](http://www2.sabesp.com.br/mananciais/DivulgacaoSiteSabesp.aspx)):
-    * `r as.numeric(round(c1$v.rel2[time(c1)==max(time(c1))],1))` % do volume total
+    * `r as.numeric(round(c1$v.rel2[time(c1)==max(time(c1))],1))` % do volume disponível
     * o mesmo que `r as.numeric(round(c1$v.rel[time(c1)==max(time(c1))],1))` % do volume útil.
+    * o mesmo que `r as.numeric(round(c1$v.rel[time(c1)==max(time(c1))]-29.2,1))` % de saldo do volume morto.
 * **Chuva nos últimos 30 dias**: `r round(pluv.ac.30,0)` mm.
 * **Média histórica dos últimos 30 dias**: `r round(pluv.hist.30,0)` mm.	
 <br>	
-* **Todas as projeções estão em percentual do volume total**.
+* **Todas as projeções estão em percentual do volume total disponível (volume útil + volume morto 1 + volume morto 2)**.
   * Para converter para percentual do volume útil multiplique por 1,292.
   * Para converter para saldo percentual do volume morto multiplique por 1,292 e subtraia 29,2.
 * As projeções são os valores esperados por um modelo matemático e os limites
 são a margem de erro da projeção. 
 * Por exemplo, para o dia `r format(max(time(tab.pred.bol)), '%d de %B de %Y')` a projeção
 é que o volume esteja entre `r as.numeric(round(tab.pred.bol$lower[time(tab.pred.bol)==max(time(tab.pred.bol))], 1))`%
-e `r as.numeric(round(tab.pred.bol$upper[time(tab.pred.bol)==max(time(tab.pred.bol))], 1))`% do volume total.
+e `r as.numeric(round(tab.pred.bol$upper[time(tab.pred.bol)==max(time(tab.pred.bol))], 1))`% do volume disponível.
 O valor médio projetado para este dia é 
-`r as.numeric(round(tab.pred.bol$mean[time(tab.pred.bol)==max(time(tab.pred.bol))], 1))`% do volume total,
+`r as.numeric(round(tab.pred.bol$mean[time(tab.pred.bol)==max(time(tab.pred.bol))], 1))`% do volume disponível,
 e está dentro deste intervalo.
 
 <br>
@@ -75,7 +76,7 @@ dygraph(c3[,c("v.morto.rel2", "v.rel2",
               "lower.100.rel2","mean.100.rel2",  "upper.100.rel2",
               "lower.125.rel2","mean.125.rel2",  "upper.125.rel2")],
         main="",
-        ylab= "Volume Armazenado (% Vol Total)")%>%
+        ylab= "Volume Armazenado (% Vol Disponível)")%>%
     dySeries("v.rel2", label="% Armazenado", color="blue")%>%
         dySeries("v.morto.rel2", label = "Volume morto", color="black", strokePattern="dotted", fillGraph=TRUE) %>%
             dySeries(c("lower.100.rel2","mean.100.rel2",  "upper.100.rel2"), label = "Chuva na média", color="red") %>%
@@ -93,7 +94,7 @@ dygraph(c3[,c("v.morto.rel2", "v.rel2",
 <br>
 
 
-* Linha azul: água armazenada em % do volume total até  `r format(min(time(ph.next)), "%d/%m/%Y")`.
+* Linha azul: água armazenada em % do volume disponível até  `r format(min(time(ph.next)), "%d/%m/%Y")`.
 * Em vermelho, laranja e verde as projeções (linhas) e seus limites de credibilidade (sombreados)
 para cenário de chuva na média histórica do mês, e 25% abaixo e acima da média.
 * Todos os cenários consideram vazão de retirada de `r round(def.max,1)` m3/s.
@@ -115,7 +116,7 @@ knitr::kable(tab.pred.30,
       col.names=c("Cenário de Chuva", "Projeção", "Limite inferior", "Limite superior"),
       digits=1,
       align=rep("c", ncol(tab1)),
-             caption=paste("Projeção e seus limites de credibilidade em % do volume total para os três cenários. ",
+             caption=paste("Projeção e seus limites de credibilidade em % do volume disponível para os três cenários. ",
                  "Vazão de retirada de ", round(def.max,1), " m3/s. Médias históricas: ",
                  as.numeric(medias$ph.cum[as.yearmon(min(time(ph.next)))]),
                  " mm de chuva acumulada em ", format(min(time(ph.next)), "%B"),

@@ -43,7 +43,7 @@ Desde então utiliza-se o "volume morto", por bombeamento.
 
 ```{r volume armazenado)}
 dygraph(c1[,c("v.abs.e9", "v.morto")], group="sit1",
-        main="Volume total armazenado",
+        main="Volume armazenado disponível",
         ylab= "Volume (Bilhões m3)")%>%
             dySeries("v.abs.e9", label = "Armazenado", color="black") %>%
                 dySeries("v.morto", label = "Volume morto", color="black",
