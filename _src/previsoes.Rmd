@@ -15,9 +15,11 @@ knitr::opts_chunk$set(echo=FALSE, warnings=FALSE, message=FALSE)
 ```
 
 ```{r quantidades ques erao usadas, include=FALSE, message=FALSE}
-## Acumulada historica de 30 dias
+## Acumulada historica em 30 dias até hoje
 pluv.hist.30 <- sum(window(pluv.hist$ph.m, start=max(time(c2.w))-29, end=max(time(c2.w))))
-## Acumulada em 30 dias
+## Acumulada historica para os proximos 30 dias
+pluv.hist.next.30 <- sum(window(pluv.hist$ph.m, start=max(time(c2.w))+1, end=max(time(c2.w))+30))
+## Acumulada em 30 dias até hoje
 pluv.ac.30 <- sum(window(c2.w$pluv,start=max(time(c2.w))-29))
 ```
 Atualizadas diariamente por volta das 09:00 horas[^2]
@@ -96,14 +98,12 @@ dygraph(c3[,c("v.morto.rel2", "v.rel2",
 
 * Linha azul: água armazenada em % do volume disponível até  `r format(min(time(ph.next)), "%d/%m/%Y")`.
 * Em vermelho, laranja e verde as projeções (linhas) e seus limites de credibilidade (sombreados)
-para cenário de chuva na média histórica do mês, e 25% abaixo e acima da média.
+para cenário de chuva na média histórica dos próximos 30 dias, e 25% abaixo e acima da média.
 * Todos os cenários consideram vazão de retirada de `r round(def.max,1)` m3/s.
-* Médias históricas: `r as.numeric(medias$ph.cum[as.yearmon(min(time(ph.next)))])`
-mm de chuva acumulada em  `r format(min(time(ph.next)), "%B")`, 
-`r as.numeric(medias$ph.cum[as.yearmon(max(time(ph.next)))])` mm em
-`r format(max(time(ph.next)), "%B")` e `r round(pluv.hist.30,1)` mm
-de `r format(min(time(ph.next)), "%d/%B")` a `r format(max(time(ph.next)), "%d/%B")`.
-* Nos últimos 30 dias a chuva acumulada foi `r round(pluv.ac.30,1)` mm.
+* **Médias históricas de chuva acumulada**:
+	* Últimos 30 dias: `r round(pluv.hist.30,1)` mm.
+	* Próximos 30 dias: `r round(pluv.hist.next.30,1)` mm.
+* Nos últimos 30 dias a chuva acumulada foi `r round(100*pluv.ac.30/pluv.hist.30,0)`% da média histórica.
 
 <br>
 <br>
@@ -117,11 +117,10 @@ knitr::kable(tab.pred.30,
       digits=1,
       align=rep("c", ncol(tab1)),
              caption=paste("Projeção e seus limites de credibilidade em % do volume disponível para os três cenários. ",
-                 "Vazão de retirada de ", round(def.max,1), " m3/s. Médias históricas: ",
-                 as.numeric(medias$ph.cum[as.yearmon(min(time(ph.next)))]),
-                 " mm de chuva acumulada em ", format(min(time(ph.next)), "%B"),
-                 " e ", as.numeric(medias$ph.cum[as.yearmon(max(time(ph.next)))]),
-                 " mm em ", format(max(time(ph.next)), "%B"), "." , sep=""))
+                 "Vazão de retirada de ", round(def.max,1), " m3/s e média histórica de ",
+                 round(pluv.hist.next.30,1),
+                 " mm de chuva acumulada de ", format(min(time(ph.next)), "%d de %B"),
+                 " a ", format(max(time(ph.next)), "%d de %B"), "." , sep=""))
 ```
 
 <br>
@@ -133,12 +132,11 @@ knitr::kable(tab.pred.30,
 ```{r tabela probs}
 knitr::kable(p.probs, col.names=c("Cenário de chuva", "Probabilidade de redução (%)"), digits=1,
              align=rep("c", ncol(p.probs)),
-             caption=paste("Para os 3 cenários de chuva e vazão de retirada de ", round(def.max,1),
-                 " m3/s. Médias históricas: ",
-                 as.numeric(medias$ph.cum[as.yearmon(min(time(ph.next)))]),
-                 " mm de chuva acumulada em ", format(min(time(ph.next)), "%B"),
-                 " e ", as.numeric(medias$ph.cum[as.yearmon(max(time(ph.next)))]),
-                 " mm em ", format(max(time(ph.next)), "%B"), "." , sep=""))
+             caption= paste("Para os 3 cenários de chuva e vazão de retirada de ",
+                 round(def.max,1), " m3/s e média histórica de ",
+                 round(pluv.hist.next.30,1),
+                 " mm de chuva acumulada de ", format(min(time(ph.next)), "%d de %B"),
+                 " a ", format(max(time(ph.next)), "%d de %B"), "." , sep=""))
 ```
 <br>
 <br>
@@ -151,14 +149,14 @@ Usamos um modelo matemático e as previsões meteorológicas
 para projetar quanta água restará no sistema Cantareira
 até `r format(fim, "%d/%m/%Y")`.
 Para isso temos que criar cenários: quanto de chuva cairá e quanta água será retirada do
-sistema. Para a retirada usamos a média do mês anterior[^1].
+sistema. Para a retirada usamos a média dos 30 dias anteriores [^1].
 Para as chuvas usamos as previsões diárias do portal [Tempo Agora](http://www.tempoagora.com.br/sustentabilidade/acompanhe-o-nivel-dos-reservatorios-em-sao-paulo/).
 
 <br>
 
 ### Como são feitas as projeções para 30 dias?
 
-Usamos o mesmo modelo matemático, supondo novamente que a vazão será a média do mês anterior.
+Usamos o mesmo modelo matemático, supondo novamente que a vazão será a média dos 30 dias anteriores.
 Para as chuvas usamos três cenários:
 
 * Chuva na média histórica,

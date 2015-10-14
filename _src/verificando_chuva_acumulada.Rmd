@@ -55,7 +55,7 @@ lines(window(pluv.hist$ph.m, start="2014-01-15", end="2014-12-15"), lty=2)
 
 As acumuladas históricas da SABESP devem bater com os valores da variável `ph.m`
 no dia 15 de cada mês, multiplicadas pelo número de dias de cada mês.
-Para conferir usasmo o objeto temporário `m2` que tem as médias nestes dias, e o número de dias
+Para conferir usamos o objeto temporário `m2` que tem as médias nestes dias, e o número de dias
 de cada mês é obtido do objeto `data`.
 
 ```{r confere medias no dia 15, echo=TRUE}
