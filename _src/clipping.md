@@ -4,6 +4,8 @@ title: Águas Futuras na mídia
 
 ### Vídeos e podcasts
 
+* [Estudo mostra que retirada de água em excesso dificulta a recuperação do Cantareira](http://g1.globo.com/sao-paulo/sptv-1edicao/videos/t/edicoes/v/estudo-mostra-que-retirada-de-agua-em-excesso-dificulta-a-recuperacao-do-cantareira/4553318/), SPTV.
+
 * [Modelagem matemática torna mais eficientes previsões para o Cantareira](http://radio.estadao.com.br/audios/detalhe/radio-estadao,modelagem-matematica-torna-mais-eficientes-previsoes-para-o-cantareira,410600), Rádio Estadão
 
 * [Pesquisadores desenvolvem site sobre nível do Sistema Cantareira ](https://www.youtube.com/watch?v=0zXyGdiCNFA&feature=youtu.be), Canal UNESP YouTube
