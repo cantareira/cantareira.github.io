@@ -26,47 +26,47 @@ class Boletim_Processor(PDF_Processor):
             if re.search('Gerado às [0-9:]+ hs de ([0-9/]+)', l):
                 g = re.search('Gerado às [0-9:]+ hs de ([0-9/]+)', l)
                 r['data'] = datetime.datetime.strptime(g.groups()[0], '%d/%m/%Y').date()
-            elif re.search('Cantareira +[▲▼−]( +[0-9,]+)+', l):
+            elif re.search('Cantareira +[▲▼−]( +[0-9,.]+)+', l):
                 r['Cantareira'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
-            elif re.search(' +Jaguari/Jacareí ( +[0-9,]+)+', l):
+            elif re.search(' +Jaguari/Jacareí ( +[0-9,.]+)+', l):
                 r['Jaguari'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
-            elif re.search(' +Cachoeira ( +[0-9,]+)+', l):
+            elif re.search(' +Cachoeira ( +[0-9,.]+)+', l):
                 r['Cachoeira'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
-            elif re.search(' +Atibainha  ( +[0-9,]+)+', l):
+            elif re.search(' +Atibainha  ( +[0-9,.]+)+', l):
                 r['Atibainha'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
-            elif re.search(' +Paiva Castro ( +[0-9,]+)+', l):
+            elif re.search(' +Paiva Castro ( +[0-9,.]+)+', l):
                 r['PaivaCastro'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
-            elif re.search('Guarapiranga +( +[0-9,]+) [▲▼−] ( +[0-9,]+)+', l):
+            elif re.search('Guarapiranga +( +[0-9,.]+) [▲▼−] ( +[0-9,]+)+', l):
                 r['Guarapiranga'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
-            elif re.search('Rio Grande +( +[0-9,]+) [▲▼−] ( +[0-9,]+)+', l):
+            elif re.search('Rio Grande +( +[0-9,.]+) [▲▼−] ( +[0-9,]+)+', l):
                 r['RioGrande'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
-            elif re.search('Rio Claro +( +[0-9,]+) [▲▼−] ( +[0-9,]+)+', l):
+            elif re.search('Rio Claro +( +[0-9,.]+) [▲▼−] ( +[0-9,]+)+', l):
                 r['RioClaro'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
-            elif re.search('Alto Tietê +[▲▼−]( +[0-9,]+)+', l):
+            elif re.search('Alto Tietê +[▲▼−]( +[0-9,.]+)+', l):
                 r['AltoTiete'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
-            elif re.search('Alto Cotia2? +[▲▼−-]( +[0-9,]+)+', l):
+            elif re.search('Alto Cotia2? +[▲▼−-]( +[0-9,.]+)+', l):
                 r['Cotia'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
-            elif re.search('Cantareira( +[0-9,]+)+$', l):
+            elif re.search('Cantareira( +[0-9,.]+)+$', l):
                 r['p Cantareira'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
-            elif re.search('Guarapiranga( +[0-9,]+)+$', l):
+            elif re.search('Guarapiranga( +[0-9,.]+)+$', l):
                 r['p Guarapiranga'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
-            elif re.search('Rio Grande( +[0-9,]+)+$', l):
+            elif re.search('Rio Grande( +[0-9,.]+)+$', l):
                 r['p RioGrande'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
-            elif re.search('Rio Claro( +[0-9,]+)+$', l):
+            elif re.search('Rio Claro( +[0-9,.]+)+$', l):
                 r['p RioClaro'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
-            elif re.search('Alto Tietê( +[0-9,]+)+', l):
+            elif re.search('Alto Tietê( +[0-9,.]+)+', l):
                 r['p AltoTiete'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
-            elif re.search('Cotia( +[0-9,]+)+', l):
+            elif re.search('Cotia( +[0-9,.]+)+', l):
                 r['p Cotia'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
-            elif re.search('Ponte Nova( +[0-9,]+)+', l):
+            elif re.search('Ponte Nova( +[0-9,.]+)+', l):
                 r['AT PN'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
-            elif re.search('Paraitinga( +[0-9,]+)+', l):
+            elif re.search('Paraitinga( +[0-9,.]+)+', l):
                 r['AT P'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
-            elif re.search('Biritiba( +[0-9,]+)+', l):
+            elif re.search('Biritiba( +[0-9,.]+)+', l):
                 r['AT B'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
-            elif re.search('Jundiaí( +[0-9,]+)+', l):
+            elif re.search('Jundiaí( +[0-9,.]+)+', l):
                 r['AT J'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
-            elif re.search('Taiaçupeba( +[0-9,]+)+', l):
+            elif re.search('Taiaçupeba( +[0-9,.]+)+', l):
                 r['AT T'] = [ i.replace(',', '.') for i in l.split(' ') if is_number(i) ]
  
         return r
