@@ -93,7 +93,7 @@ pmm <- c(259.9, 202.6, 184.1, 89.3, 83.2, 56.0, 49.9, 36.9, 91.9, 130.8, 161.2, 
 datas <- as.Date(paste(1,c(2:12,1),rep(c(2013,2014),c(11,1)),sep="-"), format="%d-%m-%Y")-1
 ## Repeat the data ny years starting in refy to current year
 refy <- as.Date("2004-01-01")
-ny <- as.numeric(format(max(time(cant.12)), "%Y")) - as.numeric(format(refy, "%Y")) + 1
+ny <- as.numeric(format(max(time(cant.12)), "%Y")) - as.numeric(format(refy, "%Y")) + 2
 medias  <- zooreg(data.frame(ph.cum=rep(pmm,ny), ph.m =rep(pmm/as.numeric(format(datas, "%d")),ny)),
                   start=as.yearmon(refy), freq=12)
 ## Average rainfall uniform along each month (montlhy mean repeated over each month) ##
