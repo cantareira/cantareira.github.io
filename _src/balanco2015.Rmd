@@ -1,0 +1,61 @@
+---
+title: "Cantareira -- Balanço de 2015"
+date: "31 de dezembro de 2015"
+author: "Projeto Águas Futuras"
+output:
+  html_document:
+    toc: true
+    theme: united
+  pdf_document:
+    highlight: zenburn
+---
+
+Fim de ano é hora de fazer balanços. No orçamento doméstico
+o saldo é a diferença entre nossas receitas e despesas.
+Para o Cantareira o balanço é a diferença entre
+o volume de água que chegou aos reservatórios e quanta água foi retirada deles.
+Os números estão na tabela no fim desta página. Os principais fatos:
+
+* Começamos 2015 com 70 milhões de $m^3$ de água armazenada, um saldo negativo de -21,8% em relação ao volume morto.
+* Em 2015 o sistema Cantareira acumulou 218 milhões de $m^3$ de água armazenada, e recuperou
+o volume morto em 30 de dezembro de 2015.
+* A recuperação aconteceu porque a retirada de água dos reservatórios foi apenas um terço do normal. 
+* O total recuperado em 2015 é cerca de metade do que perdemos em 2014.
+* O total recuperado em 2015 é 22% do volume útil. Neste ritmo levaremos quase 4 anos para encher completamente os reservatórios.
+* A quantidade água que entrou no Cantareira em 2015 corresponde à metade do que entra normalmente. 
+* A baixa vazão de entrada não se deve às chuvas, que foram acima da média. O volume total de chuva que caiu sobre
+a bacia do Cantareira em 2015 foi 5% a mais que a média histórica.
+* Em 2015 19% da chuvas que caíram sobre a bacia tornou-se vazão de entrada. A média histórica é de 39%.
+Isso quer dizer que em 2015 a bacia teve metade da eficiência normal em converter a chuva em água armazenada.
+
+Em resumo, fechamos o ano com uma vazão de entrada muito menor que a normal,
+apesar das chuvas já terem voltado. Só foi possível recuperar o volume morto
+por uma grande redução da retirada de água.  O Cantareira sofreu uma transição crítica,
+e ainda é incerto quando voltará ao normal. Enquanto não voltar,
+teremos que manter as baixas retiradas de 2015, e ainda assim esperar 4 anos para que os reservatórios
+encham.
+
+### Volumes anuais de chuva, entrada, saída e saldo no sistema Cantareira, em milhões de $m^3$
+
+|                       | Média histórica | 2014 | 2015 |
+|-----------------------|----------------:|-----:|-----:|
+| Volume de chuva       |            3571 | 2203 | 3734 |
+| Entrada               |            1389 |  357 |  708 |
+| Saída                 |            1135 |  842 |  490 |
+| Saldo entrada - saída |             254 | -484 |  218 |
+
+**Fontes:**
+
+* Médias históricas de vazões de entrada (1930-2013): Dados de Referência Acerca da Outorga do Cantareira, ANA/DAEE (http://arquivos.ana.gov.br/institucional/sof/Renovacao_Outorga/DDR_Sistema_Cantareira%20-%2012Jun15%20-%20FINAL.pdf)
+
+* Vazões de saída (2004-2015), vazões de entrada (2014-2015) e pluviosidade média mensal do últimos 30 anos: SABESP (http://www2.sabesp.com.br/mananciais/)
+
+### Contato
+
+O projeto é uma iniciativa de pesquisadores da USP (Paulo Inácio Prado, do Instituto de Biociências)
+e da UNESP (Roberto Kraenkel e Renato Coutinho, do Instituto de Física Teórica)
+que se utiliza de métodos de modelagem matemática para fazer projeções a partir de dados públicos.
+A página do projeto http://cantareira.github.io é atualizada diariamente com projeções para cinco e trinta dias.
+Também estão disponíveis na página links para todos os dados e programas utilizados, todos de utilização livre não comercial.
+
+email: <renatocoutinho+cantareira@gmail.com>
