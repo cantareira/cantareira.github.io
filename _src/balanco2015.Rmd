@@ -52,10 +52,11 @@ encham.
 
 ### Contato
 
-O projeto é uma iniciativa de pesquisadores da USP (Paulo Inácio Prado, do Instituto de Biociências)
+O projeto *Águas Futuras* é uma iniciativa de pesquisadores da USP (Paulo Inácio Prado, do Instituto de Biociências)
 e da UNESP (Roberto Kraenkel e Renato Coutinho, do Instituto de Física Teórica)
-que se utiliza de métodos de modelagem matemática para fazer projeções a partir de dados públicos.
+que usa modelos matemáticos para os sistema Cantareira a partir de dados públicos.
 A página do projeto http://cantareira.github.io é atualizada diariamente com projeções para cinco e trinta dias.
 Também estão disponíveis na página links para todos os dados e programas utilizados, todos de utilização livre não comercial.
+Boletins semanais estão disponíveis em https://aguasfuturas.wordpress.com/ .
 
 email: <renatocoutinho+cantareira@gmail.com>

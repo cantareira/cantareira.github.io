@@ -4,6 +4,8 @@ title: Águas Futuras na mídia
 
 ### Vídeos e podcasts
 
+* [Sistema Cantareira sai do volume morto depois de 19 meses](http://www.sbt.com.br/jornalismo/sbtbrasil/noticias/71886/Sistema-Cantareira-sai-do-volume-morto-depois-de-19-meses.html), SBT Brasil.
+
 * [Sistema Cantareira pode sair do volume morto já em janeiro](https://www.youtube.com/watch?v=RostrxffwJw), SBT Brasil.
 
 * [Estudo mostra que retirada de água em excesso dificulta a recuperação do Cantareira](http://g1.globo.com/sao-paulo/sptv-1edicao/videos/t/edicoes/v/estudo-mostra-que-retirada-de-agua-em-excesso-dificulta-a-recuperacao-do-cantareira/4553318/), SPTV.
