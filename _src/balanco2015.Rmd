@@ -2,12 +2,6 @@
 title: "Cantareira -- Balanço de 2015"
 date: "31 de dezembro de 2015"
 author: "Projeto Águas Futuras"
-output:
-  html_document:
-    toc: true
-    theme: united
-  pdf_document:
-    highlight: zenburn
 ---
 
 Fim de ano é hora de fazer balanços. No orçamento doméstico
@@ -17,11 +11,11 @@ o volume de água que chegou aos reservatórios e quanta água foi retirada dele
 Os números estão na tabela no fim desta página. Os principais fatos:
 
 * Começamos 2015 com 70 milhões de $m^3$ de água armazenada, um saldo negativo de -21,8% em relação ao volume morto.
-* Em 2015 o sistema Cantareira acumulou 218 milhões de $m^3$ de água armazenada, e recuperou
+* Em 2015 o sistema Cantareira acumulou 219 milhões de $m^3$ de água armazenada, e recuperou
 o volume morto em 30 de dezembro de 2015.
-* A recuperação aconteceu porque a retirada de água dos reservatórios foi apenas um terço do normal. 
+* A recuperação aconteceu porque a retirada de água dos reservatórios foi apenas 43% do normal. 
 * O total recuperado em 2015 é cerca de metade do que perdemos em 2014.
-* O total recuperado em 2015 é 22% do volume útil. Neste ritmo levaremos quase 4 anos para encher completamente os reservatórios.
+* O total recuperado em 2015 é 22% do volume útil. Nesse ritmo levaremos quase 4 anos para encher completamente os reservatórios.
 * A quantidade água que entrou no Cantareira em 2015 corresponde à metade do que entra normalmente. 
 * A baixa vazão de entrada não se deve às chuvas, que foram acima da média. O volume total de chuva que caiu sobre
 a bacia do Cantareira em 2015 foi 5% a mais que a média histórica.
@@ -30,19 +24,20 @@ Isso quer dizer que em 2015 a bacia teve metade da eficiência normal em convert
 
 Em resumo, fechamos o ano com uma vazão de entrada muito menor que a normal,
 apesar das chuvas já terem voltado. Só foi possível recuperar o volume morto
-por uma grande redução da retirada de água.  O Cantareira sofreu uma transição crítica,
+por uma grande redução da retirada de água.  O Cantareira sofreu uma transição crítica[^1],
 e ainda é incerto quando voltará ao normal. Enquanto não voltar,
-teremos que manter as baixas retiradas de 2015, e ainda assim esperar 4 anos para que os reservatórios
+teremos que manter as baixas retiradas de 2015,
+e ainda assim espetar 4 anos para que os reservatórios
 encham.
 
 ### Volumes anuais de chuva, entrada, saída e saldo no sistema Cantareira, em milhões de $m^3$
 
 |                       | Média histórica | 2014 | 2015 |
 |-----------------------|----------------:|-----:|-----:|
-| Volume de chuva       |            3571 | 2203 | 3734 |
-| Entrada               |            1389 |  357 |  708 |
-| Saída                 |            1135 |  842 |  490 |
-| Saldo entrada - saída |             254 | -484 |  218 |
+| Volume de chuva       |            3571 | 2203 | 3737 |
+| Entrada               |            1389 |  357 |  712 |
+| Saída                 |            1135 |  842 |  493 |
+| Saldo entrada - saída |             254 | -484 |  219 |
 
 **Fontes:**
 
@@ -60,3 +55,5 @@ Também estão disponíveis na página links para todos os dados e programas uti
 Boletins semanais estão disponíveis em https://aguasfuturas.wordpress.com/ .
 
 email: <renatocoutinho+cantareira@gmail.com>
+
+[^1]: Coutinho RM, Kraenkel RA, Prado PI (2015) Catastrophic Regime Shift in Water Reservoirs and São Paulo Water Supply Crisis. PLoS ONE 10(9): e0138278. <http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0138278>
