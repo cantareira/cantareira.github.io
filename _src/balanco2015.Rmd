@@ -13,7 +13,7 @@ Os números estão na tabela no fim desta página. Os principais fatos:
 * Começamos 2015 com 70 milhões de $m^3$ de água armazenada, um saldo negativo de -21,8% em relação ao volume morto.
 * Em 2015 o sistema Cantareira acumulou 219 milhões de $m^3$ de água armazenada, e recuperou
 o volume morto em 30 de dezembro de 2015.
-* A recuperação aconteceu porque a retirada de água dos reservatórios foi apenas 43% do normal. 
+* A recuperação aconteceu porque a retirada de água dos reservatórios foi apenas 46% do normal. 
 * O total recuperado em 2015 é cerca de metade do que perdemos em 2014.
 * O total recuperado em 2015 é 22% do volume útil. Nesse ritmo levaremos quase 4 anos para encher completamente os reservatórios.
 * A quantidade água que entrou no Cantareira em 2015 corresponde à metade do que entra normalmente. 
@@ -27,7 +27,7 @@ apesar das chuvas já terem voltado. Só foi possível recuperar o volume morto
 por uma grande redução da retirada de água.  O Cantareira sofreu uma transição crítica[^1],
 e ainda é incerto quando voltará ao normal. Enquanto não voltar,
 teremos que manter as baixas retiradas de 2015,
-e ainda assim espetar 4 anos para que os reservatórios
+e ainda assim esperar 4 anos para que os reservatórios
 encham.
 
 ### Volumes anuais de chuva, entrada, saída e saldo no sistema Cantareira, em milhões de $m^3$
@@ -36,14 +36,16 @@ encham.
 |-----------------------|----------------:|-----:|-----:|
 | Volume de chuva       |            3571 | 2203 | 3737 |
 | Entrada               |            1389 |  357 |  712 |
-| Saída                 |            1135 |  842 |  493 |
-| Saldo entrada - saída |             254 | -484 |  219 |
+| Saída                 |            1080 |  842 |  493 |
+| Saldo entrada - saída |             309 | -484 |  219 |
 
 **Fontes:**
 
 * Médias históricas de vazões de entrada (1930-2013): Dados de Referência Acerca da Outorga do Cantareira, ANA/DAEE (http://arquivos.ana.gov.br/institucional/sof/Renovacao_Outorga/DDR_Sistema_Cantareira%20-%2012Jun15%20-%20FINAL.pdf)
 
 * Vazões de saída (2004-2015), vazões de entrada (2014-2015) e pluviosidade média mensal do últimos 30 anos: SABESP (http://www2.sabesp.com.br/mananciais/)
+
+* Baixe [aqui](../data/balanco2015.xls) a planilha com os dados e cálculos.
 
 ### Contato
 
