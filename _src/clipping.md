@@ -25,6 +25,8 @@ title: Águas Futuras na mídia
 
 ### Matérias
 
+* [O Cantareira saiu do negativo, mas o fim da crise hídrica ainda está distante](http://brasil.elpais.com/brasil/2016/01/07/politica/1452200669_437418.html), El País.
+
 * [Sistema Cantareira sofreu transição catastrófica em 2014](http://www.usp.br/agen/?p=221501), Agência USP de notícias.
 
 * [Cantareira tem 'transição catastrófica', diz estudo publicado em revista internacional](http://sao-paulo.estadao.com.br/noticias/geral,cantareira-tem-transicao-catastrofica--diz-estudo,1765125), Estado de São Paulo.
