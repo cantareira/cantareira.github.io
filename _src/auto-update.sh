@@ -16,8 +16,9 @@ pushd "$ROOT/.."
 
 if [ ! -e  "boletins/boletim_mananciais_${hoje}.pdf" ]; then
     # fonte: http://site.sabesp.com.br/site/interna/Default.aspx?secaoId=553
-    #wget "http://site.sabesp.com.br/site/uploads/file/boletim/${year}/boletim_mananciais_${hoje3}.pdf"
-    wget "http://site.sabesp.com.br/site/uploads/file/boletim/boletim_mananciais_${hoje3}.pdf"
+    wget "http://site.sabesp.com.br/site/uploads/file/boletim/${year}/boletim_mananciais_${hoje3}.pdf"
+    if [ $? != 0 ]; then
+        wget "http://site.sabesp.com.br/site/uploads/file/boletim/boletim_mananciais_${hoje3}.pdf"
     if [ $? = 0 ]; then
         echo "** boletim dos mananciais parece atualizado **"
         mv "boletim_mananciais_${hoje3}.pdf" "boletins/boletim_mananciais_${hoje}.pdf"
