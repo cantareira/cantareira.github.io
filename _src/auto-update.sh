@@ -16,13 +16,22 @@ pushd "$ROOT/.."
 
 if [ ! -e  "boletins/boletim_mananciais_${hoje}.pdf" ]; then
     # fonte: http://site.sabesp.com.br/site/interna/Default.aspx?secaoId=553
+    fname="boletim_mananciais_${hoje3}.pdf"
     wget "http://site.sabesp.com.br/site/uploads/file/boletim/${year}/boletim_mananciais_${hoje3}.pdf"
     if [ $? != 0 ]; then
         wget "http://site.sabesp.com.br/site/uploads/file/boletim/boletim_mananciais_${hoje3}.pdf"
     fi
+    if [ $? != 0 ]; then
+        fname="boletim_mananciais_$(date +"%d%b_%y").pdf"
+        wget "http://site.sabesp.com.br/site/uploads/file/boletim/boletim_mananciais_$(date +"%d%b_%y").pdf"
+    fi
+    if [ $? != 0 ]; then
+        fname="boletim_mananciais_$(date +"%d_%b_%y").pdf"
+        wget "http://site.sabesp.com.br/site/uploads/file/boletim/boletim_mananciais_$(date +"%d_%b_%y").pdf"
+    fi
     if [ $? = 0 ]; then
         echo "** boletim dos mananciais parece atualizado **"
-        mv "boletim_mananciais_${hoje3}.pdf" "boletins/boletim_mananciais_${hoje}.pdf"
+        mv $fname "boletins/boletim_mananciais_${hoje}.pdf"
         git add "boletins/boletim_mananciais_${hoje}.pdf"
         commit=0
         python _src/boletim_scraper.py "boletins/boletim_mananciais_${hoje}.pdf" "boletins/boletim_mananciais_${ontem}.pdf" data/dados.csv data/data_ocr_cor2.csv data/dados_boletins.csv data/altotiete.csv
