@@ -29,6 +29,10 @@ if [ ! -e  "boletins/boletim_mananciais_${hoje}.pdf" ]; then
         fname="boletim_mananciais_$(date +"%d_%b_%y").pdf"
         wget "http://site.sabesp.com.br/site/uploads/file/boletim/boletim_mananciais_$(date +"%d_%b_%y").pdf"
     fi
+    if [ $? != 0 ]; then
+        fname="boletim_mananciais_$(date +"%d_%b%y").pdf"
+        wget "http://site.sabesp.com.br/site/uploads/file/boletim/boletim_mananciais_$(date +"%d_%b%y").pdf"
+    fi
     if [ $? = 0 ]; then
         echo "** boletim dos mananciais parece atualizado **"
         mv $fname "boletins/boletim_mananciais_${hoje}.pdf"
