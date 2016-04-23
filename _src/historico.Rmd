@@ -37,10 +37,10 @@ dygraph(c1[,c("afl.s", "def.s")], group="sit1",
 
 O volume de água caiu paulatinamente a partir de abril de 2013.
 Em 07 de julho de 2014 foi autorizado o uso da primeira cota do volume morto,
-para retirada por bombeamento[^5]. O volume útil [^2] se esgotou em 11 de julho de 2014.
+para retirada por bombeamento [^1]. O volume útil [^2] se esgotou em 11 de julho de 2014.
 O nível do reservatório continuou em queda e em 17/11/2014 a SABESP conseguiu autorização para usar
-uma segunda cota de volume morto [^6]. O sistema dependeu do uso do volume morto pelos 17 meses seguintes.
-Seu uso só foi revogado em março de 2016, quando o sistema estava com 23,4% do seu volume útil [^7].
+uma segunda cota de volume morto [^3]. O sistema dependeu do uso do volume morto pelos 17 meses seguintes.
+Seu uso só foi revogado em março de 2016, quando o sistema estava com 23,4% do seu volume útil [^4].
 
 
 <br>
@@ -60,9 +60,9 @@ dygraph(c1[,c("v.abs.e9", "v.morto")], group="sit1",
 
 ### As causas
 
-Os anos de 2013 e 2014 foram os menos chuvosos da região pelo menos desde 1979 [^3].
+Os anos de 2013 e 2014 foram os menos chuvosos da região pelo menos desde 1979 [^5].
 Para uma comparação com o passado recente, veja o gráfico logo abaixo.
-A causa imediata da seca foi um bloqueio atmosférico [^4].
+A causa imediata da seca foi um bloqueio atmosférico [^6].
 Mas houve anos igualmente secos em que a vazão de água para o sistema Cantareira não
 se reduziu tanto. Veja [aqui](./seca_2013-2014.html). Além disso, o
 [balanço de 2015](./balanco2015.html) mostra que as chuvas voltaram ao
@@ -87,15 +87,16 @@ dygraph(window(c3[,c("pluv", "ph.m")],end=max(time(c1))), group="sit1",
 ```
 
 
+[^1]: [RESOLUÇÃO CONJUNTA ANA/DAEE No 910, DE 07 DE JULHO DE 2014](http://arquivos.ana.gov.br/resolucoes/2014/910-2014.pdf)
+
 [^2]: Água acessível sem necessidade de bombeamento,
 pois flui pela diferença de nível entre os reservatórios do sistema.
 
-[^3]: Nobre, C. , Marengo, J. , Seluchi, M. , Cuartas, L. and Alves, L. (2016) Some Characteristics and Impacts of the Drought and Water Crisis in Southeastern Brazil during 2014 and 2015. [Journal of Water Resource and Protection, 8, 252-262](http://file.scirp.org/Html/13-9402744_63776.htm). 
+[^3]: [RESOLUÇÃO CONJUNTA ANA/DAEE No 151, DE 07 DE MARÇO DE 2016](http://www.daee.sp.gov.br/images/documentos/cantareira/anadaee151.pdf)
 
 [^4]: [Comunicado 1 do GTAG - Cantareira](http://arquivos.ana.gov.br/institucional/sof/GTAG-Cantareira/20140218_GTAG-Cantareira_Comunicado_n_1.pdf)
 
-[^5] [RESOLUÇÃO CONJUNTA ANA/DAEE No 910, DE 07 DE JULHO DE 2014](http://arquivos.ana.gov.br/resolucoes/2014/910-2014.pdf)
+[^5]: [RESOLUÇÃO CONJUNTA ANA/DAEE No 1672, DE 17 DE NOVEMBRO DE 2014](http://arquivos.ana.gov.br/resolucoes/2014/1672-2014.pdf)
 
-[^6] [RESOLUÇÃO CONJUNTA ANA/DAEE No 1672, DE 17 DE NOVEMBRO DE 2014](http://arquivos.ana.gov.br/resolucoes/2014/1672-2014.pdf)
+[^6]: Nobre, C. , Marengo, J. , Seluchi, M. , Cuartas, L. and Alves, L. (2016) Some Characteristics and Impacts of the Drought and Water Crisis in Southeastern Brazil during 2014 and 2015. [Journal of Water Resource and Protection, 8, 252-262](http://file.scirp.org/Html/13-9402744_63776.htm). 
 
-[^7] [RESOLUÇÃO CONJUNTA ANA/DAEE No 151, DE 07 DE MARÇO DE 2016](http://www.daee.sp.gov.br/images/documentos/cantareira/anadaee151.pdf)
