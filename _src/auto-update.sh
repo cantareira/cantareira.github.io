@@ -3,8 +3,6 @@
 ROOT="$( dirname "${BASH_SOURCE[0]}" )"
 year=`date "+%Y"`
 hoje=`date +"%Y-%m-%d"`
-hoje2=`date +"%Y%m%d"`
-hoje3=`date +"%d%b%y"`
 hoje4=`date +'%y%m%d'`
 ontem=`date -d "yesterday" +"%Y-%m-%d"`
 commit=1
@@ -16,26 +14,32 @@ pushd "$ROOT/.."
 
 if [ ! -e  "boletins/boletim_mananciais_${hoje}.pdf" ]; then
     # fonte: http://site.sabesp.com.br/site/interna/Default.aspx?secaoId=553
-    fname="boletim_mananciais_${hoje3}.pdf"
-    wget "http://site.sabesp.com.br/site/uploads/file/boletim/${year}/boletim_mananciais_${hoje3}.pdf"
-    if [ $? != 0 ]; then
-        wget "http://site.sabesp.com.br/site/uploads/file/boletim/boletim_mananciais_${hoje3}.pdf"
-    fi
-    if [ $? != 0 ]; then
-        fname="boletim_mananciais_$(date +"%d%b_%y").pdf"
-        wget "http://site.sabesp.com.br/site/uploads/file/boletim/boletim_mananciais_$(date +"%d%b_%y").pdf"
-    fi
-    if [ $? != 0 ]; then
-        fname="boletim_mananciais_$(date +"%d_%b_%y").pdf"
-        wget "http://site.sabesp.com.br/site/uploads/file/boletim/boletim_mananciais_$(date +"%d_%b_%y").pdf"
-    fi
-    if [ $? != 0 ]; then
-        fname="boletim_mananciais_$(date +"%d_%b%y").pdf"
-        wget "http://site.sabesp.com.br/site/uploads/file/boletim/boletim_mananciais_$(date +"%d_%b%y").pdf"
-    fi
-    if [ $? = 0 ]; then
+
+    #fname="boletim_mananciais_$(date +"%d%b%y").pdf"
+    #wget "http://site.sabesp.com.br/site/uploads/file/boletim/${year}/${fname}"
+
+    # all the variations SABESP ever tried!?
+    SAVEIFS=$IFS
+    IFS=$(echo -en "\n")
+    fnames=("boletim_mananciais_$(date +"%d%b%y").pdf"
+            "boletim_mananciais_$(date +"%d%b_%y").pdf"
+            "boletim_mananciais_$(date +"%d_%b_%y").pdf"
+            "boletim_mananciais_$(date +"%d_%b%y").pdf"
+            "boletim_mananciais _$(date +"%d%b%y").pdf"
+            "boletim_mananciais _ $(date +"%d%b%y").pdf")
+    for fname in ${fnames[*]}
+    do
+        wget "http://site.sabesp.com.br/site/uploads/file/boletim/${fname}"
+        if [ $? == 0 ]; then
+            found=0
+            break
+        fi
+    done
+    IFS=$SAVEIFS
+
+    if [ $found ]; then
         echo "** boletim dos mananciais parece atualizado **"
-        mv $fname "boletins/boletim_mananciais_${hoje}.pdf"
+        mv "${fname}" "boletins/boletim_mananciais_${hoje}.pdf"
         git add "boletins/boletim_mananciais_${hoje}.pdf"
         commit=0
         python _src/boletim_scraper.py "boletins/boletim_mananciais_${hoje}.pdf" "boletins/boletim_mananciais_${ontem}.pdf" data/dados.csv data/data_ocr_cor2.csv data/dados_boletins.csv data/altotiete.csv
@@ -55,6 +59,7 @@ else
 fi
 
 # Não usamos mais previsão de chuva do boletim SSPCJ
+#hoje2=`date +"%Y%m%d"`
 #if [ ! -e  "SSPCJ_boletimDiario_${hoje2}.pdf" ]; then
 #    wget "http://www.sspcj.org.br/images/downloads/SSPCJ_boletimDiario_${hoje2}.pdf"
 #    if [ $? = 0 ]; then
