@@ -82,7 +82,7 @@ cant.dim2 <- window(cant.dim, start=min(time(fluxos.zoo)), end=max(time(cant.p))
 ## Approximating NA values (few)
 cant.dim2 <- na.approx(cant.dim2)
 ## Eliminating records with extreme outflow outliers
-cant.dim5 <- cant.dim2[cant.dim2$defluente<4e6,]
+cant.dim5 <- cant.dim2 # [cant.dim2$defluente<4e6,]
 ## Selecting data from 2012-2015
 cant.12 <- window(cant.dim5, start="2012-01-01")
 ## Historic mean rainfall for a year (from SABESP site, 2014)
