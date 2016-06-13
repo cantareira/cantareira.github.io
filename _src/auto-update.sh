@@ -33,6 +33,12 @@ if [ ! -e  "boletins/boletim_mananciais_${hoje}.pdf" ]; then
         if [ $? == 0 ]; then
             found=0
             break
+        else
+            wget "http://site.sabesp.com.br/site/uploads/file/boletim/${year}/${fname}"
+            if [ $? == 0 ]; then
+                found=0
+                break
+            fi
         fi
     done
     IFS=$SAVEIFS
