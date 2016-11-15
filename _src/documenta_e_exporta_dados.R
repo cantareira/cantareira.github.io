@@ -106,7 +106,11 @@ proj.30 <- upData(proj.30,
 ## salva os arquivos em formato csv
 write.csv2(cant.dim5.df, file="../data/dados_de_trabalho.csv")
 write.csv2(proj.30, file="../data/proj30.csv")
-tmp1 <- html(contents(rsp), file="../dados_metadata.html")
-tmp2 <- html(contents(fluxos), file="../data_ocr_cor2_metadata.html")
-tmp3 <- html(contents(cant.dim5.df), file="../planilha_de_trabalho_metadata.html")
-tmp3 <- html(contents(proj.30), file="../projecoes_30_dias_metadata.html")
+writeLines(paste("<html>\n<head></head>\n<body>", html(contents(rsp)),
+                "</body>\n</html>", sep="\n"), "../dados_metadata.html")
+writeLines(paste("<html>\n<head></head>\n<body>", html(contents(fluxos)),
+                "</body>\n</html>", sep="\n"), "../data_ocr_cor2_metadata.html")
+writeLines(paste("<html>\n<head></head>\n<body>", html(contents(cant.dim5.df)),
+                "</body>\n</html>", sep="\n"), "../planilha_de_trabalho_metadata.html")
+writeLines(paste("<html>\n<head></head>\n<body>", html(contents(proj.30)),
+                "</body>\n</html>", sep="\n"), "../projecoes_30_dias_metadata.html")
