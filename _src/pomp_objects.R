@@ -40,8 +40,8 @@ reserv3.12.stc.3p <- pomp(
     measurement.model = obs~norm(mean=V,sd=dp),
     skeleton=skel4b,
     rprocess=euler.sim(step.fun=Csnippet(skel4b.simC), delta.t=0.1),
-    parameter.transform=function(params, ...) exp(params),
-    parameter.inv.transform=function(params, ...) log(params)
+    toEstimationScale=function(params, ...) exp(params),
+    fromEstimationScale=function(params, ...) log(params)
 )
 ##}
 
@@ -84,8 +84,8 @@ reserv3.12.stc2.3p <- pomp(
     measurement.model = obs~norm(mean=V,sd=dp),
     skeleton=skel6,
     rprocess=euler.sim(step.fun=Csnippet(skel6.simC), delta.t=0.1),
-    parameter.transform=function(params, ...) exp(params),
-    parameter.inv.transform=function(params, ...) log(params)
+    toEstimationScale=function(params, ...) exp(params),
+    fromEstimationScale=function(params, ...) log(params)
 )
 ##}
 
@@ -118,8 +118,8 @@ reserv3.12.stc.3p.3 <- pomp(
     measurement.model = obs~norm(mean=V,sd=dp),
     skeleton=skel4b,
     rprocess=euler.sim(step.fun=Csnippet(skel4c.simC), delta.t=0.1),
-    parameter.transform=function(params, ...) exp(params),
-    parameter.inv.transform=function(params, ...) log(params)
+    toEstimationScale=function(params, ...) exp(params),
+    fromEstimationScale=function(params, ...) log(params)
 )
 ##}
 
@@ -149,8 +149,8 @@ c12.01.pomp <- pomp(
     measurement.model = obs~norm(mean=V,sd=dp),
     skeleton=skel4b,
     rprocess=euler.sim(step.fun=Csnippet(skel4b.simC), delta.t=0.1),
-    parameter.transform=function(params, ...) exp(params),
-    parameter.inv.transform=function(params, ...) log(params)
+    toEstimationScale=function(params, ...) exp(params),
+    fromEstimationScale=function(params, ...) log(params)
 )
 ##}
 
@@ -179,8 +179,8 @@ c12.06.pomp <- pomp(
     measurement.model = obs~norm(mean=V,sd=dp),
     skeleton=skel4b,
     rprocess=euler.sim(step.fun=Csnippet(skel4b.simC), delta.t=0.1),
-    parameter.transform=function(params, ...) exp(params),
-    parameter.inv.transform=function(params, ...) log(params)
+    toEstimationScale=function(params, ...) exp(params),
+    fromEstimationScale=function(params, ...) log(params)
 )
 ##}
 
@@ -209,8 +209,8 @@ c14.01.pomp <- pomp(
     measurement.model = obs~norm(mean=V,sd=dp),
     skeleton=skel4b,
     rprocess=euler.sim(step.fun=Csnippet(skel4b.simC), delta.t=0.1),
-    parameter.transform=function(params, ...) exp(params),
-    parameter.inv.transform=function(params, ...) log(params)
+    toEstimationScale=function(params, ...) exp(params),
+    fromEstimationScale=function(params, ...) log(params)
 )
 
 ##}
@@ -240,8 +240,8 @@ c14.05.pomp <- pomp(
     measurement.model = obs~norm(mean=V,sd=dp),
     skeleton=skel4b,
     rprocess=euler.sim(step.fun=Csnippet(skel4b.simC), delta.t=0.1),
-    parameter.transform=function(params, ...) exp(params),
-    parameter.inv.transform=function(params, ...) log(params)
+    toEstimationScale=function(params, ...) exp(params),
+    fromEstimationScale=function(params, ...) log(params)
 )
 
 ##}
@@ -271,8 +271,8 @@ c14.07.pomp <- pomp(
     measurement.model = obs~norm(mean=V,sd=dp),
     skeleton=skel4b,
     rprocess=euler.sim(step.fun=Csnippet(skel4b.simC), delta.t=0.1),
-    parameter.transform=function(params, ...) exp(params),
-    parameter.inv.transform=function(params, ...) log(params)
+    toEstimationScale=function(params, ...) exp(params),
+    fromEstimationScale=function(params, ...) log(params)
 )
 
 ##}
@@ -302,8 +302,8 @@ c14.12.pomp <- pomp(
     measurement.model = obs~norm(mean=V,sd=dp),
     skeleton=skel4b,
     rprocess=euler.sim(step.fun=Csnippet(skel4b.simC), delta.t=0.1),
-    parameter.transform=function(params, ...) exp(params),
-    parameter.inv.transform=function(params, ...) log(params)
+    toEstimationScale=function(params, ...) exp(params),
+    fromEstimationScale=function(params, ...) log(params)
 )
 
 ##}
@@ -333,8 +333,8 @@ c14.08.pomp <- pomp(
     measurement.model = obs~norm(mean=V,sd=dp),
     skeleton=skel4b,
     rprocess=euler.sim(step.fun=Csnippet(skel4b.simC), delta.t=0.1),
-    parameter.transform=function(params, ...) exp(params),
-    parameter.inv.transform=function(params, ...) log(params)
+    toEstimationScale=function(params, ...) exp(params),
+    fromEstimationScale=function(params, ...) log(params)
 )
 ##}
 
@@ -364,7 +364,7 @@ c14.08.4p.pomp <- pomp(
     measurement.model = obs~norm(mean=V,sd=dp),
     skeleton=skel4,
     rprocess=euler.sim(step.fun=Csnippet(skel4.simC), delta.t=0.1),
-    parameter.transform=function(params, ...) exp(params),
-    parameter.inv.transform=function(params, ...) log(params)
+    toEstimationScale=function(params, ...) exp(params),
+    fromEstimationScale=function(params, ...) log(params)
 )
 ##}

@@ -78,8 +78,8 @@ create.pomp.3p <- function(zoo.obj){
         measurement.model = obs~norm(mean=V,sd=dp),
         skeleton=skel4b,
         rprocess=euler.sim(step.fun=Csnippet(skel4b.simC), delta.t=0.1),
-        parameter.transform=function(params, ...) exp(params),
-        parameter.inv.transform=function(params, ...) log(params)
+        toEstimationScale=function(params, ...) exp(params),
+        fromEstimationScale=function(params, ...) log(params)
     )
     return(pomp.obj)
 }
