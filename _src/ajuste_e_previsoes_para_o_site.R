@@ -21,19 +21,43 @@ c2.pomp <- create.pomp.3p(c2.w)
 guesses <- read.csv2("../data/coefs_estimados.csv", row.names=1)
 guess <- c(guesses[nrow(guesses),], recursive=TRUE)
 guess["V.0"] <- as.numeric(c2.w$v.abs[1])
-## Distribuicoes a priori dos parametros a estimar
+## Ajuste usando como a priori uma lognormal parametrizada pelos valores dos ajustes anteriores
+## Funcao que define a priori para cada um dos 3 parametros a ajustar
 c2.prior <- function(params,...){
-    params["a0"] <- runif(n=1, min=0.1, max=1000)
-    params["a1"] <- runif(n=1, min=0.01,max=1)
-    params["sigma"] <- runif(n=1, min=0.001,max=0.05)
+    params["a0"] <- rlnorm(n = 1, meanlog = mean(log(guesses[,"a0"]), na.rm=TRUE),
+                           sdlog = sd(log(guesses[,"a0"]), na.rm=TRUE)) 
+    params["a1"] <- rlnorm(n=1, meanlog = mean(log(guesses[,"a1"]), na.rm=TRUE),
+                          sdlog = sd(log(guesses[,"a1"]), na.rm=TRUE))
+    params["sigma"] <- rlnorm(n=1, meanlog = mean(log(guesses[,"sigma"]), na.rm=TRUE),
+                             sdlog = sd(log(guesses[,"sigma"]), na.rm=TRUE))
     params
 }
+## Adiciona a funcao de a priori ao objeto pomp
+c2.pomp <- pomp(c2.pomp, rprior = c2.prior)
+## Ajuste
+c2.fit <- bsmc2(c2.pomp, params= guess, Np = 50000,
+                est= c("a0", "a1", "sigma"), max.fail=5000 , transfrom = TRUE)
+
+
+## Distribuicoes a priori dos parametros a estimar
+c2.prior <- function(params,...){
+    params["a0"] <- runif(n=1, min=0.1, max=100)
+    params["a1"] <- runif(n=1, min=0.01,max=2)
+    params["sigma"] <- runif(n=1, min=0.0005,max=0.05)
+    params
+}
+
+### Não funciona com nova versao do pomp ##
+# Substituido pelo ajuste acima. 
 ##Ajuste com bayesian filter em duas etapas:
 ## 1 . 5 mil iteracoes com distribuicoes a priori definidas acima
-tmp.bsmc <- bsmc2.fit.3p(c2.pomp, params=guess, rpriors=c2.prior, Np=5000)
-## 2 . 30 mil iterações com a priori lognormais com parametros
-## obtidos das ditribuicoes posteriores do primeiro ajuste
-c2.fit <- bsmc2.fit.3p(c2.pomp, bsmc2.obj=tmp.bsmc, Np=30000)
+## tmp.bsmc <- bsmc2.fit.3p(c2.pomp, params=guess, rprior = c2.prior, Np=5000,
+##                          est= c("a0", "a1", "sigma"), max.fail=1000)
+## ## 2 . 30 mil iterações com a priori lognormais com parametros
+## ## obtidos das ditribuicoes posteriores do primeiro ajuste
+## c2.fit <- bsmc2.fit.3p(c2.pomp, bsmc2.obj = tmp.bsmc, Np=30000,
+##                        est = c("a0", "a1", "sigma"), max.fail=1000)
+
 ## Gravando os coeficientes estimados
 guesses <- rbind(guesses,data.frame(t(coef(c2.fit)), row.names=Sys.time()))
 write.csv2(guesses, file="../data/coefs_estimados.csv")
@@ -61,7 +85,8 @@ pred.100 <- res.fc(p1=c2.pomp, z1=c2.w$v.abs,
                    pluv.factor=1,
                    start=min(time(ph.next)),
                    end=max(time(ph.next)),
-                   coefs=exp(c2.fit@post),
+                   ##coefs=exp(c2.fit@post),
+                   coefs=c2.fit@post,
                    V.max=1.2695e9,
                    nsamp.coef=5000,
                    nsim=2, keep.sims=TRUE

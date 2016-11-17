@@ -96,7 +96,7 @@ create.pomp.3p <- function(zoo.obj){
 ## using as priors lognormal distribution with parameters taken from another fit
 ## (for sequential fits as time series are updated)
 ## if another fit is provided in bsmc2.obj parameters and lognormal priors are taken from it
-bsmc2.fit.3p <- function(pomp.obj, params, rpriors, bsmc2.obj, Np=10000, transform=TRUE){
+bsmc2.fit.3p <- function(pomp.obj, params, rpriors, bsmc2.obj, Np=10000, transform=TRUE, ...){
     if(!missing(bsmc2.obj)){
         params <- coef(bsmc2.obj)
         params["V.0"] <- obs(pomp.obj)[1,1]
@@ -104,9 +104,9 @@ bsmc2.fit.3p <- function(pomp.obj, params, rpriors, bsmc2.obj, Np=10000, transfo
         if(!bsmc2.obj@transform)
             post <- log(post)
         rpriors <- function(params, ...){
-            params["a0"] <- rlnorm(n=1, mean(post["a0",]), sd(post["a0",]))
-            params["a1"] <- rlnorm(n=1, mean(post["a1",]), sd(post["a1",]))
-            params["sigma"] <- rlnorm(n=1, mean(post["sigma",]), sd(post["sigma",]))
+            params["a0"] <- rlnorm(n=1, mean(post["a0",], na.rm=TRUE), sd(post["a0",], na.rm=TRUE))
+            params["a1"] <- rlnorm(n=1, mean(post["a1",], na.rm=TRUE), sd(post["a1",], na.rm=TRUE))
+            params["sigma"] <- rlnorm(n=1, mean(post["sigma",], na.rm=TRUE), sd(post["sigma",], na.rm=TRUE))
             params
         }
     }
@@ -114,7 +114,7 @@ bsmc2.fit.3p <- function(pomp.obj, params, rpriors, bsmc2.obj, Np=10000, transfo
                 params=params,
                 rprior=rpriors
                 )
-    bsmc2(tmp, Np=Np, transform=transform)
+    bsmc2(tmp, Np=Np, transform=transform, ...)
 }
 
 ## A function to forecast the fitted stochatic model starting in a given date,
