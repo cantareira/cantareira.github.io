@@ -12,14 +12,15 @@
 
 
 
+
 <title>Nossas fontes</title>
 
-<script src="libs/jquery-1.11.0/jquery.min.js"></script>
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="libs/bootstrap-3.3.1/css/journal.min.css" rel="stylesheet" />
-<script src="libs/bootstrap-3.3.1/js/bootstrap.min.js"></script>
-<script src="libs/bootstrap-3.3.1/shim/html5shiv.min.js"></script>
-<script src="libs/bootstrap-3.3.1/shim/respond.min.js"></script>
+<link href="libs/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 
     {% include in_header_content.html %}
 
@@ -43,6 +44,34 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 
 
 
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
 </head>
 
 <body>
@@ -57,18 +86,45 @@ code {
   color: inherit;
   background-color: rgba(0, 0, 0, 0.04);
 }
-img { 
-  max-width:100%; 
-  height: auto; 
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
 }
 </style>
+
+
+
 <div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script src="libs/navigation-1.1/tabsets.js"></script>
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
 
 
     {% include before_body_content.html %}
 
-<div id="header">
-<h1 class="title">Nossas fontes</h1>
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Nossas fontes</h1>
+
 </div>
 
 
@@ -77,8 +133,8 @@ img {
 <p>Tudo aqui foi feito com software de código aberto e está disponível para livre uso <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
 <p>Os dados e os códigos-fonte deste site estão em repositório público (<a href="https://github.com/cantareira" class="uri">https://github.com/cantareira</a>). Quem conhece as ferramentas computacionais que usamos pode verificar os resultados ou realizar outras análises.</p>
 <p>Para os que não dominam estas ferramentas computacionais, as seções abaixo disponibilizam os dados:</p>
-<div id="volume-e-pluviosidade-nos-reservatorios-de-sp-de-01012003-a-14112016" class="section level3">
-<h3>Volume e pluviosidade nos reservatórios de SP de 01/01/2003 a 14/11/2016</h3>
+<div id="volume-e-pluviosidade-nos-reservatorios-de-sp-de-01012003-a-17112016" class="section level3">
+<h3>Volume e pluviosidade nos reservatórios de SP de 01/01/2003 a 17/11/2016</h3>
 <ul>
 <li>Fonte: <a href="http://www2.sabesp.com.br/mananciais/DivulgacaoSiteSabesp.aspx">Boletins diários da SABESP de situação dos manaciais</a>, recuperados automaticamente com a ferramenta <a href="http://mananciais.tk/">mananciais.tk</a></li>
 <li><a href="/data/dados.csv">Arquivo de dados</a></li>
@@ -90,8 +146,8 @@ img {
 </ul></li>
 </ul>
 </div>
-<div id="vazoes-de-entrada-e-saida-no-sistema-cantareira-de-01012004-a-14112016" class="section level3">
-<h3>Vazões de entrada e saída no sistema Cantareira de 01/01/2004 a 14/11/2016</h3>
+<div id="vazoes-de-entrada-e-saida-no-sistema-cantareira-de-01012004-a-17112016" class="section level3">
+<h3>Vazões de entrada e saída no sistema Cantareira de 01/01/2004 a 17/11/2016</h3>
 <ul>
 <li>Fonte: <a href="http://www2.sabesp.com.br/mananciais/divulgacaopcj.aspx">Boletins diários da SABESP de vazão do sistema</a>, recuperação semi-automatizada.</li>
 <li><a href="/data/data_ocr_cor2.csv">Arquivo de dados</a></li>
@@ -99,8 +155,8 @@ img {
 <li>Podem conter erros de leitura devido ao processo semi-automático de recuperação dos dados.</li>
 </ul>
 </div>
-<div id="dados-processados-usados-em-nossas-analises-01012004-a-14112016" class="section level3">
-<h3>Dados processados usados em nossas análises (01/01/2004 a 14/11/2016)</h3>
+<div id="dados-processados-usados-em-nossas-analises-01012004-a-17112016" class="section level3">
+<h3>Dados processados usados em nossas análises (01/01/2004 a 17/11/2016)</h3>
 <ul>
 <li>Fonte: dados de volume, pluviosidade e vazões acima.</li>
 <li><a href="/data/dados_de_trabalho.csv">Arquivo de dados</a></li>
@@ -108,8 +164,8 @@ img {
 <li>Nota: valores discrepantes foram retirados, valores faltantes foram interpolados linearmente e quantidades derivadas necessárias para as projeções foram calculadas.</li>
 </ul>
 </div>
-<div id="projecoes-de-volume-de-agua-armazenada-ate-14122016" class="section level3">
-<h3>Projeções de volume de água armazenada até 14/12/2016</h3>
+<div id="projecoes-de-volume-de-agua-armazenada-ate-17122016" class="section level3">
+<h3>Projeções de volume de água armazenada até 17/12/2016</h3>
 <ul>
 <li>Fonte: <a href="./index.html">projeções para os cenários de chuva na média histórica, 25% a menos e 25% a mais que esta média</a></li>
 <li><a href="/data/proj30.csv">Arquivo de dados</a></li>
@@ -127,6 +183,8 @@ img {
 
     {% include after_body_content.html %}
 
+
+
 </div>
 
 <script>
@@ -135,6 +193,7 @@ img {
 $(document).ready(function () {
   $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
 });
+
 
 </script>
 
