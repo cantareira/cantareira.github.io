@@ -21,14 +21,13 @@
 <script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+<link href="libs/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="libs/highlightjs-1.1/highlight.js"></script>
 
     {% include in_header_content.html %}
 
 <style type="text/css">code{white-space: pre;}</style>
-<link rel="stylesheet"
-      href="libs/highlight/default.css"
-      type="text/css" />
-<script src="libs/highlight/highlight.js"></script>
 <style type="text/css">
   pre:not([class]) {
     background-color: white;
@@ -103,7 +102,6 @@ button.code-folding-btn:focus {
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
-<script src="libs/navigation-1.1/tabsets.js"></script>
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
@@ -133,8 +131,8 @@ $(document).ready(function () {
 <p>Tudo aqui foi feito com software de código aberto e está disponível para livre uso <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
 <p>Os dados e os códigos-fonte deste site estão em repositório público (<a href="https://github.com/cantareira" class="uri">https://github.com/cantareira</a>). Quem conhece as ferramentas computacionais que usamos pode verificar os resultados ou realizar outras análises.</p>
 <p>Para os que não dominam estas ferramentas computacionais, as seções abaixo disponibilizam os dados:</p>
-<div id="volume-e-pluviosidade-nos-reservatorios-de-sp-de-01012003-a-24022017" class="section level3">
-<h3>Volume e pluviosidade nos reservatórios de SP de 01/01/2003 a 24/02/2017</h3>
+<div id="volume-e-pluviosidade-nos-reservatorios-de-sp-de-01012003-a-25022017" class="section level3">
+<h3>Volume e pluviosidade nos reservatórios de SP de 01/01/2003 a 25/02/2017</h3>
 <ul>
 <li>Fonte: <a href="http://www2.sabesp.com.br/mananciais/DivulgacaoSiteSabesp.aspx">Boletins diários da SABESP de situação dos manaciais</a>, recuperados automaticamente com a ferramenta <a href="http://mananciais.tk/">mananciais.tk</a></li>
 <li><a href="/data/dados.csv">Arquivo de dados</a></li>
@@ -146,8 +144,8 @@ $(document).ready(function () {
 </ul></li>
 </ul>
 </div>
-<div id="vazoes-de-entrada-e-saida-no-sistema-cantareira-de-01012004-a-24022017" class="section level3">
-<h3>Vazões de entrada e saída no sistema Cantareira de 01/01/2004 a 24/02/2017</h3>
+<div id="vazoes-de-entrada-e-saida-no-sistema-cantareira-de-01012004-a-25022017" class="section level3">
+<h3>Vazões de entrada e saída no sistema Cantareira de 01/01/2004 a 25/02/2017</h3>
 <ul>
 <li>Fonte: <a href="http://www2.sabesp.com.br/mananciais/divulgacaopcj.aspx">Boletins diários da SABESP de vazão do sistema</a>, recuperação semi-automatizada.</li>
 <li><a href="/data/data_ocr_cor2.csv">Arquivo de dados</a></li>
@@ -155,8 +153,8 @@ $(document).ready(function () {
 <li>Podem conter erros de leitura devido ao processo semi-automático de recuperação dos dados.</li>
 </ul>
 </div>
-<div id="dados-processados-usados-em-nossas-analises-01012004-a-24022017" class="section level3">
-<h3>Dados processados usados em nossas análises (01/01/2004 a 24/02/2017)</h3>
+<div id="dados-processados-usados-em-nossas-analises-01012004-a-25022017" class="section level3">
+<h3>Dados processados usados em nossas análises (01/01/2004 a 25/02/2017)</h3>
 <ul>
 <li>Fonte: dados de volume, pluviosidade e vazões acima.</li>
 <li><a href="/data/dados_de_trabalho.csv">Arquivo de dados</a></li>
@@ -164,8 +162,8 @@ $(document).ready(function () {
 <li>Nota: valores discrepantes foram retirados, valores faltantes foram interpolados linearmente e quantidades derivadas necessárias para as projeções foram calculadas.</li>
 </ul>
 </div>
-<div id="projecoes-de-volume-de-agua-armazenada-ate-26032017" class="section level3">
-<h3>Projeções de volume de água armazenada até 26/03/2017</h3>
+<div id="projecoes-de-volume-de-agua-armazenada-ate-27032017" class="section level3">
+<h3>Projeções de volume de água armazenada até 27/03/2017</h3>
 <ul>
 <li>Fonte: <a href="./index.html">projeções para os cenários de chuva na média histórica, 25% a menos e 25% a mais que esta média</a></li>
 <li><a href="/data/proj30.csv">Arquivo de dados</a></li>
@@ -190,8 +188,11 @@ $(document).ready(function () {
 <script>
 
 // add bootstrap table styles to pandoc tables
-$(document).ready(function () {
+function bootstrapStylePandocTables() {
   $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
 });
 
 
