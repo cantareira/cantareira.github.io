@@ -1,6 +1,6 @@
 ---
 title: "Cantareira -- Balanço de 2016"
-date: "Janeiro de 2017"
+date: "Fevereiro de 2017"
 author: "Projeto Águas Futuras"
 ---
 
@@ -10,30 +10,39 @@ armazenada dobrou em relação a 2015 e o sistema fechou 2016 com 58% de
 seu volume disponível (ou 75% do volume útil).
 
 Por incrível que pareça, o volume de chuva em 2016
-foi um pouco menor do que no ano anterior (embora na média histórica).
-A recuperação está contecendo porque a eficiência das bacias hidrográficas do Cantareira
+foi um pouco menor do que no ano anterior (embora próximo da média histórica).
+A recuperação está acontecendo porque a eficiência das bacias hidrográficas do Cantareira
 voltaram ao normal. A eficiência é a proporção da água de chuva que a bacia drena para
-os reservatórios, e está calculada na última linha da tabela. Historicamente pouco mais de um terço 
+os reservatórios, e é calculada na última linha da tabela. Historicamente pouco mais de um terço 
 do volume de chuva torna-se água armazenada. O restante fica retido no solo e na vegetação, ou evapora.
-Em 2014 houve uma forte seca. O volume de chuva foi 60% do normal, e a eficiência caiu pela metade.
-No ano seguinte as chuvas voltaram ao normal, mas a eficiência não. O sistema 
-sofreu uma transição crítica[^1]. Foi necessário mais um ano de chuvas normais para
+Em 2014 houve uma forte seca: o volume de chuva foi 60% do normal, e a eficiência caiu pela metade.
+No ano seguinte as chuvas voltaram ao normal, mas a eficiência, não. O sistema 
+sofreu uma transição crítica[^1]. Foi necessário um outro ano de chuvas normais para
 a transição se reverter.
 
 O outro motivo para a recuperação do volume armazenado
-é a drástica redução na retirada de água. Em 2015 se retirou menos da metade 
-da média histórica. Em 2016 a retirada foi 60% do volume histórico. 
-Por isso, o saldo entre a entrada e saída
-em 2016 foi 260% maior do que o normal.
+é a continuação da drástica redução na retirada de água. Em 2015 se retirou menos da metade 
+da média histórica. Em 2016 a retirada foi de 60% do volume histórico. 
+Por isso, o saldo entre a entrada e a saída de água dos reservatórios
+em 2016 foi 3.6 vezes maior do que o normal.
 
-
-O que se aprende? Uma seca pode fazer a bacia hidrográfica mudar abruptamente
-para um estado de baixa eficiência. O retorno à normalidade não é imediato nem é
-fácil de prever. A eficiência levou dois anos para se reestabelecer, e
-a retirada de água vai precisar de ainda mais tempo para
+O que se aprendeu? Uma seca pode fazer a bacia hidrográfica mudar abruptamente
+para um estado de baixa eficiência. O retorno à normalidade não é imediato ou
+fácil de prever. A eficiência normal levou dois anos para se recuperar, e
+a retirada de água precisa ser controlada por ainda mais tempo para
 devolver o reservatório a níveis seguros. 
 
 ### Volumes anuais de chuva, entrada, saída e saldo no sistema Cantareira, em milhões de $m^3$
+```{r setOptions, include=FALSE, message=FALSE}
+library(rmarkdown)
+library(knitr)
+library(zoo)
+options(OutDec = ',')
+knitr::opts_chunk$set(echo=FALSE)
+```
+```{r echo=FALSE, message=FALSE, warning=FALSE, strip.white=TRUE}
+source('balanco2016.r')
+```
 
 |                       | Média histórica | 2014 | 2015 | 2016 | 
 |-----------------------|----------------:|-----:|-----:|-----:|
