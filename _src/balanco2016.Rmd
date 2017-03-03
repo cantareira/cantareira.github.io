@@ -12,7 +12,7 @@ seu volume disponível (ou 75% do volume útil).
 Por incrível que pareça, o volume de chuva em 2016
 foi um pouco menor do que no ano anterior (embora próximo da média histórica).
 A recuperação está acontecendo porque a eficiência das bacias hidrográficas do Cantareira
-voltaram ao normal. A eficiência é a proporção da água de chuva que a bacia drena para
+voltou ao normal. A eficiência é a proporção da água de chuva que a bacia drena para
 os reservatórios, e é calculada na última linha da tabela. Historicamente pouco mais de um terço 
 do volume de chuva torna-se água armazenada. O restante fica retido no solo e na vegetação, ou evapora.
 Em 2014 houve uma forte seca: o volume de chuva foi 60% do normal, e a eficiência caiu pela metade.
@@ -21,15 +21,17 @@ sofreu uma transição crítica[^1]. Foi necessário um outro ano de chuvas norm
 a transição se reverter.
 
 O outro motivo para a recuperação do volume armazenado
-é a continuação da drástica redução na retirada de água. Em 2015 se retirou menos da metade 
-da média histórica. Em 2016 a retirada foi de 60% do volume histórico. 
-Por isso, o saldo entre a entrada e a saída de água dos reservatórios
-em 2016 foi 3.6 vezes maior do que o normal.
+foi uma drástica redução na retirada de água, que prossegue. Em 2015 se retirou menos da metade
+da quantidade normalmente retirada (média histórica).
+Em 2016 a retirada continuou bem abaixo do normal (60% da média). 
+A redução na retirada foi uma enorme economia. Acumulou-se em 2016
+um volume que levaria três anos e meio para se obter, em condições normais
+de retirada e chuva.
 
 O que se aprendeu? Uma seca pode fazer a bacia hidrográfica mudar abruptamente
 para um estado de baixa eficiência. O retorno à normalidade não é imediato ou
 fácil de prever. A eficiência normal levou dois anos para se recuperar, e
-a retirada de água precisa ser controlada por ainda mais tempo para
+a retirada de água tem que ser reduzida por ainda mais tempo para
 devolver o reservatório a níveis seguros. 
 
 ### Volumes anuais de chuva, entrada, saída e saldo no sistema Cantareira, em milhões de $m^3$
