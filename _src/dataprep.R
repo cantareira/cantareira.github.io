@@ -22,6 +22,10 @@ cant.bol <- zoo(cant.bol[,-1], as.Date(cant.bol[,1],"%Y-%m-%d"))
 if (mode(cant.bol) == "character"){
     mode(cant.bol) <- "numeric"
 }
+## In Cantareira the usable capacity limit was shifted in 18.5% in May 15 2014
+## and then in more 10.7% in Oct 23 2014. It was rolled back to the usual limit
+## in May 15 2017. This corresponds to 287.5 10^6 m^3.
+cant.bol$vabs[time(cant.bol)>"2017-05-14"] <- cant.bol$vabs[time(cant.bol)>"2017-05-14"] + 287.5
 
 ###########################################################
 ### Reading and transforming data on water volume and rain
@@ -38,11 +42,13 @@ rsp$data <- as.Date(rsp$data, format="%Y-%m-%d")
 rsp <- rsp[rsp$manancial!="",]
 ## Duplicated lines
 rsp <- aggregate(rsp[,3:4], by=list(data=rsp$data, manancial=rsp$manancial), mean)
-## In Cantareira the usable capacity limit was shift in 18.5% in May 15 2014
-## and then in more 10.7% in Oct 23 2014.
+## In Cantareira the usable capacity limit was shifted in 18.5% in May 15 2014
+## and then in more 10.7% in Oct 23 2014. It was rolled back to the usual limit
+## in May 15 2017.
 z <- rsp$manancial=="sistemaCantareira"
 rsp$volume[z&rsp$data>"2014-05-15"] <- rsp$volume[z&rsp$data>"2014-05-15"] - 18.5
 rsp$volume[z&rsp$data>"2014-10-23"] <- rsp$volume[z&rsp$data>"2014-10-23"] - 10.7
+rsp$volume[z&rsp$data>"2017-05-14"] <- rsp$volume[z&rsp$data>"2017-05-14"] + 29.2
 ## In Alto Tiete usable capacity was lowered in Dec 2014
 z <- rsp$manancial=="sistemaAltoTiete"
 rsp$volume[z&rsp$data>"2014-12-13"] <- rsp$volume[z&rsp$data>"2014-12-13"] - 6.6
