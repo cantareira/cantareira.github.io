@@ -47,15 +47,12 @@ kable(tab1,
 
 
 * **Volume armazenado em `r format(max(time(c1)), '%d/%m/%Y')`** ([SABESP](http://www2.sabesp.com.br/mananciais/DivulgacaoSiteSabesp.aspx)):
-    * `r as.numeric(round(c1$v.rel2[time(c1)==max(time(c1))],1))` % do volume disponível
-    * o mesmo que `r as.numeric(round(c1$v.rel[time(c1)==max(time(c1))],1))` % do volume útil.
-    * o mesmo que `r as.numeric(round(c1$v.rel[time(c1)==max(time(c1))]-29.2,1))` % de saldo do volume morto.
+    * `r as.numeric(round(c1$v.rel[time(c1)==max(time(c1))]-29.2,1))` % do volume útil
+    * o mesmo que `r as.numeric(round(c1$v.rel2[time(c1)==max(time(c1))],1))` % do volume total (incluindo volume morto)
 * **Chuva nos últimos 30 dias**: `r round(pluv.ac.30,0)` mm.
 * **Média histórica dos últimos 30 dias**: `r round(pluv.hist.30,0)` mm.	
 <br>	
 * **Todas as projeções estão em percentual do volume total disponível (volume útil + volume morto 1 + volume morto 2)**.
-  * Para converter para percentual do volume útil multiplique por 1,292.
-  * Para converter para saldo percentual do volume morto multiplique por 1,292 e subtraia 29,2.
 * As projeções são os valores esperados por um modelo matemático e os limites
 são a margem de erro da projeção. 
 * Por exemplo, para o dia `r format(max(time(tab.pred.bol)), '%d de %B de %Y')` a projeção
