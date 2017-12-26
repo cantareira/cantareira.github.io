@@ -22,6 +22,7 @@ if [ ! -e  "boletins/boletim_mananciais_${hoje}.pdf" ]; then
     SAVEIFS=$IFS
     IFS=$(echo -en "\n")
     fnames=("boletim_mananciais_$(date +"%d%b%y").pdf"
+            "boletim_ mananciais_$(date +"%d%b%y").pdf"
             "boletim_mananciais_$(date +"%-d%b%y").pdf"
             "boletim_mananciais_$(date +"%d%b_%y").pdf"
             "boletim_mananciais_$(date +"%d_%b_%y").pdf"
