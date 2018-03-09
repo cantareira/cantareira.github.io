@@ -62,10 +62,6 @@ Para mais detalhes técnicos veja nosso [documento de metodologia](detalhes-tecn
 
 #### [Grupo de Biologia Matemática](http://www.ift.unesp.br/users/kraenkel/Roberto_Andre_Kraenkel.html), [IFT UNESP](http://www.ift.unesp.br/br/)
 
-* Renato Mendes Coutinho é doutor em física pelo Instituto de Física Teórica - UNESP e *post-doc* no mesmo instituto.
-    + [CV](http://lattes.cnpq.br/1301865568118160)
-    + <renatomc@ift.unesp.br>
-	
 * [Roberto André Kraenkel](http://www.ift.unesp.br/users/kraenkel/) é doutor em física e pesquisador do Instituto de Física Teórica - UNESP.
     + [CV](http://lattes.cnpq.br/8497878967418484)
     + <kraenkel@ift.unesp.br>
@@ -76,6 +72,10 @@ Para mais detalhes técnicos veja nosso [documento de metodologia](detalhes-tecn
     + [CV](http://lattes.cnpq.br/3884092565521453)
     + <prado@ib.usp.br>
 
+* [Renato Mendes Coutinho](http://professor.ufabc.edu.br/~renato.coutinho) é doutor em Física pelo Instituto de Física Teórica - UNESP e foi *post-doc* nesse instituto e também no IB - USP. Atualmente é professor do Centro de Matemática, Computação e Cognição (CMCC) da UFABC.
+    + [CV](http://lattes.cnpq.br/1301865568118160)
+    + <renato.coutinho@ufabc.edu.br>
+	
 
 ### Contato
 Críticas e sugestões são muito bem vindas.
