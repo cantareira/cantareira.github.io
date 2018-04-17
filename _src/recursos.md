@@ -42,7 +42,7 @@ os mananciais que abastecem a Região Metropolitana de São Paulo em: http://sit
 
 * [Boletim da falta d’água em SP](http://boletimdafaltadagua.tumblr.com)
 
-* [Aliança pela Água](http://aguasp.com.br)
+* [Aliança pela Água](https://www.aliancapelaagua.com.br/)
 
 * [Mananciais.tk](http://mananciais.tk)
 
