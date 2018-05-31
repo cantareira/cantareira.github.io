@@ -1,0 +1,81 @@
+---
+title: "Cantareira -- Balanço de 2017"
+date: "Fevereiro de 2018"
+author: "Projeto Águas Futuras"
+---
+
+```{r setOptions, include=FALSE, message=FALSE}
+library(rmarkdown)
+library(knitr)
+library(zoo)
+options(OutDec = ',')
+knitr::opts_chunk$set(echo=FALSE)
+source('balanco2017.r')
+```
+
+
+O sistema Cantareira fechou o ano de 2017 com um pouco menos de água armazenada: 
+41%  de seu volume útil, contra 46% em 2016. A diferença não parece grande, mas sua razão preocupa. 
+Em 2017 entrou menos água
+no sistema e gastou-se mais, o que resultou em um saldo negativo, que consumiu
+cerca de 10% do que foi economizado em 2016.
+
+A menor entrada deve-se a um menor volume de chuvas, que foi de 83% da média histórica.
+Já a maior saída
+aconteceu porque a SABESP aumentou a vazão de retirada de água do sistema. 
+A retirada voltou
+aos níveis de 2014, o ano de início da crise hídrica. Apesar de ainda  menor que a média
+histórica, este volume retirado foi suficiente para deixar um saldo negativo em 2017.
+
+Outro sinal preocupante é que a eficiência das bacias hidrográficas do Cantareira
+caiu de 33% para 29%. A eficiência é a proporção da água de chuva que a bacia drena para
+os reservatórios, e é calculada na última linha da tabela. Historicamente pouco mais de um terço 
+do volume de chuva torna-se água armazenada. O restante fica retido no solo e na vegetação, ou evapora.
+
+Em 2014 houve uma forte seca: o volume de chuva foi 60% do normal, e a eficiência caiu pela metade.
+No ano seguinte as chuvas voltaram ao normal, mas a eficiência, não. O sistema 
+sofreu uma transição crítica[^1]. Foi necessário um outro ano de chuvas normais para
+a transição se reverter. O ano de 2017 foi mais seco e vemos uma queda da eficiência, embora
+não nos níveis de uma transição.
+
+O que se aprendeu? Uma seca pode fazer a bacia hidrográfica mudar abruptamente
+para um estado de baixa eficiência. O retorno à normalidade não é imediato ou
+fácil de prever. A eficiência normal levou dois anos para se recuperar, e
+a retirada de água precisa ser controlada por ainda mais tempo para
+devolver o reservatório a níveis seguros. 
+
+### Volumes anuais de chuva, entrada, saída e saldo no sistema Cantareira, em milhões de $m^3$
+
+```{r tabela, message=FALSE}
+kable(t(tabela), digits=0)
+```
+
+### Volumes anuais de chuva e de vazão de entrada
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, strip.white=TRUE}
+par(las=1, mar=c(7, 8, 4, 2), mgp=c(5, 2, 0), cex.lab=1.5, cex.axis=1.5)
+midpoints <- barplot(efic151617, col=c("darkblue", "lightblue"), border=NA,
+                     names.arg=c("Média histórica", "2015", "2016", "2017"),
+                     ylab=expression(paste('Volume (bilhões de m'^'3', ')', sep='')))
+text(midpoints[1], c(0.7, 2.5), labels=c('entrada', 'chuva'), cex=1.5, col=c('white', 'black'))
+```
+
+**Fontes:**
+
+* Médias históricas de vazões de entrada (1930-2013): Dados de Referência Acerca da Outorga do Cantareira, ANA/DAEE (http://arquivos.ana.gov.br/institucional/sof/Renovacao_Outorga/DDR_Sistema_Cantareira%20-%2012Jun15%20-%20FINAL.pdf)
+
+* Vazões de saída (2004-2017), vazões de entrada (2014-2017) e pluviosidade média mensal do últimos 30 anos: SABESP (http://www2.sabesp.com.br/mananciais/)
+
+
+### Contato
+
+O projeto *Águas Futuras* é uma iniciativa de pesquisadores da USP (Paulo Inácio Prado, do Instituto de Biociências)
+UNESP (Roberto Kraenkel, Instituto de Física Teórica)  e UFABC (Renato Coutinho, Centro de Matemática Computação e Cognição)
+que usa modelos matemáticos para os sistema Cantareira a partir de dados públicos.
+A página do projeto http://cantareira.github.io é atualizada diariamente com projeções para cinco e trinta dias.
+Também estão disponíveis na página links para todos os dados e programas utilizados, todos de utilização livre não comercial.
+
+
+email: <renatocoutinho+cantareira@gmail.com>
+
+[^1]: Coutinho RM, Kraenkel RA, Prado PI (2015) Catastrophic Regime Shift in Water Reservoirs and São Paulo Water Supply Crisis. PLoS ONE 10(9): e0138278. <http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0138278>
