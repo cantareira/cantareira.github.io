@@ -102,7 +102,7 @@ refy <- as.Date("2004-01-01")
 ny <- as.numeric(format(max(time(cant.12)), "%Y")) - as.numeric(format(refy, "%Y")) + 2
 medias  <- zooreg(data.frame(ph.cum=rep(pmm,ny), ph.m =rep(pmm/as.numeric(format(datas, "%d")),ny)),
                   start=as.yearmon(refy), freq=12)
-## Average rainfall uniform along each month (montlhy mean repeated over each month) ##
+## Average rainfall uniform along each month (monthly mean repeated over each month) ##
 m1 <- zoo(medias, as.Date(time(medias)))
 tmp <- merge(m1, zoo(data.frame(y=NA), seq(refy, as.Date(as.yearmon(refy)+ny)-1, by=1)))
 pluv.hist1 <- na.locf(tmp[,c("ph.cum","ph.m")])
@@ -123,6 +123,17 @@ pluv.hist$pluv.m30 <- runmean(pluv.hist$ph.m, k=30, align="right")
 pluv.hist$pluv.m20 <- runmean(pluv.hist$ph.m, k=20, align="right")
 ## Mean of previous 10 days
 pluv.hist$pluv.m10 <- runmean(pluv.hist$ph.m, k=10, align="right")
+
+## Historical inflow 1930-2012
+## Reads historical data
+vazoes <- read.csv2("../data/vazoes_1930_2015.csv", as.is=TRUE)
+vazoes <- zoo(vazoes$x*seg.scaling, as.yearmon(vazoes$X, format="%b %Y"))
+## Pre-crisis values
+v.12 <- window(vazoes, end="Dez 2012")
+## Interpolating
+v.12 <- zoo(v.12, as.Date(time(v.12))+14)
+v.12 <- merge(v.12, zoo(data.frame(y=NA), seq(min(time(v.12))-14, max(time(v.12)+16), by=1)))[,1]
+v.12 <- na.approx(v.12)
 
 ## Rain forecast for the next days ##
 ## from http://www.sspcj.org.br/index.php/boletins-diarios-e-relatorios-telemetria-pcj/boletimdiario

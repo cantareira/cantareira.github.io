@@ -1,0 +1,89 @@
+---
+title: "Resumo da Situação do  Sistema Cantareira"
+date: "`r format(Sys.time(), '%d de %B de %Y')`"
+---
+
+```{r setOptions, include=FALSE, message=FALSE}
+library(rmarkdown)
+library(dygraphs)
+library(xtable)
+library(knitr)
+library(googleVis)
+options(OutDec = ',')
+knitr::opts_chunk$set(echo=FALSE, warnings=FALSE, message=FALSE)
+op <- options(gvis.plot.tag='chart')
+```
+
+```{r quantidades que serao usadas, include=FALSE, message=FALSE}
+int.ah <- 29 ## intervalo em dias
+hoje <- max(time(cant.dim5))
+antes <- hoje-int.ah
+periodo <- seq(antes,hoje, by=1)
+w.dias <- format(periodo, "%d-%m")
+## CHUVA ##
+## Acumulada historica em 30 dias até hoje
+pluv.hist.30 <- sum(window(pluv.hist$ph.m, start=antes, end=hoje))
+## Acumulada historica para os proximos 30 dias
+pluv.hist.next.30 <- sum(window(pluv.hist$ph.m, start=hoje+1, end=hoje+30))
+## Acumulada em 30 dias até hoje
+pluv.ac.30 <- sum(window(cant.dim5$pluv,start=antes, end=hoje))
+## Em milhoes de m3
+pluv.hist.30v <- pluv.hist.30 * 2.279493
+pluv.hist.next.30v <- pluv.hist.next.30 * 2.279493
+pluv.ac.30v <- pluv.ac.30 * 2.279493
+
+## INFLOW ##
+## Serie historica pre-crise (1930-2012)
+v.12.w <- v.12[format(time(v.12), "%d-%m") %in% w.dias]
+## Serie com valores acumulados dos 29 dias anteriores em relacao a data de hoje
+v.12.ac <- zoo( runmean(v.12, k = int.ah, align = "right") * int.ah, time(v.12))
+## Media historica da vazao acumulada no mesmo periodo (m3)
+v.12.hist.30 <- mean(v.12.ac[format(time(v.12.ac),"%d-%m")==format(hoje,"%d-%m")])
+## Vazao acumulada no periodo (m3)
+v.ac.30 <- sum(window(cant.dim5$afluente,start=antes, end=hoje))
+## Em milhoes de m3
+v.12.hist.30v <- v.12.hist.30/1e6
+v.ac.30v <- v.ac.30/1e6
+
+## OUTFLOW ##
+## Periodo Pre-crise
+out.12 <- window(cant.dim5$defluente, end = "2012-12-31")
+## Serie com valores acumulados dos 29 dias anteriores em relacao a data de hoje
+out.12.ac <- zoo( runmean(out.12, k = int.ah, align = "right") * int.ah, time(out.12))
+## Media historica da vazao acumulada no mesmo periodo (m3)
+out.12.hist.30 <- mean(out.12.ac[format(time(out.12.ac),"%d-%m")==format(hoje,"%d-%m")])
+## Acumulada em 30 dias ate hoje
+out.ac.30 <- sum(window(cant.dim5$defluente,start=antes, end=hoje))
+```
+Atualizadas diariamente por volta das 09:00 horas[^2]
+
+<br>
+<br>
+
+## Vazões de entrada e de saída e chuva no mês
+
+```{r gauges}
+df.gauge <- data.frame(
+    nome = c("Chuva", "Entrada", "Retirada"),
+    valor = round( c(100*pluv.ac.30/pluv.hist.30,
+              100*v.ac.30/v.12.hist.30,
+              100*out.ac.30/out.12.hist.30), 1)
+)
+
+Gauge1 <-  gvisGauge(df.gauge[1:2,], 
+                    options=list(min=0, max=max(c(df.gauge$valor,100)), greenFrom=80,
+                                 greenTo=100, yellowFrom=50, yellowTo=80,
+                                 redFrom=0, redTo=50))
+Gauge2 <-  gvisGauge(df.gauge[3,], 
+                    options=list(min=0, max=max(c(df.gauge$valor,100)), redFrom=80,
+                                 redTo=100, yellowFrom=50, yellowTo=80,
+                                 greenFrom=0, greenTo=50))
+plot(Gauge1)
+plot(Gauge2)
+```
+
+Percentuais dos últimos 30 dias em relação
+às médias históricas de antes da crise hídrica de 2013-2014.
+
+<br>
+
