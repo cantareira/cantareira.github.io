@@ -1,0 +1,361 @@
+---
+---
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Resumo da Situação do Sistema Cantareira</title>
+
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+<link href="libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="libs/highlightjs-9.12.0/highlight.js"></script>
+
+    {% include in_header_content.html %}
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+    {% include before_body_content.html %}
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Resumo da Situação do Sistema Cantareira</h1>
+<h4 class="date"><em>24 de julho de 2018</em></h4>
+
+</div>
+
+
+<p>Atualizadas diariamente por volta das 09:00 horas[^2]</p>
+<p><br> <br></p>
+<div id="vazoes-de-entrada-e-de-saida-e-chuva-no-mes" class="section level2">
+<h2>Vazões de entrada e de saída e chuva no mês</h2>
+<!-- Gauge generated in R 3.5.1 by googleVis 0.6.2 package -->
+<!-- Tue Jul 24 04:40:24 2018 -->
+<!-- jsHeader -->
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataGaugeID20af408a1d55 () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+"Chuva",
+3,2
+],
+[
+"Entrada",
+41
+] 
+];
+data.addColumn('string','nome');
+data.addColumn('number','valor');
+data.addRows(datajson);
+return(data);
+}
+
+
+// jsData 
+function gvisDataGaugeID20af4da0a102 () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+"Retirada",
+90,3
+] 
+];
+data.addColumn('string','nome');
+data.addColumn('number','valor');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartGaugeID20af408a1d55() {
+var data = gvisDataGaugeID20af408a1d55();
+var options = {};
+options["allowHtml"] = true;
+options["min"] = 0;
+options["max"] = 100;
+options["greenFrom"] = 80;
+options["greenTo"] = 100;
+options["yellowFrom"] = 50;
+options["yellowTo"] = 80;
+options["redFrom"] = 0;
+options["redTo"] = 50;
+
+    var chart = new google.visualization.Gauge(
+    document.getElementById('GaugeID20af408a1d55')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+
+
+// jsDrawChart
+function drawChartGaugeID20af4da0a102() {
+var data = gvisDataGaugeID20af4da0a102();
+var options = {};
+options["allowHtml"] = true;
+options["min"] = 0;
+options["max"] = 100;
+options["redFrom"] = 80;
+options["redTo"] = 100;
+options["yellowFrom"] = 50;
+options["yellowTo"] = 80;
+options["greenFrom"] = 0;
+options["greenTo"] = 50;
+
+    var chart = new google.visualization.Gauge(
+    document.getElementById('GaugeID20af4da0a102')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "gauge";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartGaugeID20af408a1d55);
+})();
+function displayChartGaugeID20af408a1d55() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+
+
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "gauge";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartGaugeID20af4da0a102);
+})();
+function displayChartGaugeID20af4da0a102() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script>
+<!-- jsChart -->
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartGaugeID20af408a1d55"></script>
+<!-- jsChart -->
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartGaugeID20af4da0a102"></script>
+<table border="0">
+<tr>
+<td>
+<!-- divChart -->
+<div id="GaugeID20af408a1d55" style="width: 500; height: automatic;">
+
+</div>
+</td>
+<td>
+<!-- divChart -->
+<div id="GaugeID20af4da0a102" style="width: 500; height: automatic;">
+
+</div>
+</td>
+</tr>
+</table>
+<p>Percentuais dos últimos 30 dias em relação às médias históricas de antes da crise hídrica de 2013-2014.</p>
+</div>
+
+
+    {% include after_body_content.html %}
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

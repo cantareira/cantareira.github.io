@@ -5,13 +5,15 @@ date: "`r format(Sys.time(), '%d de %B de %Y')`"
 
 ```{r setOptions, include=FALSE, message=FALSE}
 library(rmarkdown)
-library(dygraphs)
-library(xtable)
+##library(dygraphs)
+##library(xtable)
+library(zoo)
+library(caTools)
 library(knitr)
 library(googleVis)
+op <- options(gvis.plot.tag='chart')
 options(OutDec = ',')
 knitr::opts_chunk$set(echo=FALSE, warnings=FALSE, message=FALSE)
-op <- options(gvis.plot.tag='chart')
 ```
 
 ```{r quantidades que serao usadas, include=FALSE, message=FALSE}
@@ -54,6 +56,7 @@ out.12.ac <- zoo( runmean(out.12, k = int.ah, align = "right") * int.ah, time(ou
 out.12.hist.30 <- mean(out.12.ac[format(time(out.12.ac),"%d-%m")==format(hoje,"%d-%m")])
 ## Acumulada em 30 dias ate hoje
 out.ac.30 <- sum(window(cant.dim5$defluente,start=antes, end=hoje))
+
 ```
 Atualizadas diariamente por volta das 09:00 horas[^2]
 
@@ -62,14 +65,13 @@ Atualizadas diariamente por volta das 09:00 horas[^2]
 
 ## Vazões de entrada e de saída e chuva no mês
 
-```{r gauges}
+```{r gauges, results="asis", tidy=FALSE}
 df.gauge <- data.frame(
     nome = c("Chuva", "Entrada", "Retirada"),
     valor = round( c(100*pluv.ac.30/pluv.hist.30,
               100*v.ac.30/v.12.hist.30,
               100*out.ac.30/out.12.hist.30), 1)
 )
-
 Gauge1 <-  gvisGauge(df.gauge[1:2,], 
                     options=list(min=0, max=max(c(df.gauge$valor,100)), greenFrom=80,
                                  greenTo=100, yellowFrom=50, yellowTo=80,
@@ -78,12 +80,15 @@ Gauge2 <-  gvisGauge(df.gauge[3,],
                     options=list(min=0, max=max(c(df.gauge$valor,100)), redFrom=80,
                                  redTo=100, yellowFrom=50, yellowTo=80,
                                  greenFrom=0, greenTo=50))
-plot(Gauge1)
-plot(Gauge2)
+
+## none of those options working
+plot(gvisMerge(Gauge1, Gauge2, horizontal=TRUE))
+##print(Gauge1, "chart")
+##plot(Gauge1)
+##plot(Gauge2)
 ```
 
 Percentuais dos últimos 30 dias em relação
 às médias históricas de antes da crise hídrica de 2013-2014.
 
-<br>
 
