@@ -70,7 +70,7 @@ df.gauge <- data.frame(
     nome = c("Chuva", "Entrada", "Retirada"),
     valor = round( c(100*pluv.ac.30/pluv.hist.30,
               100*v.ac.30/v.12.hist.30,
-              100*out.ac.30/out.12.hist.30), 1)
+              100*out.ac.30/out.12.hist.30), 0)
 )
 Gauge1 <-  gvisGauge(df.gauge[1:2,], 
                     options=list(min=0, max=max(c(df.gauge$valor,100)), greenFrom=80,

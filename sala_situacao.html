@@ -137,18 +137,18 @@ $(document).ready(function () {
 <div id="vazoes-de-entrada-e-de-saida-e-chuva-no-mes" class="section level2">
 <h2>Vazões de entrada e de saída e chuva no mês</h2>
 <!-- Gauge generated in R 3.5.1 by googleVis 0.6.2 package -->
-<!-- Tue Jul 24 04:40:24 2018 -->
+<!-- Tue Jul 24 05:04:37 2018 -->
 <!-- jsHeader -->
 <script type="text/javascript">
  
 // jsData 
-function gvisDataGaugeID20af408a1d55 () {
+function gvisDataGaugeID7436237f4766 () {
 var data = new google.visualization.DataTable();
 var datajson =
 [
  [
 "Chuva",
-3,2
+3
 ],
 [
 "Entrada",
@@ -163,13 +163,13 @@ return(data);
 
 
 // jsData 
-function gvisDataGaugeID20af4da0a102 () {
+function gvisDataGaugeID743659375cb4 () {
 var data = new google.visualization.DataTable();
 var datajson =
 [
  [
 "Retirada",
-90,3
+90
 ] 
 ];
 data.addColumn('string','nome');
@@ -179,8 +179,8 @@ return(data);
 }
  
 // jsDrawChart
-function drawChartGaugeID20af408a1d55() {
-var data = gvisDataGaugeID20af408a1d55();
+function drawChartGaugeID7436237f4766() {
+var data = gvisDataGaugeID7436237f4766();
 var options = {};
 options["allowHtml"] = true;
 options["min"] = 0;
@@ -193,7 +193,7 @@ options["redFrom"] = 0;
 options["redTo"] = 50;
 
     var chart = new google.visualization.Gauge(
-    document.getElementById('GaugeID20af408a1d55')
+    document.getElementById('GaugeID7436237f4766')
     );
     chart.draw(data,options);
     
@@ -203,8 +203,8 @@ options["redTo"] = 50;
 
 
 // jsDrawChart
-function drawChartGaugeID20af4da0a102() {
-var data = gvisDataGaugeID20af4da0a102();
+function drawChartGaugeID743659375cb4() {
+var data = gvisDataGaugeID743659375cb4();
 var options = {};
 options["allowHtml"] = true;
 options["min"] = 0;
@@ -217,7 +217,7 @@ options["greenFrom"] = 0;
 options["greenTo"] = 50;
 
     var chart = new google.visualization.Gauge(
-    document.getElementById('GaugeID20af4da0a102')
+    document.getElementById('GaugeID743659375cb4')
     );
     chart.draw(data,options);
     
@@ -241,9 +241,9 @@ if (newPackage)
   pkgs.push(chartid);
   
 // Add the drawChart function to the global list of callbacks
-callbacks.push(drawChartGaugeID20af408a1d55);
+callbacks.push(drawChartGaugeID7436237f4766);
 })();
-function displayChartGaugeID20af408a1d55() {
+function displayChartGaugeID7436237f4766() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   window.clearTimeout(window.__gvisLoad);
@@ -280,9 +280,9 @@ if (newPackage)
   pkgs.push(chartid);
   
 // Add the drawChart function to the global list of callbacks
-callbacks.push(drawChartGaugeID20af4da0a102);
+callbacks.push(drawChartGaugeID743659375cb4);
 })();
-function displayChartGaugeID20af4da0a102() {
+function displayChartGaugeID743659375cb4() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   window.clearTimeout(window.__gvisLoad);
@@ -305,20 +305,20 @@ callbacks.shift()();
 // jsFooter
 </script>
 <!-- jsChart -->
-<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartGaugeID20af408a1d55"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartGaugeID7436237f4766"></script>
 <!-- jsChart -->
-<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartGaugeID20af4da0a102"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartGaugeID743659375cb4"></script>
 <table border="0">
 <tr>
 <td>
 <!-- divChart -->
-<div id="GaugeID20af408a1d55" style="width: 500; height: automatic;">
+<div id="GaugeID7436237f4766" style="width: 500; height: automatic;">
 
 </div>
 </td>
 <td>
 <!-- divChart -->
-<div id="GaugeID20af4da0a102" style="width: 500; height: automatic;">
+<div id="GaugeID743659375cb4" style="width: 500; height: automatic;">
 
 </div>
 </td>
